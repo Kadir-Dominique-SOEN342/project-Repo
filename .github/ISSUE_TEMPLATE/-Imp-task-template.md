@@ -8,6 +8,8 @@ assignees: ''
 ---
 
 from : #US_number
+Use Case: 
+Operation Contract : 
 
 ## Task Description:
 
