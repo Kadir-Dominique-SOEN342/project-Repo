@@ -18,7 +18,7 @@ SOEN 342 - SECTION H
 - [UML Domain model]
 - [UML package Diagram]
 #### System Sequence Diagram
-- [Process Offering system sequence diagram]
+- [Process Offering System Sequence diagram]
 -[Process Offering System operations]
 #### Process oferring system operations contract
 - [Sys. Op 1.]
@@ -28,7 +28,7 @@ SOEN 342 - SECTION H
 #### UML Interaction diagrams
 - [Sys Op 1]..
 - [Sys Op 2.]..
-- [UML Class Diagram]
+- [Process Offering UML Class Diagram]
 
 ### Implementation 
 - [link to Java project]
