@@ -11,6 +11,15 @@ assignees: ''
 
 As a _, I want to _ so that _ .
 
+## Use case scenario 
+- Actors: 
+- Preconditions: 
+- Basic Flow (Sucess scenario): 
+- Alternative Flows (edge case , errors) :
+- Postconditions::
+
+
+
 ## User acceptance flow 
 
 1.
@@ -25,7 +34,7 @@ As a _, I want to _ so that _ .
 
 ---
 
-##TASK BREAKDOWN
+## TASK BREAKDOWN
 
 - [ ] task2 Reference_to_Issue
 - [ ] task3 Reference_to_Issue
