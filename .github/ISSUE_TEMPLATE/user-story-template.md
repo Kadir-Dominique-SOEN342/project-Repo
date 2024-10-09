@@ -20,13 +20,14 @@ As a _, I want to _ so that _ .
 
 
 
-## User acceptance flow 
-
+## User acceptance flow (flow for testing)
+(Describe the steps that the user will follow during acceptance testing)
 1.
 2.
 3.
 
 ## Acceptance Criteria 
+(what should the system do- which conditions should be met for this feature to be acompleted and accepted)
 
 - [ ] critera1
 - [ ] critera2
