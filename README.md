@@ -11,7 +11,7 @@ SOEN 342 - SECTION H
 ## Interation 1
 
 ### SRS 
-- [Use Case Diagram](SRS/UML_UseCase_v2.jpg)
+- [Use Case Diagram](/SRS/UmlDomainModel_v3.jpg)
 
 ## Interation 2 
 ### SRS
