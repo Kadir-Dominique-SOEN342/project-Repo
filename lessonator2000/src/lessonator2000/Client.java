@@ -29,4 +29,10 @@ public class Client extends User{
 		
 	}
 	
+
+	
+//Todo: Getters/ Setters
+	public String getUsername() {
+		return userName;
+	}
 }
