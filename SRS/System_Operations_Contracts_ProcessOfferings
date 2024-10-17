@@ -1,5 +1,5 @@
 
-System Operations Contratcs
+System Operations Contracts for Process Offerings
 ------------------------------------------------------------------------------------------------
 uploadOffering
 
@@ -39,8 +39,8 @@ Postconditions:
 - The operation is a read only operation.The State of the system is not changed.
 ------------------------------------------------------------------------------------------------
 signupToLesson
-Operation: signupToLesson(credentials : String, lessonId : String)
 
+Operation: signupToLesson(lessonId : String)
 Cross References: Use Case: Process Offering
 Preconditions:
 – The instructor is registered
@@ -54,10 +54,10 @@ Preconditions:
 – instructor has visibility to offerings and lessons
 Postconditions:
 
-    an instance of lessonPairing lp was created(instance creation)
-    lp is associated with Lesson (association created)
-    lp is associated with instructor(association created)
-    lp was added to instructor’s lessonPairingCollection(attribute modification)
-    lesson.hasInstructor was set to true (attribute modification)
+- an instance of lessonPairing lp was created(instance creation)
+- lp is associated with Lesson (association created)
+- lp is associated with instructor(association created)
+- lp was added to instructor’s lessonPairingCollection(attribute modification)
+- lesson.hasInstructor was set to true (attribute modification)
 
 ------------------------------------------------------------------------------------------------
