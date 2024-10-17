@@ -31,6 +31,7 @@ SOEN 342 - SECTION H
 - [viewOffering()](SAD/InteractionDiagram_viewOffering_v2.jpg)
 - [ signuptoLesson()](SAD/InteractionDiagrams/InteractionDiagram_signupToLesson_v4.jpg)
 
+#### UML Class diagram
 - [Process Offering UML Class Diagram]()
 
 ### Implementation 
