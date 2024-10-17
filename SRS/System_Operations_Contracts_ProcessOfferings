@@ -25,7 +25,8 @@ Preconditions:
 - Offerings instance exist
 - Lesson is found in Offerings
 Postconditions:
-- Lesson is removed from Offerings (attribute modification)
+- Lesson is removed from Offerings (attribute modification)  
+- Lesson is removed from instructor lesson collection (attribute modification)
 ------------------------------------------------------------------------------------------------
 viewOffering
 
