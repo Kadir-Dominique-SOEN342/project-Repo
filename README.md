@@ -26,12 +26,12 @@ SOEN 342 - SECTION H
 
 ### SAD 
 #### UML Interaction diagrams
-[uploadOffering()]()
-[ deleteOffering()]()
-[viewOffering()](SAD/InteractionDiagram_viewOffering_v2.jpg)
-[ signuptoLesson()](SAD/InteractionDiagrams/InteractionDiagram_signupToLesson_v4.jpg)
+- [uploadOffering()](SAD/InteractionDiagrams/uploadOffering.png)
+- [ deleteOffering()](SAD/InteractionDiagrams/deleteOffering.png)
+- [viewOffering()](SAD/InteractionDiagram_viewOffering_v2.jpg)
+- [ signuptoLesson()](SAD/InteractionDiagrams/InteractionDiagram_signupToLesson_v4.jpg)
 
-- [Process Offering UML Class Diagram]
+- [Process Offering UML Class Diagram]()
 
 ### Implementation 
 - [link to Java project]
