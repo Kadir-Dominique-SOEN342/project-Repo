@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"lessonator2000","c":"Registration","l":"register()"},{"p":"lessonator2000","c":"Registration","l":"Registration()","u":"%3Cinit%3E()"}];updateSearchResults();
