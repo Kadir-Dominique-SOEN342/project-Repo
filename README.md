@@ -15,14 +15,14 @@ SOEN 342 - SECTION H
 
 ## Interation 2 
 ### SRS
-- [UML Domain model]
+- [UML Domain model](SRS/UmlDomainModel_v7.jpg)
 - [UML package Diagram]
 #### System Sequence Diagram
 - [Process Offering System Sequence diagram]
--[Process Offering System operations]
+-[Process Offering System operations](SRS/ProcessOffering_System_Operation_)
 #### Process oferring system operations contract
-- [Sys. Op 1.]
-- [Sys. Op2.]
+- [Operation contract for System Operations of Process Offerings](SRS/System_Operations_Contracts_ProcessOfferings)
+
 
 ### SAD 
 #### UML Interaction diagrams
