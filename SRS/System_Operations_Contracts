@@ -1,22 +1,59 @@
+
+System Operations Contratcs
+------------------------------------------------------------------------------------------------
 uploadOffering
 
 Operation: uploadOffering(type: String, hasInstructor: Boolean, isAvailable: Boolean)
 Cross Reference: Use Case: Process Offerings
-Preconditions: The administrator is logged in to the system.
+Preconditions:
+- The administrator is logged in to the system.
 Postconditions:
-
-A Lesson instance lesson is created (instance creation)
-lesson is associated with Offerings (association formation)
-lesson.hasInstructor was set to false (attribute modification)
-lesson.isAvailable was set to true (attribute modification)  
-
+- A Lesson instance lesson is created (instance creation)
+- lesson is associated with Offerings (association formation)
+- lesson.hasInstructor was set to false (attribute modification)
+- lesson.isAvailable was set to true (attribute modification)  
+------------------------------------------------------------------------------------------------
 deleteOffering()
 
 Operation: deleteOffering(lesson: Lesson)
 Cross Reference: Use Case: Process Offerings
 Preconditions:
-
-The admin is logged in to the system
-lesson is found in Offerings
+- The admin is logged in to the system
+- Lesson is found in Offerings
 Postconditions:
-lesson is removed from Offerings (attribute modification)
+- Lesson is removed from Offerings (attribute modification)
+------------------------------------------------------------------------------------------------
+viewOffering
+
+Operation: viewOffering(u : User)
+Cross References: Use Case: Process Offering
+Preconditions:
+– User instance exist
+– Organization instance exists
+– Organization offerings collection has been created
+Postconditions:
+- The operation is a read only operation.The State of the system is not changed.
+------------------------------------------------------------------------------------------------
+signupToLesson
+Operation: signupToLesson(credentials : String, lessonId : String)
+
+Cross References: Use Case: Process Offering
+Preconditions:
+– The instructor is registered
+– The instructor is logged in
+– The instructor instance exist
+– organization instance exist
+– organization offerings collection exist
+– instructor lessonPairingCollection exist
+– Lessons instance exist
+– lesson.hasInstructor is false
+– instructor has visibility to offerings and lessons
+Postconditions:
+
+    an instance of lessonPairing lp was created(instance creation)
+    lp is associated with Lesson (association created)
+    lp is associated with instructor(association created)
+    lp was added to instructor’s lessonPairingCollection(attribute modification)
+    lesson.hasInstructor was set to true (attribute modification)
+
+------------------------------------------------------------------------------------------------
