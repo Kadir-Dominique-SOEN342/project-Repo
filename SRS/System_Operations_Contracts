@@ -1,1 +1,22 @@
+uploadOffering
 
+Operation: uploadOffering(type: String, hasInstructor: Boolean, isAvailable: Boolean)
+Cross Reference: Use Case: Process Offerings
+Preconditions: The administrator is logged in to the system.
+Postconditions:
+
+A Lesson instance lesson is created (instance creation)
+lesson is associated with Offerings (association formation)
+lesson.hasInstructor was set to false (attribute modification)
+lesson.isAvailable was set to true (attribute modification)  
+
+deleteOffering()
+
+Operation: deleteOffering(lesson: Lesson)
+Cross Reference: Use Case: Process Offerings
+Preconditions:
+
+The admin is logged in to the system
+lesson is found in Offerings
+Postconditions:
+lesson is removed from Offerings (attribute modification)
