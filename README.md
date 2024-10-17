@@ -26,8 +26,11 @@ SOEN 342 - SECTION H
 
 ### SAD 
 #### UML Interaction diagrams
-- [Sys Op 1]..
-- [Sys Op 2.]..
+[uploadOffering()]()
+[ deleteOffering()]()
+[viewOffering()](SAD/InteractionDiagram_viewOffering_v2.jpg)
+[ signuptoLesson()](SAD/InteractionDiagrams/InteractionDiagram_signupToLesson_v4.jpg)
+
 - [Process Offering UML Class Diagram]
 
 ### Implementation 
