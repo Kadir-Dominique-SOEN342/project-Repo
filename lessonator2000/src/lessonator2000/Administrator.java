@@ -23,5 +23,5 @@ public class Administrator extends User {
 		return myadmin;
 		
 	}
-
+	public void viewOffering() {/*TODO: implement */};
 }

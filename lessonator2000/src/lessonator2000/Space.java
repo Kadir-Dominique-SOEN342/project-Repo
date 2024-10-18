@@ -10,13 +10,13 @@ private String city;
 private String province;
 
 
-public Space(String rentedOrOwned, String roomNumber, String type , String city, String province, Schedual myschedule) {
+public Space(String rentedOrOwned, String roomNumber, String type , String city, String province) {
 	this.rentedOrOwned = rentedOrOwned;
 	this.roomNumber = roomNumber;
 	this.typeOfSpace = type;
-	this.openFor = myschedule;
+	this.openFor = new Schedual();
 	this.city = city;
 	this.province = province;
-}
+		}
 
 }

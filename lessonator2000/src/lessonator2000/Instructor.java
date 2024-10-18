@@ -61,5 +61,7 @@ public class Instructor extends User{
 		availability.add(city);
 		
 	}
+	
+	public void viewOffering() {/*TODO: implement */};
 
 }

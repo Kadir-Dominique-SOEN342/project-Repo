@@ -35,4 +35,6 @@ public class Client extends User{
 	public String getUsername() {
 		return userName;
 	}
+	
+	public void viewOffering() {/*TODO: implement */};
 }

@@ -4,6 +4,6 @@ public class Public extends User {
 	
 
 	
-
+	public void viewOffering() {/*TODO: implement */};
 
 }

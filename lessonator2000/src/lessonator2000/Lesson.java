@@ -25,7 +25,9 @@ public class Lesson {
     }
     
    //getter
-    
+    public String getID() {
+    	return this.lessonId;
+    }
     
     
     
