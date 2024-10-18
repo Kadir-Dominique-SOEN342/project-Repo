@@ -6,4 +6,5 @@ public class User {
 	//public void viewOfferings() {
 	//}
 
+
 }
