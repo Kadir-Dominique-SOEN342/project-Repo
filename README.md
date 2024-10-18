@@ -26,7 +26,7 @@ SOEN 342 - SECTION H
 
 ### SAD 
 #### UML Interaction diagrams
-- [uploadOffering()](SAD/InteractionDiagrams/uploadOffering.png)
+- [uploadOffering()](SAD/InteractionDiagrams/UploadOffering_v2.jpg)
 - [ deleteOffering()](SAD/InteractionDiagrams/deleteOffering.png)
 - [viewOffering()](SAD/InteractionDiagram_viewOffering_v2.jpg)
 - [ signuptoLesson()](SAD/InteractionDiagrams/InteractionDiagram_signupToLesson_v4.jpg)
