@@ -21,7 +21,16 @@ public class Lesson {
     }
 
     public String toString(){
-        return (this.type + " class with " + teacher.getFirstName + " " + teacher.getLastName);
+        return (this.type + " class with " + teacher.getFirstName() + " " + teacher.getLastName());
+    }
+    
+   //getter
+    public String getID() {
+    	return this.lessonId;
+    }
+    
+    
+    
+   
     }
 
-}

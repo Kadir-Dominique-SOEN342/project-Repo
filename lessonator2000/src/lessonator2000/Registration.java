@@ -9,15 +9,10 @@ public class Registration {
 	private ArrayList<Client> clientRegistry = new ArrayList<Client>();
 	private ArrayList<Instructor> instructorRegistry = new ArrayList<Instructor>();
 	private Administrator myAdmin = Administrator.getAdministrator();
-	private static Registration registry = null; // is set when getRegistry() is first called
 	
 	
-	
-	
+	private static Registration registry = null;
 	//constructor - implemented ad a singleton
-	/**
-	 * private constructor
-	 */
 	private  Registration() {
 		// Remove this after persistance is achieved through the database is completed. These are hardcoded clients/ instructors
 		Client e = new Client("Bernard", "Summer",LocalDate.of(1956, 01, 4), "bsum" , "neworder");
@@ -37,7 +32,13 @@ public class Registration {
 		Instructor c = new Instructor("Judo", "Hajime", "Isogai", 5148659658L);
 		instructorRegistry.add(c);
 		
-		//		
+		
+		
+		//
+		
+		
+		
+		
 	}
 	
 	
