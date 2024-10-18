@@ -32,7 +32,7 @@ SOEN 342 - SECTION H
 - [ signuptoLesson()](SAD/InteractionDiagrams/InteractionDiagram_signupToLesson_v4.jpg)
 
 #### UML Class diagram
-- [Process Offering UML Class Diagram](SAD/UmlClassDiagram_v4.1.jpg)
+- [Process Offering UML Class Diagram](SAD/UmlClassDiagram_v6.jpg)
 
 ### Implementation 
 - [link to Java project](lessonator2000)
