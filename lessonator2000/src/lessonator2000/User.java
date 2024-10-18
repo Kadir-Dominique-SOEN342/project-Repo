@@ -1,9 +1,8 @@
 package lessonator2000;
 
-public class User {
+public abstract class User {
 	
-	
-	//public void viewOfferings() {
-	//}
+	public abstract void viewOffering(); //Enforces that every child class implements it's version of viewOffering();
+
 
 }
