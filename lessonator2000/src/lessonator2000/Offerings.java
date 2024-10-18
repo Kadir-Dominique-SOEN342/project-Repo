@@ -4,10 +4,12 @@ public class Offerings{
 
     private ArrayList<Lesson> lessons;
 
+    //Constructor
     public Offerings(){
         this.lessons = new ArrayList<Lesson>;
     }
 
+    
     public void uploadOffering(String type, String id){
         this.lessons.add(new Lesson(type, id, false, true));
     }

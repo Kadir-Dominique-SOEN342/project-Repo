@@ -11,12 +11,6 @@ public class Registration {
 	private Administrator myAdmin = Administrator.getAdministrator();
 	
 	
-	
-
-	
-	
-	
-	
 	private static Registration registry = null;
 	//constructor - implemented ad a singleton
 	private  Registration() {

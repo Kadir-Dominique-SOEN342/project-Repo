@@ -24,10 +24,10 @@ public class Instructor extends User{
 		return this.specialization;
 	}
 	
-	public String firstname() {
+	public String getFirstName() {
 		return this.firstname;
 	}
-	public String lastname() {
+	public String getLastName() {
 		return this.lastname;
 	}
 	public long getPhone() {
