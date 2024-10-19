@@ -19,7 +19,7 @@ SOEN 342 - SECTION H
 - [UML package Diagram]
 #### System Sequence Diagram
 - [Process Offering System Sequence diagram]
--[Process Offering System operations](SRS/ProcessOffering_System_Operation_)
+- [Process Offering System operations](SRS/ProcessOffering_System_Operation_)
 #### Process oferring system operations contract
 - [Operation contract for System Operations of Process Offerings](SRS/System_Operations_Contracts_ProcessOfferings)
 
