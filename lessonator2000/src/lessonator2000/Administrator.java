@@ -23,5 +23,8 @@ public class Administrator extends User {
 		return myadmin;
 		
 	}
-	public void viewOffering() {/*TODO: implement */};
+	
+	public String getUsername() {
+		return this.username;
+	}
 }

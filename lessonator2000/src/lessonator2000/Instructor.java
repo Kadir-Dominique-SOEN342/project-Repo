@@ -9,6 +9,7 @@ public class Instructor extends User{
 	private String firstname;
 	private String lastname;
 	private long phoneNumber;
+	private ArrayList<Lesson> teaches;
 	ArrayList<String> availability = new ArrayList<String>(); //TODO: check if we actually make city into a class
 	
 	public Instructor(String specialization, String firstname,String lastname,long phonenb) {
@@ -16,6 +17,7 @@ public class Instructor extends User{
 		this.firstname = firstname;
 		this.lastname= lastname;
 		this.phoneNumber= phonenb;
+		this.teaches = new ArrayList<Lesson>();
 	}
 	
 	
@@ -62,6 +64,9 @@ public class Instructor extends User{
 		
 	}
 	
-	public void viewOffering() {/*TODO: implement */};
+	public void addToCollection(Lesson l) {
+		teaches.add(l);
+		
+	}
 
 }

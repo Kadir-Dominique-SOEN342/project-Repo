@@ -1,6 +1,7 @@
 package lessonator2000;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Schedual {
 	Day[][] mySchedual;
@@ -19,8 +20,8 @@ public class Schedual {
 		 mySchedual[0] = new Day[366]; //2024 is a leap year
 		 mySchedual[1] = new Day[365]; //2025 is a normal year
 		 mySchedual[2] = new Day[365]; //2026 is a normal year	
-		 mySchedual[4] = new Day[365]; //2027 is a leap year	
-		 mySchedual[5] = new Day[366]; //2028 is a leap year		
+		 mySchedual[3] = new Day[365]; //2027 is a normal year	
+		 mySchedual[4] = new Day[366]; //2028 is a leap year		
 		 
 
 	        // Initialize Day objects for each day in the schedule
@@ -34,10 +35,29 @@ public class Schedual {
 	            }
 		 
 	        }
+
+	public Timeslot addLesson(Lesson myLesson, LocalDate date, LocalTime startTime, LocalTime endTime) {
+	//	System.out.println("Schedual : addLesson");
+		Day myDay = null;
+		// Find the correct Day object that corresponds to the given date
+        for (int year = 0; year < mySchedual.length; year++) {
+            for (Day d : mySchedual[year]) {
+                if (date.isEqual(d.getDate())) {
+                    myDay = d;
+                    break; // Exit the loop once the correct day is found
+                }
+            }
+            if (myDay != null) break; // Exit the outer loop as well if day is found
+        }
+        
+      Timeslot myTimeSlot =   myDay.createTimeSlot(startTime, endTime, myLesson);
+        return myTimeSlot;
+		}
+	}
 	
 	//TODO : Method to update the calendar and drop previous years 
 	
 	
 
-	}
+	
 
