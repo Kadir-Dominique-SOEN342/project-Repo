@@ -1,26 +1,30 @@
 package lessonator2000;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
 
 public class Day {
 	
-	private Timeslot[] daySchedual;
+	//private Timeslot[] daySchedual;
+	
+	private ArrayList<Timeslot> daySchedual;
 	private LocalDate today;
 	
-	// a day can hold at most 20 time slots ()
+
 	public Day(LocalDate today) {
-		daySchedual = new Timeslot[20];
+		daySchedual = new ArrayList();
 		this.today = today;
 	}
 	
 	
 	//getter
-	public Timeslot[] getDaySchedual() {
+	public ArrayList<Timeslot> getDaySchedual() {
 		return this.daySchedual;
 	}
 	
 	//setter
-	public void setDaySchedual(Timeslot[] newTimeSlot) {
+	public void setDaySchedual(ArrayList<Timeslot> newTimeSlot) {
 		this.daySchedual = newTimeSlot;
 	}
 	
@@ -32,4 +36,16 @@ public class Day {
 		return "There are no lessons scheduled today";
 	}
 
+	public LocalDate getDate() {
+		return this.today;
+	}
+
+
+	public Timeslot createTimeSlot(LocalTime startTime, LocalTime endTime, Lesson myLesson) {
+		//System.out.println("Day :  createTimeSlot");
+		Timeslot myTimeSlot = new Timeslot(startTime, endTime, myLesson);
+	daySchedual.add(myTimeSlot);
+	return myTimeSlot;
+		//TODO: make sure start time is after end time of other time slots.
+	}
 }

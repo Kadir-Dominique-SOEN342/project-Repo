@@ -9,10 +9,9 @@ public class Registration {
 	private ArrayList<Client> clientRegistry = new ArrayList<Client>();
 	private ArrayList<Instructor> instructorRegistry = new ArrayList<Instructor>();
 	private Administrator myAdmin = Administrator.getAdministrator();
-	
-	
 	private static Registration registry = null;
-	//constructor - implemented ad a singleton
+	
+		//constructor - implemented ad a singleton
 	private  Registration() {
 		// Remove this after persistance is achieved through the database is completed. These are hardcoded clients/ instructors
 		Client e = new Client("Bernard", "Summer",LocalDate.of(1956, 01, 4), "bsum" , "neworder");
@@ -37,8 +36,6 @@ public class Registration {
 		//
 		
 		
-		
-		
 	}
 	
 	
@@ -52,6 +49,72 @@ public class Registration {
 		}
 		return registry;
 	}
+	
+	public static User login() {
+
+		Scanner keyboard = new Scanner(System.in);
+
+
+		System.out.println("Hello There, are you a :");
+		System.out.println("1- Client");
+		System.out.println("2- Instructor");
+		System.out.println("3- Administrator");
+		System.out.println("4 - I want to keep browsing without logging in ");
+
+
+		//TODO: Need to not assume perfect user. 
+		int userChoice = keyboard.nextInt();
+
+
+		//Returns a client if it's found, returns a public if not
+		if(userChoice == 1) {
+			System.out.println("What is your username");
+			String username = keyboard.next();
+			Client myClient = registry.searchClient(username);
+
+			if(myClient == null ) {
+				System.out.println("You are not registered, you will browse as public for now until you do.");
+				return new Public();
+			}
+			else {System.out.println("You are logged in" + username); 
+			return myClient;
+			}
+			
+		}
+
+		//Returns an instructor if it's found, returns a public if not
+		if(userChoice == 2) {
+			System.out.println("What is your phoneNumber");
+			long phoneNumber = keyboard.nextLong();
+			Instructor myInstructor = registry.searchInstructor(phoneNumber);
+
+			if(myInstructor == null ) {
+				System.out.println("You are not registered, you will browse as public for now until you do.");
+				return new Public();
+			}
+			else {  System.out.println("You are now logged in " + myInstructor.getFirstName());
+			return myInstructor;}
+		}
+
+		//Returns the admin if it's found, returns a public if not
+		if(userChoice == 3) {
+			System.out.println("username");
+			String userName = keyboard.next();
+
+			if(registry.myAdmin.getUsername().equals(userName)){
+				System.out.println("you are now logged in as admin");
+				return registry.myAdmin ; 
+			}
+
+			else {
+				System.out.println("wrong username, you will browse as public for now .");
+				return new Public();
+			}
+		}
+return null;
+	}
+
+
 /**
  * 
  * This method let's you create a new user or returns a User of type public to keep browsing without registering.
@@ -166,9 +229,21 @@ private static void underageCheck(LocalDate birth) {
 private  Client searchClient(String username) {
  for(Client c : clientRegistry) {
 	String clientusername = c.getUsername();
-	 if(clientusername == username)
+//	System.out.println(clientusername);
+	 if(clientusername.equals(username))
 		 return c;
 	 }
  return null;
  }
+
+private  Instructor searchInstructor(long phone) {
+	 for(Instructor ins : instructorRegistry) {
+		long phoneNumber = ins.getPhone();
+		System.out.println(phoneNumber);
+		 if(phoneNumber == phone)
+			 return ins;
+		 }
+	 return null;
+	 }
+
 }

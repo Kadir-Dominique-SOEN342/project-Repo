@@ -36,5 +36,5 @@ public class Client extends User{
 		return userName;
 	}
 	
-	public void viewOffering() {/*TODO: implement */};
+	
 }

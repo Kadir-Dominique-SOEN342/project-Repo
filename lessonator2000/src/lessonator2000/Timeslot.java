@@ -17,4 +17,12 @@ public class Timeslot {
 		lessonduration = Duration.between(start,end);
 
 }
+	
+	public LocalTime getStartTime() {
+		return this.startTime;
+	}
+	
+	public LocalTime getEndTime() {
+		return this.startTime;
+	}
 }
