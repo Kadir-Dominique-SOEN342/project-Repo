@@ -18,7 +18,7 @@ SOEN 342 - SECTION H
 - [UML Domain model](SRS/UmlDomainModel_v7.jpg)
 - [UML package Diagram]
 #### System Sequence Diagram
-- [Process Offering System Sequence diagram]
+- [Process Offering System Sequence diagram](SRS/SystemSequenceDiagram.png)
 - [Process Offering System operations](SRS/ProcessOffering_System_Operation_)
 #### Process oferring system operations contract
 - [Operation contract for System Operations of Process Offerings](SRS/System_Operations_Contracts_ProcessOfferings)
@@ -26,13 +26,13 @@ SOEN 342 - SECTION H
 
 ### SAD 
 #### UML Interaction diagrams
-- [uploadOffering()](SAD/InteractionDiagrams/UploadOffering_v3.jpg)
+- [uploadOffering()](SAD/UploadOffering_v4.jpg)
 - [ deleteOffering()](SAD/InteractionDiagrams/deleteOffering.png)
 - [viewOffering()](SAD/InteractionDiagram_viewOffering_v2.jpg)
 - [ signuptoLesson()](SAD/InteractionDiagrams/InteractionDiagram_signupToLesson_v4.jpg)
 
 #### UML Class diagram
-- [Process Offering UML Class Diagram](SAD/UmlClassDiagram_v6.jpg)
+- [Process Offering UML Class Diagram](SAD/UmlClassDiagram_v7.jpg)
 
 ### Implementation 
 - [link to Java project](lessonator2000)
