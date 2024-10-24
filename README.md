@@ -8,6 +8,9 @@ SOEN 342 - SECTION H
 - Dominique Proulx
   -  40177566
   - dominique.proulx@mail.concordia.ca
+
+### Project Discussion : https://github.com/Kadir-Dominique-SOEN342/project-Repo/discussions/1
+
 ## Interation 1
 
 ### SRS 
