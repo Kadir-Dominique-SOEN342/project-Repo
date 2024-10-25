@@ -11,7 +11,7 @@ public class Registration {
 	private Administrator myAdmin = Administrator.getAdministrator();
 	private static Registration registry = null;
 	
-		//constructor - implemented ad a singleton
+		//constructor - implemented as a singleton
 	private  Registration() {
 		// Remove this after persistance is achieved through the database is completed. These are hardcoded clients/ instructors
 		Client e = new Client("Bernard", "Summer",LocalDate.of(1956, 01, 4), "bsum" , "neworder");

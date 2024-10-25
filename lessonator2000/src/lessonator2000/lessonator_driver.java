@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class lessonator_driver {
 
-	private static Administrator myadmin = Administrator.getAdministrator();	
+
 	private static Registration registry  = Registration.getRegistry();	
 	private static Location locationregistry = Location.getLocationRegistry();
 	private static User browsingUser;
@@ -38,7 +38,7 @@ public class lessonator_driver {
 		case 1: {register();break;}  //register
 		case 2:{login(); break;}     // login
 		case 3: {viewOffering();break;} // viewOFferings
-		case 4: {if (browsingUser instanceof Administrator)UploadOffering();else{System.out.println("Sorry this choice is not available to you");}break;} //uploadOffering
+		case 4: {if (browsingUser instanceof Administrator)uploadOffering();else{System.out.println("Sorry this choice is not available to you");}break;} //uploadOffering
 		case 5: {if (browsingUser instanceof Instructor)signupToLesson(); else{System.out.println("Sorry this choice is not available to you");}break;}   //signupToLesson
 		case 6: {if (browsingUser instanceof Client)makeBooking(); else{System.out.println("Sorry this choice is not available to you");}}             //makeOffering
 		case 7: {if (browsingUser instanceof Administrator)cancelBooking();{System.out.println("Sorry this choice is not available to you");} break;} // cancelBooking
@@ -93,7 +93,7 @@ public class lessonator_driver {
 	}
 	
 
-	public static int printMenu(User u) {
+	private static int printMenu(User u) {
 		//TODO: not assume perfect user
 		Scanner keyboard = new Scanner(System.in);
 		int userChoice;
@@ -156,7 +156,7 @@ public class lessonator_driver {
 		offers.signupToLesson((Instructor)browsingUser, lessonId);
 	}
 	
-	public static void UploadOffering() {
+	public static void uploadOffering() {
 		System.out.println("---------------------------------------------------");
 		System.out.println("-----------------UploadOffering--------------------");
 		System.out.println("---------------------------------------------------");
