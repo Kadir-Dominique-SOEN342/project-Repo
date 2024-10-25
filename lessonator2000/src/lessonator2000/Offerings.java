@@ -40,7 +40,7 @@ public class Offerings{
 	}
 
 		//Commented out by Dom on 18-10-2024 , I needed it to compile to implement viewOfferings().  
-		//   public void deleteOffering(Lesson lesson){
+		  public void deleteOffering(Lesson lesson){
 		// Lesson foundLesson = null; 
 		// 	Lesson foundLesson;
 		//    for(Lesson temp : lessons){
@@ -52,7 +52,7 @@ public class Offerings{
 		//         lessons.remove(foundLesson);
 		//     }
 
-		//   }
+		  }
 
 		//Offerings is implemented as a singleton 
 		public static Offerings getOfferings() {
