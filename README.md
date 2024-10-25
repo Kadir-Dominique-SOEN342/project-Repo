@@ -35,7 +35,7 @@ SOEN 342 - SECTION H
 - [ signuptoLesson()](SAD/InteractionDiagrams/InteractionDiagram_signupToLesson_v4.jpg)
 
 #### UML Class diagram
-- [UML Class Diagram](SAD/UmlClassDiagram_v7.jpg)
+- [UML Class Diagram](SAD/UmlClassDiagram_v8.jpg)
 
 ### Implementation 
 - [link to Java project](lessonator2000)
