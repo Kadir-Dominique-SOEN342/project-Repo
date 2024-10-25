@@ -146,13 +146,20 @@ public class lessonator_driver {
 	}
 	
 	public static void signupToLesson() {
+		System.out.println("---------------------------------------------------");
+		System.out.println("-----------------Signup To Lessons-----------------");
+		System.out.println("---------------------------------------------------");
 		Scanner keyboard = new Scanner(System.in);
 		System.out.println("Please enter the LessonID");
+		//TODO : do not assume perfect user
 		String lessonId = keyboard.next();
 		offers.signupToLesson((Instructor)browsingUser, lessonId);
 	}
 	
 	public static void UploadOffering() {
+		System.out.println("---------------------------------------------------");
+		System.out.println("-----------------UploadOffering--------------------");
+		System.out.println("---------------------------------------------------");
 	//	System.out.println("Main: UploadOffering()");
 		//TODO:  not assume perfect user
 		Scanner keyboard = new Scanner(System.in);

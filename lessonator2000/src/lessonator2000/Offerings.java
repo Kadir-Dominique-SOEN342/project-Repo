@@ -88,6 +88,9 @@ public class Offerings{
 
 		}
 		public void viewOffering(User u) {
+			System.out.println("---------------------------------------------------");
+			System.out.println("-----------------viewOffring-----------------");
+			System.out.println("---------------------------------------------------");
 			
 			if(u instanceof Instructor) {
 				System.out.println("Here are all the lessons that you can view as an instructor: \n");
@@ -100,10 +103,10 @@ public class Offerings{
 		}
 		public void signupToLesson(Instructor ins, String lessonId) {
 			Lesson myLesson= null;
-			for(Lesson l: lessons) {
+			for(Lesson les: lessons) {
 				
-				if(l.getID().equals(lessonId)) {
-					myLesson = l;
+				if(les.getID().equals(lessonId)) {
+					myLesson = les;
 				}
 			}
 			
