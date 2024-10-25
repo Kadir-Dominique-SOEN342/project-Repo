@@ -18,7 +18,7 @@ SOEN 342 - SECTION H
 
 ## Interation 2 
 ### SRS
-- [UML Domain model](SRS/UmlDomainModel_v7.jpg)
+- [UML Domain model](SRS/UmlDomainModel_v9.jpg)
 - [UML package Diagram]
 #### System Sequence Diagram
 - [Process Offering System Sequence diagram](SRS/SystemSequenceDiagram.png)
@@ -35,7 +35,7 @@ SOEN 342 - SECTION H
 - [ signuptoLesson()](SAD/InteractionDiagrams/InteractionDiagram_signupToLesson_v4.jpg)
 
 #### UML Class diagram
-- [UML Class Diagram](SAD/UmlClassDiagram_v8.jpg)
+- [UML Class Diagram](SAD/UmlClassDiagram_v9.jpg)
 
 ### Implementation 
 - [link to Java project](lessonator2000)
