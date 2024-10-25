@@ -35,14 +35,17 @@ public class lessonator_driver {
 		int userchoice;
 		userchoice = printMenu(browsingUser);
 		switch(userchoice) {
-		case 1: {Registration.register();break;}
-		case 2:{Registration.login();break;}
-		case 3: {viewOffering();break;}
-		case 4: {if (browsingUser instanceof Administrator)UploadOffering();else{System.out.println("Sorry this choice is not available to you");}break;}
-		case 5: {if (browsingUser instanceof Instructor)signupToLesson(); else{System.out.println("Sorry this choice is not available to you");}break;}
-		//	case 6: {if (browsingUser instanceof Client)bookLesson(); else{System.out.println("Sorry this choice is not available to you");}}
-		case 7 : {if (browsingUser instanceof Administrator)deleteOffering();else{System.out.println("Sorry this choice is not available to you");} break;}
-		case 10: {System.out.println("Goodbye!"); System.exit(0);}
+		case 1: {register();break;}  //register
+		case 2:{login(); break;}     // login
+		case 3: {viewOffering();break;} // viewOFferings
+		case 4: {if (browsingUser instanceof Administrator)UploadOffering();else{System.out.println("Sorry this choice is not available to you");}break;} //uploadOffering
+		case 5: {if (browsingUser instanceof Instructor)signupToLesson(); else{System.out.println("Sorry this choice is not available to you");}break;}   //signupToLesson
+		case 6: {if (browsingUser instanceof Client)makeBooking(); else{System.out.println("Sorry this choice is not available to you");}}             //makeOffering
+		case 7: {if (browsingUser instanceof Administrator)cancelBooking();{System.out.println("Sorry this choice is not available to you");} break;} // cancelBooking
+		case 8: {if ((browsingUser instanceof Administrator) || (browsingUser instanceof Client))viewBooking();{System.out.println("Sorry this choice is not available to you");} break;}
+		case 9: {if (browsingUser instanceof Client)confirmBooking();{System.out.println("Sorry this choice is not available to you");} break;}
+		case 10: logOut();
+		case 11: {System.out.println("Goodbye!"); System.exit(0);} //exitsystem
 		}
 		}
 		
@@ -50,9 +53,115 @@ public class lessonator_driver {
 	
 	}
 
+	public static void register() {
+		
+		browsingUser = Registration.register();
+		if(browsingUser == null) {
+		browsingUser = new Public();
+		System.out.println("Registration failed, you will have to start over.");
+		}
+		else System.out.println("Registraiton complete, happy browsing");
+	}
+	
+	public static void login() {
+		Registration.login();
+	}
+	
+	public static void logOut() {
+		browsingUser = new Public();
+	}
+	
+	public static void makeBooking() {
+		//implementation
+	}
+
+	public static void confirmBooking() {
+		//implementation
+	}
+	
+	public static void cancelBooking() {
+		//implementation
+	}
+	
+	public static void viewBooking() {
+		//implementation
+	}
+	
+	
+	public static void deleteOffering() {  // delete this
+		//Offerings.deleteoffering();
+	}
+	
+
+	public static int printMenu(User u) {
+		//TODO: not assume perfect user
+		Scanner keyboard = new Scanner(System.in);
+		int userChoice;
+		System.out.println();
+		System.out.println("*****************************************");
+		System.out.println("***-----------------------------------***");
+		System.out.println("***----------Lessonator2000-----------***");
+		System.out.println("***-----------------------------------***");
+		System.out.println("*****************************************");
+		System.out.println();
+		if(u instanceof Client) {
+
+			System.out.println("Welcome , what would you like to do ?\n You are interacting with this system as a Client");
+			System.out.println("3- View Offerings");
+			System.out.println("6-  Book a Lesson");
+			System.out.println("8-  View Bookings");
+			System.out.println("10- Logout");
+			System.out.println("9-  Confirm Booking");
+			System.out.println("11- Exit");
+			}
+		else if(u instanceof Instructor) {
+			
+			System.out.println("Welcome , what would you like to do ?\\n You are interacting with this system as an Instructor");
+			System.out.println("3- View Offerings");
+			System.out.println("5- Signup to Lessons");
+			System.out.println("10- Logout");
+			System.out.println("11- Exit");
+			}
+		else if(u instanceof Administrator) {
+			
+			System.out.println("Welcome , what would you like to do ?\\n You are interacting with this system as an Administrator");
+			System.out.println("4- Upload Offering");
+			System.out.println("7- Cancel Bookings");
+			System.out.println("8- View Bookings");
+			System.out.println("10- Logout");
+			System.out.println("11- Exit");
+			}
+		else {
+			
+			System.out.println("Welcome , what would you like to do?\n You are not logged in, you will interact with this system as Public");
+			System.out.println("1- Register");
+			System.out.println("2- Log in");
+			System.out.println("3- View Offerings");
+			System.out.println("11- Exit");
+			
+
+			}
+		return userChoice = keyboard.nextInt();
+
+	}
+	
+	public static void signupToLesson() {
+		System.out.println("---------------------------------------------------");
+		System.out.println("-----------------Signup To Lessons-----------------");
+		System.out.println("---------------------------------------------------");
+		Scanner keyboard = new Scanner(System.in);
+		System.out.println("Please enter the LessonID");
+		//TODO : do not assume perfect user
+		String lessonId = keyboard.next();
+		offers.signupToLesson((Instructor)browsingUser, lessonId);
+	}
+	
 	public static void UploadOffering() {
+		System.out.println("---------------------------------------------------");
+		System.out.println("-----------------UploadOffering--------------------");
+		System.out.println("---------------------------------------------------");
 	//	System.out.println("Main: UploadOffering()");
-		//TODO:  not asusme perfect user
+		//TODO:  not assume perfect user
 		Scanner keyboard = new Scanner(System.in);
 		System.out.println("What type of lesson is it?");
 		String lessontype = keyboard.next();
@@ -79,8 +188,8 @@ public class lessonator_driver {
 		
 		Lesson myLesson = offers.uploadOffering(lessontype, lessonID , false, true,  isPublic,  capacity);
 				
-		Space mySpace = locationregistry.addLessonToSpace(roomNb, myLesson, date, startTime, endTime); 
-		Timeslot myTimeSlot = mySpace.addLessonToSchedual(myLesson, date,  startTime,endTime);
+		Space mySpace = locationregistry.addLessonToSpace(roomNb, myLesson, startday, startTime, endTime);  // modigfy startday 
+		Timeslot myTimeSlot = mySpace.addLessonToSchedual(myLesson, startday,  startTime,endTime);// modigfy startday 
 		
 		
 		offers.addSpaceTimeToLesson(mySpace, myTimeSlot, myLesson);
@@ -88,67 +197,10 @@ public class lessonator_driver {
 		// System.out.println(myLesson.toString());
 		
 	}
-	
+
 	public static void viewOffering() {
 				offers.viewOffering(browsingUser);
 		
-	}
-	
-	public static void deleteOffering() {
-		
-	}
-	
-	public static void signupToLesson() {
-		Scanner keyboard = new Scanner(System.in);
-		System.out.println("Please enter the LessonID");
-		String lessonId = keyboard.next();
-		offers.signupToLesson((Instructor)browsingUser, lessonId);
-	}
-	
-	public static int printMenu(User u) {
-		//TODO: not assume perfect user
-		Scanner keyboard = new Scanner(System.in);
-		int userChoice;
-		System.out.println();
-		System.out.println("*****************************************");
-		System.out.println("***-----------------------------------***");
-		System.out.println("***----------Lessonator2000-----------***");
-		System.out.println("***-----------------------------------***");
-		System.out.println("*****************************************");
-		System.out.println();
-		if(u instanceof Client) {
-
-			System.out.println("Welcome , what would you like to do ?\n You are interacting with this system as a Client");
-			System.out.println("3- View Offerings");
-			System.out.println("6-  Book a Lesson");
-			System.out.println("10- Exit");
-			}
-		else if(u instanceof Instructor) {
-			
-			System.out.println("Welcome , what would you like to do ?\\n You are interacting with this system as an Instructor");
-			System.out.println("3- View Offerings");
-			System.out.println("5- Signup to Lessons");
-			System.out.println("7- Signup to Lessons");
-			System.out.println("10- Exit");
-			}
-		else if(u instanceof Administrator) {
-			
-			System.out.println("Welcome , what would you like to do ?\\n You are interacting with this system as an Administrator");
-			System.out.println("4- Upload Offering");
-			System.out.println("10- Exit");
-			}
-		else {
-			
-			System.out.println("Welcome , what would you like to do?\n You are not logged in, you will interact with this system as Public");
-			System.out.println("1- Register");
-			System.out.println("2- Log in");
-			System.out.println("3- View Offerings");
-			System.out.println("10- Exit");
-			
-
-			}
-		return userChoice = keyboard.nextInt();
-
 	}
 }
 

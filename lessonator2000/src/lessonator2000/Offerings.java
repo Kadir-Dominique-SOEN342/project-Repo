@@ -40,7 +40,7 @@ public class Offerings{
 	}
 
 		//Commented out by Dom on 18-10-2024 , I needed it to compile to implement viewOfferings().  
-		//   public void deleteOffering(Lesson lesson){
+		  public void deleteOffering(Lesson lesson){
 		// Lesson foundLesson = null; 
 		// 	Lesson foundLesson;
 		//    for(Lesson temp : lessons){
@@ -52,7 +52,7 @@ public class Offerings{
 		//         lessons.remove(foundLesson);
 		//     }
 
-		//   }
+		  }
 
 		//Offerings is implemented as a singleton 
 		public static Offerings getOfferings() {
@@ -88,6 +88,9 @@ public class Offerings{
 
 		}
 		public void viewOffering(User u) {
+			System.out.println("---------------------------------------------------");
+			System.out.println("-----------------viewOffring-----------------");
+			System.out.println("---------------------------------------------------");
 			
 			if(u instanceof Instructor) {
 				System.out.println("Here are all the lessons that you can view as an instructor: \n");
@@ -100,10 +103,10 @@ public class Offerings{
 		}
 		public void signupToLesson(Instructor ins, String lessonId) {
 			Lesson myLesson= null;
-			for(Lesson l: lessons) {
+			for(Lesson les: lessons) {
 				
-				if(l.getID().equals(lessonId)) {
-					myLesson = l;
+				if(les.getID().equals(lessonId)) {
+					myLesson = les;
 				}
 			}
 			

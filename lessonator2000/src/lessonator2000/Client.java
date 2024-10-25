@@ -12,7 +12,7 @@ public class Client extends User{
 	private LocalDate dateOfBirth;
 	private String userName;
 	private String password; 
-	ArrayList<underageClient> dependantsCatalog = new ArrayList<underageClient>();
+	ArrayList<UnderageClient> dependantsCatalog = new ArrayList<UnderageClient>();
 	
 
 	//Constructors
@@ -36,5 +36,36 @@ public class Client extends User{
 		return userName;
 	}
 	
+	public String getfirstName() {
+		return firstName;
+	}
+	public String getlastName() {
+		return lastName;
+	}
+	public LocalDate getDateOfBirth() {
+		return dateOfBirth;
+	}
+	
+	public String getPassword() {
+		return password;
+	}
+	
+	public void setfirstName(String firstname) {
+		this.firstName = firstName;
+	}
+	
+	public void setLastName(String lastname) {
+		this.lastName = lastname;
+	}
+	public void setuserName(String username) {
+		this.userName = username;
+	}
+	public void setpassword(String pwrd) {
+		this.password = pwrd;
+	}
+	
+	public void addToDependantsCatalog(UnderageClient uc) {
+		this.dependantsCatalog.add(uc);
+	}
 	
 }
