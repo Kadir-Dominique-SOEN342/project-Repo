@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class lessonator_driver {
 
-	private static Administrator myadmin = Administrator.getAdministrator();	
+
 	private static Registration registry  = Registration.getRegistry();	
 	private static Location locationregistry = Location.getLocationRegistry();
 	private static User browsingUser;
