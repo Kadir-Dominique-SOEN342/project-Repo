@@ -1,7 +1,6 @@
 The complete set of System operations for the use case PROCESS OFFERING is:
 
     uploadOffering()
-    deleteOffering()
     viewOffering()
     signuptoLesson()
 
