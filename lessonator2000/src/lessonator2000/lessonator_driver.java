@@ -17,18 +17,46 @@ public class lessonator_driver {
 		// TODO Auto-generated method stub
 
 
-		//Registration.register(); //TODO: for iteration 2 finish register
-		//Registration.login();
 		
 		//hardcode a few lessons
-		//UploadOffering("Judo", "jud101", false, true, LocalDate.of(2024, 1, 13),  LocalTime.of(10,00,00),  LocalTime.of(11,00,00), "TY908", true, 10);
+	//hardcodedLesson1	
+		//create the new lesson Offering -- uploadOffering(...)
+		Lesson myLesson = offers.uploadOffering("Judo", "jud101", false, true,  true, 10,LocalDate.of(2024, 1, 13), LocalDate.of(2024, 12, 13),"Wednesday");	
+		//addLessonToSpace(...)
+		Space mySpace = locationregistry.addLessonToSpace("TY908");  	
+		//addLocationToSchedual, this will return the timeslot created for this lesson. Create the timeslot. addLessonToschedual add the timeslot to every day that falls on the dayOfTheWeek between startdate and enddate
+		Timeslot myTimeSlot =	mySpace.addLessonToSchedual(myLesson, LocalDate.of(2024, 1, 13), LocalDate.of(2024, 12, 13),"Wednesday", LocalTime.of(10,00,00),  LocalTime.of(11,00,00));
+		// add space and time to lesson
+		offers.addSpaceTimeToLesson(mySpace, myTimeSlot, myLesson);
+	 
+	//hardcodedlesson2
 	
-	    //UploadOffering("SumoWrestling", "sumo900", false, true, LocalDate.of(2025, 6, 28),  LocalTime.of(3,00,00),  LocalTime.of(3,30,00), "H513", false, 0);
-		//UploadOffering("Aerobics", "aero111", true, true, LocalDate.of(2026, 6, 28),  LocalTime.of(3,00,00),  LocalTime.of(3,30,00), "123ramsay", true, 5);
+				Lesson myLesson2 = offers.uploadOffering("SumoWrestling", "sumo900", false, true,  true, 10,LocalDate.of(2025, 6, 28), LocalDate.of(2025,12,11),"Monday");	
+				//addLessonToSpace(...)
+				Space mySpace2 = locationregistry.addLessonToSpace("H513");  	
+				//addLocationToSchedual, this will return the timeslot created for this lesson. Create the timeslot. addLessonToschedual add the timeslot to every day that falls on the dayOfTheWeek between startdate and enddate
+				Timeslot myTimeSlot2 =	mySpace2.addLessonToSchedual(myLesson2, LocalDate.of(2025, 6, 28), LocalDate.of(2025,12,11),"Monday", LocalTime.of(5,00,00),  LocalTime.of(3,30,00));
+				// add space and time to lesson
+				offers.addSpaceTimeToLesson(mySpace2, myTimeSlot2, myLesson2);
 		
+		
+				//hardcodedlesson2
+				
+				Lesson myLesson3 = offers.uploadOffering("Aerobics", "aero111", true, true,  true, 1,LocalDate.of(2025, 6, 28), LocalDate.of(2025,10,20),"Saturday");	
+				//addLessonToSpace(...)
+				Space mySpace3 = locationregistry.addLessonToSpace("H513");  	
+				//addLocationToSchedual, this will return the timeslot created for this lesson. Create the timeslot. addLessonToschedual add the timeslot to every day that falls on the dayOfTheWeek between startdate and enddate
+				Timeslot myTimeSlot3 =	mySpace3.addLessonToSchedual(myLesson3, LocalDate.of(2025, 6, 28), LocalDate.of(2025,10,20),"Saturday", LocalTime.of(3,00,00),  LocalTime.of(5,30,00));
+				// add space and time to lesson
+				offers.addSpaceTimeToLesson(mySpace3, myTimeSlot3, myLesson3);
+				
+				
+				
+				
+				
 		//browsingUser = new Client("Bobby","Baratheon",LocalDate.of(1600, 1, 13) , "bobb", "westeros"); 
-		//browsingUser = new Instructor("Sword","Ned" , "Stark", 5128963587L);
-		browsingUser = new Public();
+		browsingUser = new Instructor("Sword","Ned" , "Stark", 5128963587L);
+		//browsingUser = new Public();
 		
 		while(true) {
 		//print the top menu
@@ -172,9 +200,9 @@ public class lessonator_driver {
 		System.out.println("What is the day of the week the lesson will take place on?");
 		String lessonDay = keyboard.next();
 		System.out.println("What is the start date? must be of the form yyyy-mm-dd");
-		LocalDate startday = LocalDate.parse(keyboard.next());
+		LocalDate startdate = LocalDate.parse(keyboard.next());
 		System.out.println("What is the end date? must be of the form yyyy-mm-dd");
-		LocalDate endday = LocalDate.parse(keyboard.next());
+		LocalDate enddate = LocalDate.parse(keyboard.next());
 		System.out.println("What is the start time? must be of the form 00:00:00 ");
 		LocalTime startTime = LocalTime.parse(keyboard.next());
 		System.out.println("What is the end time? must be of the form 00:00:00 ");
@@ -186,17 +214,26 @@ public class lessonator_driver {
 		capacity = keyboard.nextInt();}
 		else capacity = 1;
 		
-		Lesson myLesson = offers.uploadOffering(lessontype, lessonID , false, true,  isPublic,  capacity);
-				
-		Space mySpace = locationregistry.addLessonToSpace(roomNb, myLesson, startday, startTime, endTime);  // modigfy startday 
-		Timeslot myTimeSlot = mySpace.addLessonToSchedual(myLesson, startday,  startTime,endTime);// modigfy startday 
+		//create the new lesson Offering -- uploadOffering(...)
+		Lesson myLesson = offers.uploadOffering(lessontype, lessonID , false, true,  isPublic,  capacity,startdate, enddate,lessonDay);
 		
+		//addLessonToSpace(...)
+		Space mySpace = locationregistry.addLessonToSpace(roomNb);  
+		
+		//addLocationToSchedual, this will return the timeslot created for this lesson. Create the timeslot. addLessonToschedual add the timeslot to every day that falls on the dayOfTheWeek between startdate and enddate
+		Timeslot myTimeSlot =	mySpace.addLessonToSchedual(myLesson, startdate, enddate, lessonDay,startTime, endTime);
+
+		// add space and time to lesson
 		
 		offers.addSpaceTimeToLesson(mySpace, myTimeSlot, myLesson);
-		
-		// System.out.println(myLesson.toString());
-		
+				
+		System.out.println("You have uploaded the lesson" +  myLesson.toString());
+				
+	    
 	}
+
+
+	
 
 	public static void viewOffering() {
 				offers.viewOffering(browsingUser);

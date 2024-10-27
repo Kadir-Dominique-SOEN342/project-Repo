@@ -45,9 +45,9 @@ public String province() {
 }
 //TODO: finish getters and setters
 
-public Timeslot addLessonToSchedual(Lesson myLesson, LocalDate date, LocalTime startTime, LocalTime endTime) {
+public Timeslot addLessonToSchedual(Lesson myLesson, LocalDate startdate, LocalDate enddate, String dayOfTheWeek, LocalTime startTime, LocalTime endTime) {
 	//System.out.println("Space: addLessonToSchedual");
-Timeslot myTimeslot = 	openFor.addLesson(myLesson,date, startTime,endTime);
+	Timeslot myTimeslot = openFor.addLesson( myLesson,  startdate,  enddate,  dayOfTheWeek ,  startTime,  endTime);
 	return myTimeslot;
 }
 }
