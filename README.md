@@ -23,7 +23,7 @@ SOEN 342 - SECTION H
 
 ### SRS
 
-- [UML Domain model](SRS/UmlDomainModel_v9.jpg)
+- [UML Domain model](SRS/UmlDomainModel_v10.jpg)
 - [UML package Diagram]
 
 #### System Sequence Diagram
@@ -39,7 +39,7 @@ SOEN 342 - SECTION H
 
 #### UML Interaction diagrams
 
-- [uploadOffering()](SAD/UploadOffering_v4.jpg)
+- [uploadOffering()](SAD/UploadOffering_v6.jpg)
 - [viewOffering()](SAD/InteractionDiagrams/InteractionDiagram_viewOffering_v4.jpg)
 - [ signuptoLesson()](SAD/InteractionDiagrams/InteractionDiagram_signupToLesson_v4.jpg)
 
