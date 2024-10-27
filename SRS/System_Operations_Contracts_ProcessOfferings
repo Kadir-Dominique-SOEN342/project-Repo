@@ -2,7 +2,7 @@
 
 uploadOffering
 
-Operation: uploadOffering(type: String, hasInstructor: Boolean, isAvailable: Boolean, lessonID: String)
+Operation: uploadOffering()
 Cross Reference: Use Case: Process Offerings
 Preconditions:
 
@@ -19,7 +19,7 @@ Preconditions:
 
 viewOffering
 
-Operation: viewOffering(u : User)
+Operation: viewOffering()
 Cross References: Use Case: Process Offering
 Preconditions:
 – User instance exist
@@ -33,7 +33,7 @@ Postconditions:
 
 signupToLesson
 
-Operation: signupToLesson(lessonId : String)
+Operation: signupToLesson()
 Cross References: Use Case: Process Offering
 Preconditions:
 – The instructor is registered
