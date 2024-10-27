@@ -1,0 +1,7 @@
+The complete set of System operations for the use case PROCESS Booking is:
+
+    makeBooking()
+    cancelBooking()
+    viewBooking()
+
+These methods need to be part of the public interface of our system
