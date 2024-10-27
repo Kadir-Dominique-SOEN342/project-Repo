@@ -1,0 +1,40 @@
+## System Operations Contracts for Process Booking
+
+makeBooking
+
+
+
+---
+
+cancelBooking
+
+Operation: cancelBooking()
+Cross References: Use Case: Process Booking
+Preconditions:
+– Administrator is logged in
+– Lessonator2000 instance exists
+– BookingCatalog exist and has been instantiated as Lessonator2000 attribute
+- Booking b exist
+- Booking b is part of the BookingCatalog collection bookings
+
+Postconditions:
+-  b is removed from bookings Booking collection in BookingCatalog(attribute modification)
+- associoation between b and BookingCatalog severed.
+
+---
+
+viewBooking
+
+Operation: viewBooking()
+Cross References: Use Case: Process Booking
+Preconditions:
+– The User is registered as Administrator or Client
+– The User is logged in as Administrator or Client
+– Lessoinator2000 instance exist
+– BookingCatalog exist and has been instantiated as Lessonator2000 attribute
+
+Postconditions:
+
+This is a read only operation, no instance are created, no attributes changed or association formed. The state of the system does not change after this operation.
+
+---
