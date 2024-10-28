@@ -32,24 +32,27 @@ public class Location {
 		return organizationLocations;
 	}
 
-	public Space addLessonToSpace(String roomNb, Lesson myLesson, LocalDate date, LocalTime startTime,LocalTime endTime) {
+	
+	//finds the space we will add the lesson to
+	public Space addLessonToSpace(String roomNb) {
 	//	System.out.println("Location : addLessonToSpace");
-		Space lessonSpace =null;
-		for(Space s: spaceRegistry) {
+		Space lessonSpace = null; //initialize to 0
+		for(Space s: spaceRegistry) {  // for each space in registry , return the space if the room number is equal
 			if(roomNb.equals(s.getRoomNumber())) {
 				lessonSpace = s;	
 				//System.out.println("Location: found room Number");
 			}
 		}
-
+		
+	
 		if(lessonSpace != null) {
-			lessonSpace.addLessonToSchedual(myLesson, date, startTime, endTime);
-	       return lessonSpace;
-	    } else {
-	        System.out.println("Space with room number " + roomNb + " not found.");
-	    }
+	      return lessonSpace;
+	  } else {
+	      System.out.println("Space with room number " + roomNb + " not found.");
+      }
+		return lessonSpace;
 
-	    return lessonSpace;
+	//    return lessonSpace;
 	}
 
 

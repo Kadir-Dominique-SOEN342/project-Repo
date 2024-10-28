@@ -23,36 +23,26 @@ public class Offerings{
 	//	this.lessons.add(new Lesson(type, id, false, true));
 	//TODO:  need to add the creation of a private or public lesson 
 	//}
-	public Lesson uploadOffering(String type, String id , Boolean hasInstructor, Boolean isAvailable, Boolean isPublic, int capacity) {
+	public Lesson uploadOffering(String type, String id , Boolean hasInstructor, Boolean isAvailable, Boolean isPublic, int capacity, LocalDate start, LocalDate end, String weekDay) {
 		//System.out.println("Offerings: uploadOffering");
+		//First create the elsson
 		Lesson myLesson = null;
 		if(isPublic) {
-			myLesson = new PublicLesson(capacity, type, id,  hasInstructor, isAvailable);
+			myLesson = new PublicLesson(capacity, type, id,  hasInstructor, isAvailable, start, end, weekDay);
 		}
 		if(!isPublic) {
-			myLesson = new PrivateLesson(type, id, hasInstructor, isAvailable);
+			myLesson = new PrivateLesson(type, id, hasInstructor, isAvailable,start, end, weekDay);
 		}
 		
-		//add the lesson to the lesson collection
+		//Add the lesson to the lesson collection
 		lessons.add(myLesson);
-
+		
+		//return the lesson 
 		return myLesson;
+		
+		
 	}
 
-		//Commented out by Dom on 18-10-2024 , I needed it to compile to implement viewOfferings().  
-		  public void deleteOffering(Lesson lesson){
-		// Lesson foundLesson = null; 
-		// 	Lesson foundLesson;
-		//    for(Lesson temp : lessons){
-		//        if(temp.getID().equals(lesson.getID()))
-		//            Lesson foundLesson = temp;
-		//         break;
-		//    }
-		//      if(foundLesson != null){
-		//         lessons.remove(foundLesson);
-		//     }
-
-		  }
 
 		//Offerings is implemented as a singleton 
 		public static Offerings getOfferings() {

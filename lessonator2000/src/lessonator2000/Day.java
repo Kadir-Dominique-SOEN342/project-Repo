@@ -40,12 +40,16 @@ public class Day {
 		return this.today;
 	}
 
+	public void addToCollection(Timeslot myTimeSlot) {
+		daySchedual.add(myTimeSlot);
+		
+	}
 
-	public Timeslot createTimeSlot(LocalTime startTime, LocalTime endTime, Lesson myLesson) {
+	//public Timeslot createTimeSlot(LocalTime startTime, LocalTime endTime, Lesson myLesson) {
 		//System.out.println("Day :  createTimeSlot");
-		Timeslot myTimeSlot = new Timeslot(startTime, endTime, myLesson);
-	daySchedual.add(myTimeSlot);
-	return myTimeSlot;
+	//	Timeslot myTimeSlot = new Timeslot(startTime, endTime, myLesson);
+	//daySchedual.add(myTimeSlot);
+	//return myTimeSlot;
 		//TODO: make sure start time is after end time of other time slots.
 	}
-}
+

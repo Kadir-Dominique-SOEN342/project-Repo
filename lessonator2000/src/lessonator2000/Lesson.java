@@ -1,5 +1,7 @@
 package lessonator2000;
 
+import java.time.LocalDate;
+
 public class Lesson {
 
     private String type;
@@ -10,11 +12,19 @@ public class Lesson {
     private Space space;
     private Timeslot time;
 
-    public Lesson(String type, String id, boolean hasInstructor, boolean isAvailable){
+   private LocalDate startDate;
+    private LocalDate endDate;
+  private String dayOfTheWeek;
+
+
+    public Lesson(String type, String id, boolean hasInstructor, boolean isAvailable, LocalDate startDate, LocalDate endDate , String weekDay){
         this.type = type;
         this.lessonId = id;
         this.hasInstructor = hasInstructor;
         this.isAvailable = isAvailable;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.dayOfTheWeek = weekDay;
 
     }
 
@@ -23,7 +33,7 @@ public class Lesson {
     }
 
     public String toString(){
-        return "the lesson ID : " + lessonId + " "  +  space.getTypeOfSpace() + " " + space.getroomNumber() + " , in " + space.getCity() + " , is available for " + type + " From " + time.getStartTime() + " to " + time.getEndTime() ;
+        return "the lesson ID : " + lessonId + "\n The"  +  space.getTypeOfSpace() + " " + space.getroomNumber() + " , in " + space.getCity() + " , is available for " + type + " on "+ dayOfTheWeek + " From " + time.getStartTime() + " to " + time.getEndTime() + ", from" + startDate.getMonthValue() + " " + startDate.getDayOfYear() + "to " + endDate.getMonthValue() + " " + endDate.getDayOfYear()+ ",  " + endDate.getYear();
         		//" with " + teacher.getFirstName() + " " + teacher.getLastName();       
     }
     
@@ -44,6 +54,15 @@ public class Lesson {
     
     public Instructor getInstructor() {
     	return this.teacher;
+    }
+    public LocalDate getStartDatE() {
+    	return startDate;
+    }
+    public LocalDate getEndDate() {
+    	return endDate;
+    }
+    public String getDayOfTheWeek() {
+    	return dayOfTheWeek;
     }
     
     //Setters
@@ -76,7 +95,14 @@ public class Lesson {
 		this.time = time;
 		
 	}
-   
-   
+	public void setStartDate(LocalDate start) {
+		this.startDate = start;
+	}
+   public  void setEndDate(LocalDate end) {
+	   this.endDate = end;
+   }
+   public void setDayOfTheWeek(String day) {
+	   this.dayOfTheWeek = day;
+   }
     }
 
