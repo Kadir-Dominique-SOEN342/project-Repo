@@ -2,7 +2,7 @@ package lessonator2000;
 
 //Implemented as a singleton
 
-public class Administrator extends User {
+public class Administrator extends lessonator2000.User {
 	private static Administrator myadmin = null;
 	private String username = "myadmin"; //hardcoded
 	private String password = "admin"; // hardcoded

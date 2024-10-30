@@ -8,9 +8,9 @@ public class Lesson {
     private String lessonId;
     private boolean hasInstructor;
     private boolean isAvailable;
-    private Instructor teacher;
-    private Space space;
-    private Timeslot time;
+    private lessonator2000.Instructor teacher;
+    private lessonator2000.Space space;
+    private lessonator2000.Timeslot time;
 
    private LocalDate startDate;
     private LocalDate endDate;
@@ -28,7 +28,7 @@ public class Lesson {
 
     }
 
-    public void addInstructorToLesson(Instructor ins){
+    public void addInstructorToLesson(lessonator2000.Instructor ins){
         this.teacher = ins;
     }
 
@@ -52,7 +52,7 @@ public class Lesson {
     	return this.isAvailable;
     }
     
-    public Instructor getInstructor() {
+    public lessonator2000.Instructor getInstructor() {
     	return this.teacher;
     }
     public LocalDate getStartDatE() {
@@ -83,15 +83,15 @@ public class Lesson {
     	
     }
     
-    public void setTeacher(Instructor ins) {
+    public void setTeacher(lessonator2000.Instructor ins) {
     	this.teacher = ins;
     }
 
-	public void setSpace(Space mySpace) {
+	public void setSpace(lessonator2000.Space mySpace) {
 		this.space = mySpace;
 		
 	}
-	public void setTime(Timeslot time) {
+	public void setTime(lessonator2000.Timeslot time) {
 		this.time = time;
 		
 	}

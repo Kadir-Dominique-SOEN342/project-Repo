@@ -1,34 +1,33 @@
 package lessonator2000;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.*;
 
 public class Registration {
 	
 	//Registrator holds the registries for the organisation
-	private ArrayList<Client> clientRegistry = new ArrayList<Client>();
-	private ArrayList<Instructor> instructorRegistry = new ArrayList<Instructor>();
-	private Administrator myAdmin = Administrator.getAdministrator();
+	private ArrayList<lessonator2000.Client> clientRegistry = new ArrayList<lessonator2000.Client>();
+	private ArrayList<lessonator2000.Instructor> instructorRegistry = new ArrayList<lessonator2000.Instructor>();
+	private lessonator2000.Administrator myAdmin = lessonator2000.Administrator.getAdministrator();
 	private static Registration registry = null;
 	
 		//constructor - implemented as a singleton
 	private  Registration() {
 		// Remove this after persistance is achieved through the database is completed. These are hardcoded clients/ instructors
-		Client e = new Client("Bernard", "Summer",LocalDate.of(1956, 01, 4), "bsum" , "neworder");
+		lessonator2000.Client e = new lessonator2000.Client("Bernard", "Summer",LocalDate.of(1956, 01, 4), "bsum" , "neworder");
 		clientRegistry.add(e);
-		Client f = new Client("Steven", "Morris",LocalDate.of(1957, 10, 28), "smor" , "neworder");
+		lessonator2000.Client f = new lessonator2000.Client("Steven", "Morris",LocalDate.of(1957, 10, 28), "smor" , "neworder");
 		clientRegistry.add(f);
-		Client g = new Client("Peter", "Hook",LocalDate.of(1956, 02, 13), "phoo" , "neworder");
+		lessonator2000.Client g = new lessonator2000.Client("Peter", "Hook",LocalDate.of(1956, 02, 13), "phoo" , "neworder");
 		clientRegistry.add(g);
-		Client h = new Client("Gillian", "Gilbert",LocalDate.of(1961, 01, 27), "ggil" , "neworder");
+		lessonator2000.Client h = new lessonator2000.Client("Gillian", "Gilbert",LocalDate.of(1961, 01, 27), "ggil" , "neworder");
 		clientRegistry.add(h);
 		
 		
-		Instructor a = new Instructor("Aerobie", "Julie", "Samson", 5148659658L);
+		lessonator2000.Instructor a = new lessonator2000.Instructor("Aerobie", "Julie", "Samson", 5148659658L);
 		instructorRegistry.add(a);
-		Instructor b = new Instructor("Sumo", "Ura", "Kazuki", 5148659658L);
+		lessonator2000.Instructor b = new lessonator2000.Instructor("Sumo", "Ura", "Kazuki", 5148659658L);
 		instructorRegistry.add(b);
-		Instructor c = new Instructor("Judo", "Hajime", "Isogai", 5148659658L);
+		lessonator2000.Instructor c = new lessonator2000.Instructor("Judo", "Hajime", "Isogai", 5148659658L);
 		instructorRegistry.add(c);
 		
 		
@@ -50,7 +49,7 @@ public class Registration {
 		return registry;
 	}
 	
-	public static User login() {
+	public static lessonator2000.User login() {
 
 		Scanner keyboard = new Scanner(System.in);
 
@@ -70,11 +69,11 @@ public class Registration {
 		if(userChoice == 1) {
 			System.out.println("What is your username");
 			String username = keyboard.next();
-			Client myClient = registry.searchClient(username);
+			lessonator2000.Client myClient = registry.searchClient(username);
 
 			if(myClient == null ) {
 				System.out.println("You are not registered, you will browse as public for now until you do.");
-				return new Public();
+				return new lessonator2000.Public();
 			}
 			else {System.out.println("You are logged in" + username); 
 			return myClient;
@@ -86,11 +85,11 @@ public class Registration {
 		if(userChoice == 2) {
 			System.out.println("What is your phoneNumber");
 			long phoneNumber = keyboard.nextLong();
-			Instructor myInstructor = registry.searchInstructor(phoneNumber);
+			lessonator2000.Instructor myInstructor = registry.searchInstructor(phoneNumber);
 
 			if(myInstructor == null ) {
 				System.out.println("You are not registered, you will browse as public for now until you do.");
-				return new Public();
+				return new lessonator2000.Public();
 			}
 			else {  System.out.println("You are now logged in " + myInstructor.getFirstName());
 			return myInstructor;}
@@ -108,7 +107,7 @@ public class Registration {
 
 			else {
 				System.out.println("wrong username, you will browse as public for now .");
-				return new Public();
+				return new lessonator2000.Public();
 			}
 		}
 return null;
@@ -116,11 +115,11 @@ return null;
 
 
 /**
- * 
  * This method let's you create a new user or returns a User of type public to keep browsing without registering.
+ *
  * @return a User
  */
-public static User register() {
+public static lessonator2000.User register() {
 	
 	Scanner keyboard = new Scanner(System.in);
 	 int userChoice;
@@ -143,12 +142,12 @@ public static User register() {
 	
 	if(userChoice == 1) {
 		System.out.println("Thank you, keep Browsing as public.");
-		Public p  = new Public();
+		lessonator2000.Public p  = new lessonator2000.Public();
 		return p;
 	}
 	
 	else if (userChoice == 2) {
-		Client c =getRegistry().createClient(); // create the Client and return it to the driver
+		lessonator2000.Client c =getRegistry().createClient(); // create the Client and return it to the driver
 		if(c != null) { //Registration successful
 			return c;
 		}
@@ -159,7 +158,7 @@ public static User register() {
 	
 	else if (userChoice == 3) {
 		
-		UnderageClient uc = getRegistry().createUnderageClient();   // create the underageClient and return it to the driver
+		lessonator2000.UnderageClient uc = getRegistry().createUnderageClient();   // create the underageClient and return it to the driver
 		if(uc != null) {  //Registration successful
 			return uc;
 		}
@@ -195,8 +194,8 @@ private static Boolean underageCheck(LocalDate birth) {
  * @param username
  * @return the client object if found. returns null if not found.
  */
-private  Client searchClient(String username) {
- for(Client c : clientRegistry) {
+private  lessonator2000.Client searchClient(String username) {
+ for(lessonator2000.Client c : clientRegistry) {
 	String clientusername = c.getUsername();
 //	System.out.println(clientusername);
 	 if(clientusername.equals(username))
@@ -205,8 +204,8 @@ private  Client searchClient(String username) {
  return null;
  }
 
-private  Instructor searchInstructor(long phone) {
-	 for(Instructor ins : instructorRegistry) {
+private  lessonator2000.Instructor searchInstructor(long phone) {
+	 for(lessonator2000.Instructor ins : instructorRegistry) {
 		long phoneNumber = ins.getPhone();
 		System.out.println(phoneNumber);
 		 if(phoneNumber == phone)
@@ -214,7 +213,7 @@ private  Instructor searchInstructor(long phone) {
 		 }
 	 return null;
 	 }
-private  Client createClient() {
+private  lessonator2000.Client createClient() {
 	Scanner keyboard = new Scanner(System.in);
 	//TODO: Need to not assume perfect user. 
 			System.out.println("What is your first name:");
@@ -236,7 +235,7 @@ private  Client createClient() {
 			String username = keyboard.next();
 			System.out.println("\n What is your password");
 			String password = keyboard.next();
-			Client c = new Client(firstn, lastn, birth, username, password);  //create new client
+			lessonator2000.Client c = new lessonator2000.Client(firstn, lastn, birth, username, password);  //create new client
 			getRegistry().clientRegistry.add(c);//add client to Clientregistry
 			System.out.println("Successfull registration, you can now browser as Client");
 			return c;
@@ -246,13 +245,13 @@ private  Client createClient() {
 				return null;} // Registraiton failed
 }
 
-private UnderageClient createUnderageClient() {
+private lessonator2000.UnderageClient createUnderageClient() {
 	
 	Scanner keyboard = new Scanner(System.in);
 	//TODO: Need to not assume perfect user. 
 	System.out.println("What is the username of your parent?");
 	String parentUsername = keyboard.next();							
-	Client parent  = getRegistry().searchClient(parentUsername);  // find the parent Client
+	lessonator2000.Client parent  = getRegistry().searchClient(parentUsername);  // find the parent Client
 	if(parent == null){
 		System.out.println("Please go back and create a parent client, this username was not found"); 
 	return null;}
@@ -278,7 +277,7 @@ private UnderageClient createUnderageClient() {
 	Boolean isUnderage = underageCheck(birth);
 	
 	if(isUnderage) {
-	UnderageClient uc = new UnderageClient(firstn, lastn, birth, username, password,parent);  //create new underageClient
+	lessonator2000.UnderageClient uc = new lessonator2000.UnderageClient(firstn, lastn, birth, username, password,parent);  //create new underageClient
 	parent.addToDependantsCatalog(uc);    // add the underageClient to the parent's dependant catalog
 	getRegistry().clientRegistry.add(uc); //add underageclient to client's catalog 
 	System.out.println("Successfull registration, you can now browser as an underage Client. To book a lesson, ask your parent");
@@ -289,7 +288,7 @@ private UnderageClient createUnderageClient() {
 	}
 	
 
-private Instructor createInstructor() {
+private lessonator2000.Instructor createInstructor() {
 	Scanner keyboard = new Scanner(System.in);
 	//TODO: Need to not assume perfect user. 
 	System.out.println("What is your specialization:");
@@ -301,7 +300,7 @@ private Instructor createInstructor() {
 			System.out.println("What is your phoneNumber");
 			long phone = keyboard.nextInt();
 	
-	Instructor i = new Instructor(specialization, firstn, lastn, phone); 
+	lessonator2000.Instructor i = new lessonator2000.Instructor(specialization, firstn, lastn, phone);
 	return i;
 	
 }
