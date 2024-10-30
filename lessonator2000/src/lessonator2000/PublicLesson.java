@@ -2,7 +2,7 @@ package lessonator2000;
 
 import java.time.LocalDate;
 
-public class PublicLesson extends Lesson {
+public class PublicLesson extends lessonator2000.Lesson {
 
     private int capacity;
     private int participants;
@@ -16,4 +16,18 @@ public class PublicLesson extends Lesson {
     public void updateParticipants(){
         this.participants++;
     }
+
+    public void setCapacity(int cap){
+        this.capacity = cap;
+    }
+
+    public int getCapacity(){
+        return this.capacity;
+    }
+
+    public int getParticipants(){
+        return this.participants;
+    }
+
+
 }

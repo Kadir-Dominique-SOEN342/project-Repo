@@ -8,7 +8,7 @@ public class Space {
 private String rentedOrOwned;
 private String roomNumber;
 private String typeOfSpace;
-private Schedual openFor;
+private lessonator2000.Schedual openFor;
 private String city;
 private String province;
 
@@ -17,7 +17,7 @@ public Space(String rentedOrOwned, String roomNumber, String type , String city,
 	this.rentedOrOwned = rentedOrOwned;
 	this.roomNumber = roomNumber;
 	this.typeOfSpace = type;
-	this.openFor = new Schedual();
+	this.openFor = new lessonator2000.Schedual();
 	this.city = city;
 	this.province = province;
 		}
@@ -45,9 +45,9 @@ public String province() {
 }
 //TODO: finish getters and setters
 
-public Timeslot addLessonToSchedual(Lesson myLesson, LocalDate startdate, LocalDate enddate, String dayOfTheWeek, LocalTime startTime, LocalTime endTime) {
+public lessonator2000.Timeslot addLessonToSchedual(lessonator2000.Lesson myLesson, LocalDate startdate, LocalDate enddate, String dayOfTheWeek, LocalTime startTime, LocalTime endTime) {
 	//System.out.println("Space: addLessonToSchedual");
-	Timeslot myTimeslot = openFor.addLesson( myLesson,  startdate,  enddate,  dayOfTheWeek ,  startTime,  endTime);
+	lessonator2000.Timeslot myTimeslot = openFor.addLesson( myLesson,  startdate,  enddate,  dayOfTheWeek ,  startTime,  endTime);
 	return myTimeslot;
 }
 }

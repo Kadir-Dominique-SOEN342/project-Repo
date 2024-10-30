@@ -8,7 +8,7 @@ public class Day {
 	
 	//private Timeslot[] daySchedual;
 	
-	private ArrayList<Timeslot> daySchedual;
+	private ArrayList<lessonator2000.Timeslot> daySchedual;
 	private LocalDate today;
 	
 
@@ -19,18 +19,18 @@ public class Day {
 	
 	
 	//getter
-	public ArrayList<Timeslot> getDaySchedual() {
+	public ArrayList<lessonator2000.Timeslot> getDaySchedual() {
 		return this.daySchedual;
 	}
 	
 	//setter
-	public void setDaySchedual(ArrayList<Timeslot> newTimeSlot) {
+	public void setDaySchedual(ArrayList<lessonator2000.Timeslot> newTimeSlot) {
 		this.daySchedual = newTimeSlot;
 	}
 	
 	//Overriding toString
 	public String toString() {
-		for(Timeslot t : daySchedual) {
+		for(lessonator2000.Timeslot t : daySchedual) {
 			return t.toString();
 		}
 		return "There are no lessons scheduled today";
@@ -40,7 +40,7 @@ public class Day {
 		return this.today;
 	}
 
-	public void addToCollection(Timeslot myTimeSlot) {
+	public void addToCollection(lessonator2000.Timeslot myTimeSlot) {
 		daySchedual.add(myTimeSlot);
 		
 	}
