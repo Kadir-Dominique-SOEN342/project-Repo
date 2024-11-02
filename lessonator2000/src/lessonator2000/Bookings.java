@@ -28,6 +28,10 @@ public class Bookings {
         return bookingclient;
     }
 
+    
+    public int getBookingId() {
+    	return this.bookingId;
+    }
     public void setBookingclient(lessonator2000.Client bookingclient) {
         this.bookingclient = bookingclient;
     }
@@ -37,6 +41,6 @@ public class Bookings {
     }
 
     public String toString(){
-        return (this.bookingId + " " + bookingclient.toString() + " " + bookinglesson.getID());
+        return ("The id of the booking is : "+ getBookingId() + "\nthe client is : " + bookingclient.toString() + "\nthe lesson id is:  " + bookinglesson.getID());
     }
 }
