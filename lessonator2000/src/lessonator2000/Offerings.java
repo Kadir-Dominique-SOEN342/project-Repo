@@ -10,18 +10,14 @@ public class Offerings{
 	private ArrayList<lessonator2000.Lesson> lessons;
 	private static Offerings offers = null;
 
-	private lessonator2000.BookingCatalog bookings;
+	private lessonator2000.BookingCatalog bookingCatalog;
 
 
 
 	//Constructor
 	private Offerings(){
 		this.lessons = new ArrayList<lessonator2000.Lesson>();
-		this.bookings = new lessonator2000.BookingCatalog();
-		
-				//Some hardcoded lessons
-
-
+		this.bookingCatalog = lessonator2000.BookingCatalog.getBookingCatalog();
 	}
 
 
@@ -56,6 +52,10 @@ public class Offerings{
 				offers = new Offerings();
 			}
 			return offers;	
+		}
+		
+		public BookingCatalog getBookingCatalog() {
+			return this.bookingCatalog;
 		}
 
 
@@ -139,14 +139,15 @@ public class Offerings{
 			String lesson = sc.next();
 
 			if(choice == 2){
-				lessonator2000.UnderageClient uc = bookings.underageBooking(cl);
+				lessonator2000.UnderageClient uc = bookingCatalog.underageBooking(cl);
 				createBooking(lesson, uc);
 			}
 			else{
 				createBooking(lesson, cl);
 			}
 			// This is just to test if Bookings are in the Booking catalog
-			bookings.showBookings();
+			System.out.println("Here is your new booking: ");
+			bookingCatalog.viewBooking(cl);
 
 		}
 		public void createBooking(String lessonId, lessonator2000.Client cl){
@@ -154,12 +155,12 @@ public class Offerings{
 			lessonator2000.Lesson les = findLesson(lessonId);
 			if(les.getisAvailable()){
 				if(les instanceof lessonator2000.PrivateLesson){
-					bookings.addBooking(les, cl);
+					bookingCatalog.addBooking(les, cl);
 					les.setisAvailable(false);
 				}
 				else if(les instanceof lessonator2000.PublicLesson && (((lessonator2000.PublicLesson) les).getParticipants() < ((lessonator2000.PublicLesson) les).getCapacity())){
 
-					bookings.addBooking(les,cl);
+					bookingCatalog.addBooking(les,cl);
 					((lessonator2000.PublicLesson) les).updateParticipants();
 				}
 

@@ -16,7 +16,9 @@ public class Client extends lessonator2000.User{
 	
 
 	//Constructors
-	
+	public Client() {
+
+	}
 
 	public Client(String firstn,String lastn, LocalDate birth, String username, String password) {
 		
