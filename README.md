@@ -23,7 +23,7 @@ SOEN 342 - SECTION H
 
 ### SRS
 
-- [UML Domain model](SRS/UmlDomainModel_v10.jpg)
+- [UML Domain model](SRS/UmlDomainModel_v11.jpg)
 - [UML package Diagram]
 
 #### System Sequence Diagram
@@ -62,12 +62,12 @@ SOEN 342 - SECTION H
 
 #### Process Booking system operations contract
 
-- [Operation contract for System Operations of Process Booking]()
+- [Operation contract for System Operations of Process Booking](SRS/System_Operations_Contracts_ProcessBooking)
 
 ### SAD
 
 #### UML Interaction diagrams
 
-- []()
-- []()
-- []()
+- [makeBooking()](SAD/InteractionDiagram_makeBooking_v5.jpg)
+- [cancelBooking()](SAD/InteractionDiagram_CancelBooking_v2.jpg)
+- [viewBooking()](SAD/InteractionDiagram_ViewBooking_v2.jpg)

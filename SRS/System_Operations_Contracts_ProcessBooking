@@ -2,7 +2,25 @@
 
 makeBooking
 
+Operation: makeBooking()
+Cross Reference: Use case: Process Booking
+Preconditions:
 
+- lesson exists in Offerings
+- Client is registered and logged in
+- lesson.isAvailable is true
+
+Postconditions:
+
+- lesson.participants is incremented by 1 (attribute modification)
+- if lesson is public and lesson.capacity is equal to lesson.participant , isAvailable is set to false (attribute modification)
+- bookingCatalog.sequenceID is incresed (attribute modification)
+- if lesson is private lesson.isAvaiable set to false(attribute modification)
+- Booking b instance is created (instance creation)
+- Booking b is added to bookings of BookingCatalog(attribute modification)
+- association between client and booking is created(association formed)
+- association between lesson and booking is created(association formed)
+- Booking is associated with bookingCatalog(association formed)
 
 ---
 
@@ -11,15 +29,14 @@ cancelBooking
 Operation: cancelBooking()
 Cross References: Use Case: Process Booking
 Preconditions:
-– Administrator is logged in
-– Lessonator2000 instance exists
-– BookingCatalog exist and has been instantiated as Lessonator2000 attribute
+– Administrator exist and is logged in
+
 - Booking b exist
-- Booking b is part of the BookingCatalog collection bookings
+- Booking b is part of the BookingCatalog's collection bookings
 
 Postconditions:
--  b is removed from bookings Booking collection in BookingCatalog(attribute modification)
-- associoation between b and BookingCatalog severed.
+
+- b is removed from bookings Booking collection in BookingCatalog(attribute modification)
 
 ---
 
@@ -30,8 +47,6 @@ Cross References: Use Case: Process Booking
 Preconditions:
 – The User is registered as Administrator or Client
 – The User is logged in as Administrator or Client
-– Lessoinator2000 instance exist
-– BookingCatalog exist and has been instantiated as Lessonator2000 attribute
 
 Postconditions:
 
