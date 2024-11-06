@@ -3,14 +3,14 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class Registration {
-	
+
 	//Registrator holds the registries for the organisation
 	private ArrayList<lessonator2000.Client> clientRegistry = new ArrayList<lessonator2000.Client>();
 	private ArrayList<lessonator2000.Instructor> instructorRegistry = new ArrayList<lessonator2000.Instructor>();
 	private lessonator2000.Administrator myAdmin = lessonator2000.Administrator.getAdministrator();
 	private static Registration registry = null;
-	
-		//constructor - implemented as a singleton
+
+	//constructor - implemented as a singleton
 	private  Registration() {
 		// Remove this after persistance is achieved through the database is completed. These are hardcoded clients/ instructors
 		lessonator2000.Client e = new lessonator2000.Client("Bernard", "Summer",LocalDate.of(1956, 01, 4), "bsum" , "neworder");
@@ -21,23 +21,23 @@ public class Registration {
 		clientRegistry.add(g);
 		lessonator2000.Client h = new lessonator2000.Client("Gillian", "Gilbert",LocalDate.of(1961, 01, 27), "ggil" , "neworder");
 		clientRegistry.add(h);
-		
-		
+
+
 		lessonator2000.Instructor a = new lessonator2000.Instructor("Aerobie", "Julie", "Samson", 5148659658L);
 		instructorRegistry.add(a);
 		lessonator2000.Instructor b = new lessonator2000.Instructor("Sumo", "Ura", "Kazuki", 5148659658L);
 		instructorRegistry.add(b);
 		lessonator2000.Instructor c = new lessonator2000.Instructor("Judo", "Hajime", "Isogai", 5148659658L);
 		instructorRegistry.add(c);
-		
-		
-		
+
+
+
 		//
-		
-		
+
+
 	}
-	
-	
+
+
 	/**
 	 * 
 	 * @returns the one and only registry
@@ -48,7 +48,7 @@ public class Registration {
 		}
 		return registry;
 	}
-	
+
 	public static lessonator2000.User login() {
 
 		Scanner keyboard = new Scanner(System.in);
@@ -66,7 +66,7 @@ public class Registration {
 			try { userChoice = keyboard.nextInt();
 			valid = true;}
 			catch (java.util.InputMismatchException e) {
-			System.out.println("Please enter a valid int");
+				System.out.println("Please enter a valid int");
 			}
 		}
 
@@ -79,14 +79,14 @@ public class Registration {
 				try { username = keyboard.next();
 				valid = true;}
 				catch (java.util.InputMismatchException e) {
-				System.out.println("Please enter a valid String");
+					System.out.println("Please enter a valid String");
 				}
 			}
-			
-			
-			
-			
-			
+
+
+
+
+
 			lessonator2000.Client myClient = registry.searchClient(username);
 
 			if(myClient == null ) {
@@ -96,7 +96,7 @@ public class Registration {
 			else {System.out.println("You are logged in" + username); 
 			return myClient;
 			}
-			
+
 		}
 
 		//Returns an instructor if it's found, returns a public if not
@@ -108,13 +108,13 @@ public class Registration {
 				try { phoneNumber  = keyboard.nextLong();
 				valid = true;}
 				catch (java.util.InputMismatchException e) {
-				System.out.println("Please enter a valid Long");
+					System.out.println("Please enter a valid Long");
 				}
 			}
-			
-			
-			
-			
+
+
+
+
 			lessonator2000.Instructor myInstructor = registry.searchInstructor(phoneNumber);
 
 			if(myInstructor == null ) {
@@ -134,10 +134,10 @@ public class Registration {
 				try { userName = keyboard.next();
 				valid = true;}
 				catch (java.util.InputMismatchException e) {
-				System.out.println("Please enter a valid String");
+					System.out.println("Please enter a valid String");
 				}
 			}
-			
+
 
 			if(registry.myAdmin.getUsername().equals(userName)){
 				System.out.println("you are now logged in as admin");
@@ -149,356 +149,358 @@ public class Registration {
 				return new lessonator2000.Public();
 			}
 		}
-return null;
+		return null;
 	}
 
 
-/**
- * This method let's you create a new user or returns a User of type public to keep browsing without registering.
- *
- * @return a User
- */
-public static lessonator2000.User register() {
-	
-	Scanner keyboard = new Scanner(System.in);
-	 int userChoice;
-	
-	do {
-		
-		System.out.println("---------------------------------------------------");
-		System.out.println("-----------------Registration----------------------");
-		System.out.println("---------------------------------------------------");
-		System.out.println("1. I don't want to register");
-		System.out.println("2. Client");
-		System.out.println("3. Underage Client");
-		System.out.println("4. Instructor");
-		 System.out.println("Please enter a number between 1 and 4");
-		 
-		userChoice = keyboard.nextInt();
-	   
-	   
-	} while (!(userChoice >=1) || !(userChoice <= 4));
-	
-	if(userChoice == 1) {
-		System.out.println("Thank you, keep Browsing as public.");
-		lessonator2000.Public p  = new lessonator2000.Public();
-		return p;
-	}
-	
-	else if (userChoice == 2) {
-		lessonator2000.Client c =getRegistry().createClient(); // create the Client and return it to the driver
-		if(c != null) { //Registration successful
-			return c;
+	/**
+	 * This method let's you create a new user or returns a User of type public to keep browsing without registering.
+	 *
+	 * @return a User
+	 */
+	public   lessonator2000.User register() {
+
+		Scanner keyboard = new Scanner(System.in);
+		int userChoice;
+
+		do {
+
+			System.out.println("---------------------------------------------------");
+			System.out.println("-----------------Registration----------------------");
+			System.out.println("---------------------------------------------------");
+			System.out.println("1. I don't want to register");
+			System.out.println("2. Client");
+			System.out.println("3. Underage Client");
+			System.out.println("4. Instructor");
+			System.out.println("Please enter a number between 1 and 4");
+
+			userChoice = keyboard.nextInt();
+
+
+		} while (!(userChoice >=1) || !(userChoice <= 4));
+
+		if(userChoice == 1) {
+			System.out.println("Thank you, keep Browsing as public.");
+			lessonator2000.Public p  = new lessonator2000.Public();
+			return p;
 		}
-		return null; // Registration fail
-		
-		
-	}
-	
-	else if (userChoice == 3) {
-		
-		lessonator2000.UnderageClient uc = getRegistry().createUnderageClient();   // create the underageClient and return it to the driver
-		if(uc != null) {  //Registration successful
-			return uc;
+
+		else if (userChoice == 2) {
+			
+				lessonator2000.Client c =getRegistry().createClient(); // create the Client and return it to the driver
+				if(c != null) { //Registration successful
+					return c;
+				}
+			return null; // Registration fail
+
+
 		}
-		return null;  // Registration fail
+
+		else if (userChoice == 3) {
+			
+				lessonator2000.UnderageClient uc = getRegistry().createUnderageClient();   // create the underageClient and return it to the driver
+				if(uc != null) {  //Registration successful
+					return uc;
+				}
+				return null;  // Registration fail
+			}
+
+		else if(userChoice == 4) {
+			
+				return  getRegistry().createInstructor();   // create the Instructor and return it to the driver
+			}
+		
+		else return null;
+
 	}
-	
-	else if(userChoice == 4) {
-		return  getRegistry().createInstructor();   // create the Instructor and return it to the driver
-	
+
+
+	private static Boolean underageCheck(LocalDate birth) {
+
+		System.out.println();
+		LocalDate today = LocalDate.now();
+		if((today.getYear() - birth.getYear() )< 18) {
+			return true;  // return true if underage
+		}
+		else return false; // return false if adult
+
+
+
+
 	}
-	else return null;
-	
-}
-
-
-private static Boolean underageCheck(LocalDate birth) {
-
-	System.out.println();
-	LocalDate today = LocalDate.now();
-	if((today.getYear() - birth.getYear() )< 18) {
-	return true;  // return true if underage
+	/**
+	 * 
+	 * @param username
+	 * @return the client object if found. returns null if not found.
+	 */
+	private  lessonator2000.Client searchClient(String username) {
+		for(lessonator2000.Client c : clientRegistry) {
+			String clientusername = c.getUsername();
+			//	System.out.println(clientusername);
+			if(clientusername.equals(username))
+				return c;
+		}
+		return null;
 	}
-	else return false; // return false if adult
-	
-	
-	
-	
-}
-/**
- * 
- * @param username
- * @return the client object if found. returns null if not found.
- */
-private  lessonator2000.Client searchClient(String username) {
- for(lessonator2000.Client c : clientRegistry) {
-	String clientusername = c.getUsername();
-//	System.out.println(clientusername);
-	 if(clientusername.equals(username))
-		 return c;
-	 }
- return null;
- }
 
-private  lessonator2000.Instructor searchInstructor(long phone) {
-	 for(lessonator2000.Instructor ins : instructorRegistry) {
-		long phoneNumber = ins.getPhone();
-		System.out.println(phoneNumber);
-		 if(phoneNumber == phone)
-			 return ins;
-		 }
-	 return null;
-	 }
-private  lessonator2000.Client createClient() {
-	Scanner keyboard = new Scanner(System.in);
-	
-			System.out.println("What is your first name:");
-			String firstn = null;
-			boolean valid = false;
-			while (!valid) {
-				try { firstn = keyboard.next();
-				valid = true;}
-				catch (java.util.InputMismatchException e) {
+	private  lessonator2000.Instructor searchInstructor(long phone) {
+		for(lessonator2000.Instructor ins : instructorRegistry) {
+			long phoneNumber = ins.getPhone();
+			System.out.println(phoneNumber);
+			if(phoneNumber == phone)
+				return ins;
+		}
+		return null;
+	}
+	private synchronized  lessonator2000.Client createClient() {
+		Scanner keyboard = new Scanner(System.in);
+
+		System.out.println("What is your first name:");
+		String firstn = null;
+		boolean valid = false;
+		while (!valid) {
+			try { firstn = keyboard.next();
+			valid = true;}
+			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid String");
-				}
 			}
-			
-			
-			System.out.println("\n What is your last name:");
-			String lastn = null;
-			 valid = false;
-			while (!valid) {
-				try { lastn = keyboard.next();
-				valid = true;}
-				catch (java.util.InputMismatchException e) {
+		}
+
+
+		System.out.println("\n What is your last name:");
+		String lastn = null;
+		valid = false;
+		while (!valid) {
+			try { lastn = keyboard.next();
+			valid = true;}
+			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid String");
-				}
 			}
-			
-			System.out.println("\n What is your year of birth");
-			int year = 0;
-			 valid = false;
-			while (!valid) {
-				try { year = keyboard.nextInt();
-				valid = true;}
-				catch (java.util.InputMismatchException e) {
+		}
+
+		System.out.println("\n What is your year of birth");
+		int year = 0;
+		valid = false;
+		while (!valid) {
+			try { year = keyboard.nextInt();
+			valid = true;}
+			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid integer");
-				}
 			}
-			System.out.println("\n What is your month of birth");
-			int month = 0 ;
-			valid = false;
-			while (!valid) {
-				try { month = keyboard.nextInt();
-				valid = true;}
-				catch (java.util.InputMismatchException e) {
+		}
+		System.out.println("\n What is your month of birth");
+		int month = 0 ;
+		valid = false;
+		while (!valid) {
+			try { month = keyboard.nextInt();
+			valid = true;}
+			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid integer");
-				}
 			}
-			
-			System.out.println("\n What is your day of birth");
-			int day = 0;
-			 valid = false;
-			while (!valid) {
-				try { day = keyboard.nextInt();
-				valid = true;}
-				catch (java.util.InputMismatchException e) {
+		}
+
+		System.out.println("\n What is your day of birth");
+		int day = 0;
+		valid = false;
+		while (!valid) {
+			try { day = keyboard.nextInt();
+			valid = true;}
+			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid int");
-				}
 			}
-			
-			
-			LocalDate birth = LocalDate.of(year, month, day);
-			
-			Boolean isUnderage = underageCheck(birth);
-			
-			if(!isUnderage) {
+		}
+
+
+		LocalDate birth = LocalDate.of(year, month, day);
+
+		Boolean isUnderage = underageCheck(birth);
+
+		if(!isUnderage) {
 			System.out.println("\n What is your username");
 			String username = keyboard.next();
-			 valid = false;
+			valid = false;
 			while (!valid) {
 				try { username = keyboard.next();
 				valid = true;}
 				catch (java.util.InputMismatchException e) {
-				System.out.println("Please enter a valid String");
+					System.out.println("Please enter a valid String");
 				}
 			}
 			System.out.println("\n What is your password");
 			String password = keyboard.next();
-			 valid = false;
+			valid = false;
 			while (!valid) {
 				try { password = keyboard.next();
 				valid = true;}
 				catch (java.util.InputMismatchException e) {
-				System.out.println("Please enter a valid String");
+					System.out.println("Please enter a valid String");
 				}
 			}
-			
+
 			lessonator2000.Client c = new lessonator2000.Client(firstn, lastn, birth, username, password);  //create new client
 			getRegistry().clientRegistry.add(c);//add client to Clientregistry
 			System.out.println("Successfull registration, you can now browser as Client");
 			return c;
-			}
-			else{
-				System.out.println("Failed registration. You need to register as an underage client. Make sure you create an adult client first.");
-				return null;} // Registraiton failed
-}
+		}
+		else{
+			System.out.println("Failed registration. You need to register as an underage client. Make sure you create an adult client first.");
+			return null;} // Registraiton failed
+	}
 
-private lessonator2000.UnderageClient createUnderageClient() {
-	
-	Scanner keyboard = new Scanner(System.in);
+	private synchronized lessonator2000.UnderageClient createUnderageClient() {
 
-	System.out.println("What is the username of your parent?");
-	String parentUsername = null;
-	boolean valid = false;
-	while (!valid) {
-		try { parentUsername = keyboard.next();
-		valid = true;}
-		catch (java.util.InputMismatchException e) {
-		System.out.println("Please enter a valid String");
-		}
-	}
-	lessonator2000.Client parent  = getRegistry().searchClient(parentUsername);  // find the parent Client
-	if(parent == null){
-		System.out.println("Please go back and create a parent client, this username was not found"); 
-	return null;}
-		
-	
-	System.out.println("What is your first name:");
-	String firstn = keyboard.next();
-	valid = false;
-	while (!valid) {
-		try { firstn = keyboard.next();
-		valid = true;}
-		catch (java.util.InputMismatchException e) {
-		System.out.println("Please enter a valid String");
-		}
-	}
-	System.out.println("\n What is your last name:");
-	String lastn = keyboard.next();
-	valid = false;
-	while (!valid) {
-		try { lastn = keyboard.next();
-		valid = true;}
-		catch (java.util.InputMismatchException e) {
-		System.out.println("Please enter a valid String");
-		}
-	}
-	System.out.println("\n What is your year of birth");
-	int year = 0;
-	valid = false;
-	while (!valid) {
-		try { year = keyboard.nextInt();
-		valid = true;}
-		catch (java.util.InputMismatchException e) {
-		System.out.println("Please enter a valid integer");
-		}
-	}
-	System.out.println("\n What is your month of birth");
-	int month = 0 ;
-	valid = false;
-	while (!valid) {
-		try { month = keyboard.nextInt();
-		valid = true;}
-		catch (java.util.InputMismatchException e) {
-		System.out.println("Please enter a valid integer");
-		}
-	}
-	System.out.println("\n What is your day of birth");
-	int day =0 ;
-	valid = false;
-	while (!valid) {
-		try { day = keyboard.nextInt();
-		valid = true;}
-		catch (java.util.InputMismatchException e) {
-		System.out.println("Please enter a valid integer");
-		}
-	}
-	LocalDate birth = LocalDate.of(year, month, day);
-	System.out.println("\n What is your username");
-	String username = null;
-	valid = false;
-	while (!valid) {
-		try { username = keyboard.next();
-		valid = true;}
-		catch (java.util.InputMismatchException e) {
-		System.out.println("Please enter a valid String");
-		}
-	}
-	System.out.println("\n What is your password");
-	String password = null;
-	valid = false;
-	while (!valid) {
-		try { password = keyboard.next();
-		valid = true;}
-		catch (java.util.InputMismatchException e) {
-		System.out.println("Please enter a valid String");
-		}
-	}
-	
-	
-	Boolean isUnderage = underageCheck(birth);
-	
-	if(isUnderage) {
-	lessonator2000.UnderageClient uc = new lessonator2000.UnderageClient(firstn, lastn, birth, username, password,parent);  //create new underageClient
-	parent.addToDependantsCatalog(uc);    // add the underageClient to the parent's dependant catalog
-	getRegistry().clientRegistry.add(uc); //add underageclient to client's catalog 
-	System.out.println("Successfull registration, you can now browser as an underage Client. To book a lesson, ask your parent");
-	return uc;}
-	else {
-		System.out.println("Failed registration. You need to register as a Client.");
-		return null;} // Registraiton failed
-	}
-	
+		Scanner keyboard = new Scanner(System.in);
 
-private lessonator2000.Instructor createInstructor() {
-	Scanner keyboard = new Scanner(System.in);
-	System.out.println("What is your specialization:");
-	String specialization =null;
-	boolean valid = false;
-	while (!valid) {
-		try { specialization = keyboard.next();
-		valid = true;}
-		catch (java.util.InputMismatchException e) {
-		System.out.println("Please enter a valid String");
-		}
-	}
-			System.out.println("What is your first name:");
-			String firstn =null;
-			valid = false;
-			while (!valid) {
-				try { firstn = keyboard.next();
-				valid = true;}
-				catch (java.util.InputMismatchException e) {
+		System.out.println("What is the username of your parent?");
+		String parentUsername = null;
+		boolean valid = false;
+		while (!valid) {
+			try { parentUsername = keyboard.next();
+			valid = true;}
+			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid String");
-				}
 			}
-			System.out.println("\n What is your last name:");
-			String lastn =null;
-			valid = false;
-			while (!valid) {
-				try { lastn = keyboard.next();
-				valid = true;}
-				catch (java.util.InputMismatchException e) {
+		}
+		lessonator2000.Client parent  = getRegistry().searchClient(parentUsername);  // find the parent Client
+		if(parent == null){
+			System.out.println("Please go back and create a parent client, this username was not found"); 
+			return null;}
+
+
+		System.out.println("What is your first name:");
+		String firstn = keyboard.next();
+		valid = false;
+		while (!valid) {
+			try { firstn = keyboard.next();
+			valid = true;}
+			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid String");
-				}
 			}
-			System.out.println("What is your phoneNumber");
-			long phone = 0 ;
-			valid = false;
-			while (!valid) {
-				try { phone = keyboard.nextLong();
-				valid = true;}
-				catch (java.util.InputMismatchException e) {
+		}
+		System.out.println("\n What is your last name:");
+		String lastn = keyboard.next();
+		valid = false;
+		while (!valid) {
+			try { lastn = keyboard.next();
+			valid = true;}
+			catch (java.util.InputMismatchException e) {
+				System.out.println("Please enter a valid String");
+			}
+		}
+		System.out.println("\n What is your year of birth");
+		int year = 0;
+		valid = false;
+		while (!valid) {
+			try { year = keyboard.nextInt();
+			valid = true;}
+			catch (java.util.InputMismatchException e) {
+				System.out.println("Please enter a valid integer");
+			}
+		}
+		System.out.println("\n What is your month of birth");
+		int month = 0 ;
+		valid = false;
+		while (!valid) {
+			try { month = keyboard.nextInt();
+			valid = true;}
+			catch (java.util.InputMismatchException e) {
+				System.out.println("Please enter a valid integer");
+			}
+		}
+		System.out.println("\n What is your day of birth");
+		int day =0 ;
+		valid = false;
+		while (!valid) {
+			try { day = keyboard.nextInt();
+			valid = true;}
+			catch (java.util.InputMismatchException e) {
+				System.out.println("Please enter a valid integer");
+			}
+		}
+		LocalDate birth = LocalDate.of(year, month, day);
+		System.out.println("\n What is your username");
+		String username = null;
+		valid = false;
+		while (!valid) {
+			try { username = keyboard.next();
+			valid = true;}
+			catch (java.util.InputMismatchException e) {
+				System.out.println("Please enter a valid String");
+			}
+		}
+		System.out.println("\n What is your password");
+		String password = null;
+		valid = false;
+		while (!valid) {
+			try { password = keyboard.next();
+			valid = true;}
+			catch (java.util.InputMismatchException e) {
+				System.out.println("Please enter a valid String");
+			}
+		}
+
+
+		Boolean isUnderage = underageCheck(birth);
+
+		if(isUnderage) {
+			lessonator2000.UnderageClient uc = new lessonator2000.UnderageClient(firstn, lastn, birth, username, password,parent);  //create new underageClient
+			parent.addToDependantsCatalog(uc);    // add the underageClient to the parent's dependant catalog
+			getRegistry().clientRegistry.add(uc); //add underageclient to client's catalog 
+			System.out.println("Successfull registration, you can now browser as an underage Client. To book a lesson, ask your parent");
+			return uc;}
+		else {
+			System.out.println("Failed registration. You need to register as a Client.");
+			return null;} // Registraiton failed
+	}
+
+
+	private synchronized lessonator2000.Instructor createInstructor() {
+		Scanner keyboard = new Scanner(System.in);
+		System.out.println("What is your specialization:");
+		String specialization =null;
+		boolean valid = false;
+		while (!valid) {
+			try { specialization = keyboard.next();
+			valid = true;}
+			catch (java.util.InputMismatchException e) {
+				System.out.println("Please enter a valid String");
+			}
+		}
+		System.out.println("What is your first name:");
+		String firstn =null;
+		valid = false;
+		while (!valid) {
+			try { firstn = keyboard.next();
+			valid = true;}
+			catch (java.util.InputMismatchException e) {
+				System.out.println("Please enter a valid String");
+			}
+		}
+		System.out.println("\n What is your last name:");
+		String lastn =null;
+		valid = false;
+		while (!valid) {
+			try { lastn = keyboard.next();
+			valid = true;}
+			catch (java.util.InputMismatchException e) {
+				System.out.println("Please enter a valid String");
+			}
+		}
+		System.out.println("What is your phoneNumber");
+		long phone = 0 ;
+		valid = false;
+		while (!valid) {
+			try { phone = keyboard.nextLong();
+			valid = true;}
+			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid long");
-				}
 			}
-	
-	lessonator2000.Instructor i = new lessonator2000.Instructor(specialization, firstn, lastn, phone);
-	return i;
-	
-}
+		}
+
+		lessonator2000.Instructor i = new lessonator2000.Instructor(specialization, firstn, lastn, phone);
+		return i;
+
+	}
 
 
 }
