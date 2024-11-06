@@ -20,7 +20,7 @@ public class BookingCatalog {
 		}  return bookingCatalog;	
 	}
 
-	public void addBooking(lessonator2000.Lesson l, lessonator2000.Client cl) {
+	public synchronized void addBooking(lessonator2000.Lesson l, lessonator2000.Client cl) {
 		lessonator2000.Bookings b = new lessonator2000.Bookings(l, cl); 
 		bookings.add(b);
 	}
@@ -73,7 +73,7 @@ public class BookingCatalog {
 	}
 	
 	
-	public void cancelBooking(int id) {
+	public synchronized void cancelBooking(int id) {
 
 		lessonator2000.Bookings bookingToRemove = null; 
 		for( lessonator2000.Bookings b : bookings) {

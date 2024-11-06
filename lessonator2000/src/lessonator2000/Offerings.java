@@ -25,7 +25,7 @@ public class Offerings{
 	//	this.lessons.add(new Lesson(type, id, false, true));
 	//TODO:  need to add the creation of a private or public lesson 
 	//}
-	public lessonator2000.Lesson uploadOffering(String type, String id , Boolean hasInstructor, Boolean isAvailable, Boolean isPublic, int capacity, LocalDate start, LocalDate end, String weekDay) {
+	public synchronized lessonator2000.Lesson uploadOffering(String type, String id , Boolean hasInstructor, Boolean isAvailable, Boolean isPublic, int capacity, LocalDate start, LocalDate end, String weekDay) {
 		//System.out.println("Offerings: uploadOffering");
 		//First create the elsson
 		lessonator2000.Lesson myLesson = null;
@@ -97,7 +97,7 @@ public class Offerings{
 			
 			}
 		}
-		public void signupToLesson(lessonator2000.Instructor ins, String lessonId) {
+		public synchronized void signupToLesson(lessonator2000.Instructor ins, String lessonId) {
 			lessonator2000.Lesson myLesson= null;
 			for(lessonator2000.Lesson les: lessons) {
 				
@@ -130,7 +130,7 @@ public class Offerings{
 			return myLesson;
 		}
 
-		public void makeBooking(lessonator2000.Client cl){
+		public synchronized void makeBooking(lessonator2000.Client cl){
 			Scanner sc = new Scanner(System.in);
 			System.out.println("Are you booking for:");
 			System.out.println("1. Yourself\n2. Dependant");
@@ -150,7 +150,7 @@ public class Offerings{
 			bookingCatalog.viewBooking(cl);
 
 		}
-		public void createBooking(String lessonId, lessonator2000.Client cl){
+		public synchronized void createBooking(String lessonId, lessonator2000.Client cl){
 			// Find lesson with lesson id
 			lessonator2000.Lesson les = findLesson(lessonId);
 			if(les.getisAvailable()){
