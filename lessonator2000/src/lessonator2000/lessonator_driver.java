@@ -36,7 +36,7 @@ public class lessonator_driver {
 			//start a new session to begin with
 			
 		 sessionCatalog.createNewSession();
-			 sessionCatalog.createNewSession();
+			// sessionCatalog.createNewSession();
 			
 			System.out.println("waiting for a new session to start");
 			}

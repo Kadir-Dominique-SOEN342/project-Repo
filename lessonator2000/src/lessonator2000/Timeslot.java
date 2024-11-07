@@ -25,4 +25,8 @@ public class Timeslot {
 	public LocalTime getEndTime() {
 		return this.startTime;
 	}
+	
+	public Lesson getLesson() {
+		return this.timedLesson;
+	}
 }

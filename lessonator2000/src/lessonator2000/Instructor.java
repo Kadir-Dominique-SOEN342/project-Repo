@@ -69,4 +69,18 @@ public class Instructor extends lessonator2000.User {
 		
 	}
 
+
+	public void removeLesson(Lesson lessonToRemove) {
+		teaches.removeIf(l -> l == lessonToRemove);
+		for(Lesson l : teaches) {
+		//	if(l == lessonToRemove) {
+		//		//remove the lesson 
+		//		teaches.remove(teaches.indexOf(l));
+
+		//	}
+		//}
+			System.out.println("The lesson has been removed from the instructor's collection");
+	}
+
 }
+	}

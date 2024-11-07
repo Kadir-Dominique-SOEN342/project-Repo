@@ -33,13 +33,23 @@ public class Lesson {
     }
 
     public String toString(){
-        return "the lesson ID : " + lessonId + "\n The"  +  space.getTypeOfSpace() + " " + space.getroomNumber() + " , in " + space.getCity() + " , is available for " + type + " on "+ dayOfTheWeek + " From " + time.getStartTime() + " to " + time.getEndTime() + ", from" + startDate.getMonthValue() + " " + startDate.getDayOfYear() + "to " + endDate.getMonthValue() + " " + endDate.getDayOfYear()+ ",  " + endDate.getYear();
+
+        return "the lesson ID : " + lessonId + "\n " +  (!isAvailable ? "UNAVAILABLE " : "")+ "The"  +  space.getTypeOfSpace() + " " + space.getroomNumber() + " , in " + space.getCity() + " , is available for " + type + " on "+ dayOfTheWeek + " From " + time.getStartTime() + " to " + time.getEndTime() + ", from" + startDate.getMonthValue() + " " + startDate.getDayOfYear() + "to " + endDate.getMonthValue() + " " + endDate.getDayOfYear()+ ",  " + endDate.getYear();
         		//" with " + teacher.getFirstName() + " " + teacher.getLastName();       
     }
     
    //Getters
     public String getID() {
     	return this.lessonId;
+    }
+    public Space getSpace() {
+    	return this.space;
+    }
+    public Instructor getTeacher() {
+    	return this.teacher;
+    }
+    public Timeslot getTimeSlot() {
+    	return this.time;
     }
     
     public String getype() {
