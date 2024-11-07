@@ -28,7 +28,7 @@ SOEN 342 - SECTION H
 
 #### System Sequence Diagram
 
-- [Process Offering System Sequence diagram](SRS/SystemSequenceDiagram.png)
+- [Process Offering System Sequence diagram](SRS/SystemSequenceDiagram- ProcessOffering_v2.jpg)
 - [Process Offering System operations](SRS/ProcessOffering_System_Operation_)
 
 #### Process oferring system operations contract
