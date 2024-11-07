@@ -5,12 +5,12 @@ import java.util.Scanner;
 
 public class BookingCatalog {
 	private static BookingCatalog bookingCatalog = null;
-	private ArrayList<lessonator2000.Bookings> bookings;
+	private ArrayList<lessonator2000.Booking> bookings;
 
 	//implemented as singleton
 	private BookingCatalog() {
 		
-		bookings = new ArrayList<lessonator2000.Bookings>();
+		bookings = new ArrayList<lessonator2000.Booking>();
 	}
 	
 	//returns the single instance of BookingCatalog if its not null, if it is , it creates it and then returns it
@@ -21,7 +21,7 @@ public class BookingCatalog {
 	}
 
 	public synchronized void addBooking(lessonator2000.Lesson l, lessonator2000.Client cl) {
-		lessonator2000.Bookings b = new lessonator2000.Bookings(l, cl); 
+		lessonator2000.Booking b = new lessonator2000.Booking(l, cl); 
 		bookings.add(b);
 	}
 
@@ -35,7 +35,7 @@ public class BookingCatalog {
 
 	}
 
-	public void setBookingCatalog(ArrayList<lessonator2000.Bookings> bookingCatalog) {
+	public void setBookingCatalog(ArrayList<lessonator2000.Booking> bookingCatalog) {
 		this.bookings = bookingCatalog;
 	}
 
@@ -55,7 +55,7 @@ public class BookingCatalog {
 	
 	public void adminViewVooking() {
 		
-			for (lessonator2000.Bookings b : bookings) {
+			for (lessonator2000.Booking b : bookings) {
 				System.out.println(b.toString());
 			}
 	}
@@ -63,7 +63,7 @@ public class BookingCatalog {
 	
 	public void clientViewVooking(Client client) {
 		
-			for (lessonator2000.Bookings b : bookings) {
+			for (lessonator2000.Booking b : bookings) {
 				Client c  = b.getBookingclient();
 				if(c == client) {
 					System.out.println(b.toString());
@@ -75,8 +75,8 @@ public class BookingCatalog {
 	
 	public synchronized void cancelBooking(int id) {
 
-		lessonator2000.Bookings bookingToRemove = null; 
-		for( lessonator2000.Bookings b : bookings) {
+		lessonator2000.Booking bookingToRemove = null; 
+		for( lessonator2000.Booking b : bookings) {
 			if (b.getBookingId() == id) {
 				bookingToRemove = b;	    				
 			}}
@@ -89,4 +89,16 @@ public class BookingCatalog {
 		
 
 	}
-}
+
+	public void removeBooking(Lesson lessonToRemove) {
+		bookings.removeIf(b -> b.getBookinglesson() == lessonToRemove);
+		System.out.println("every booking containg the lesson was removed");
+		//for(Booking b : bookings) {
+		//	if(b.getBookinglesson() == lessonToRemove) {
+		//		bookings.remove(bookings.indexOf(lessonToRemove));
+		//		
+		}
+			
+		
+		
+	}

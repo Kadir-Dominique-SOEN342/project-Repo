@@ -45,11 +45,23 @@ public class Day {
 		
 	}
 
+
+	public void removeTimeSlot(Lesson lessonToRemove) {
+		daySchedual.removeIf(ts -> ts.getLesson() == lessonToRemove);
+	//	for(Timeslot ts : daySchedual) {
+		//	if (ts.getLesson() == lessonToRemove) {
+			//	daySchedual.remove(daySchedual.indexOf(ts));
+				System.out.println("timeslot containing lesson removed from day " + today.toString());
+			}
+		
+		
+	}
+
 	//public Timeslot createTimeSlot(LocalTime startTime, LocalTime endTime, Lesson myLesson) {
 		//System.out.println("Day :  createTimeSlot");
 	//	Timeslot myTimeSlot = new Timeslot(startTime, endTime, myLesson);
 	//daySchedual.add(myTimeSlot);
 	//return myTimeSlot;
 		//TODO: make sure start time is after end time of other time slots.
-	}
+	
 

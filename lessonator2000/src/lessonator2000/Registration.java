@@ -73,20 +73,16 @@ public class Registration {
 		//Returns a client if it's found, returns a public if not
 		if(userChoice == 1) {
 			System.out.println("What is your username");
-			String username = keyboard.next();
+			String username = null;
 			valid = false;
 			while (!valid) {
-				try { username = keyboard.next();
+				try { username =  keyboard.next();
+				keyboard.nextLine();
 				valid = true;}
 				catch (java.util.InputMismatchException e) {
 					System.out.println("Please enter a valid String");
 				}
 			}
-
-
-
-
-
 			lessonator2000.Client myClient = registry.searchClient(username);
 
 			if(myClient == null ) {
@@ -128,10 +124,11 @@ public class Registration {
 		//Returns the admin if it's found, returns a public if not
 		if(userChoice == 3) {
 			System.out.println("username");
-			String userName = keyboard.next();
+			String userName = null;
 			valid = false;
 			while (!valid) {
 				try { userName = keyboard.next();
+				keyboard.nextLine();
 				valid = true;}
 				catch (java.util.InputMismatchException e) {
 					System.out.println("Please enter a valid String");

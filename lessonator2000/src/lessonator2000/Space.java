@@ -39,6 +39,9 @@ public String getroomNumber() {
 public String getTypeOfSpace() {
 	return this.typeOfSpace;
 }
+public Schedual getSchedual() {
+	return this.openFor;
+}
 
 public String province() {
 	return this.province;
@@ -49,5 +52,12 @@ public lessonator2000.Timeslot addLessonToSchedual(lessonator2000.Lesson myLesso
 	//System.out.println("Space: addLessonToSchedual");
 	lessonator2000.Timeslot myTimeslot = openFor.addLesson( myLesson,  startdate,  enddate,  dayOfTheWeek ,  startTime,  endTime);
 	return myTimeslot;
+}
+
+
+
+public void removeLessonFromSpace(Lesson lessonToRemove) {
+	openFor.removeLesson(lessonToRemove);
+		
 }
 }

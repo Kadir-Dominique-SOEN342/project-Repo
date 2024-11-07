@@ -122,6 +122,30 @@ public class Schedual {
 		
 		return myDateArray;
 	}
+	
+	//removeLesson removes each timeslot that has the lessonToRemove as attribute from every day between the lesosn startDate and endDate that fall's on dayOfTheWeek
+	public void removeLesson(Lesson lessonToRemove) {
+		// TODO Auto-generated method stub
+		ArrayList<LocalDate> localDateArray = findAllDateBetween(lessonToRemove.getStartDatE(), lessonToRemove.getEndDate(), lessonToRemove.getDayOfTheWeek());
+	
+		//for each date remvove the timeslot
+		for(LocalDate date : localDateArray) {
+			lessonator2000.Day myDay = null;
+			for (int year = 0; year < mySchedual.length; year++) {
+				for (lessonator2000.Day d : mySchedual[year]) {
+					if (date.isEqual(d.getDate())) {
+						myDay = d;
+						d.removeTimeSlot(lessonToRemove); // For every day that matches, add the timeslot to the day's collection
+						
+					}
+				}
+
+			}
+
+
+		}
+	
+	}
 	}
 	
 	//TODO : Method to update the calendar and drop previous years 

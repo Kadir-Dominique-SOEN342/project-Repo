@@ -85,10 +85,10 @@ public class Offerings{
 		}
 		public void viewOffering(lessonator2000.User u) {
 			System.out.println("---------------------------------------------------");
-			System.out.println("-----------------viewOffring-----------------");
+			System.out.println("-----------------viewOffering-----------------");
 			System.out.println("---------------------------------------------------");
 			
-			if(u instanceof lessonator2000.Instructor) {
+			if(u instanceof lessonator2000.Instructor || u instanceof lessonator2000.Administrator) {
 				System.out.println("Here are all the lessons that you can view as an instructor: \n");
 				listAllOffering();	
 			}
@@ -170,6 +170,46 @@ public class Offerings{
 			}
 
 
+		}
+
+
+		public void deleteOffering(String lessonId) {
+			Lesson lessonToRemove= null;
+			for( Lesson l : lessons) {
+				if(l.getID().equals(lessonId)) lessonToRemove = l;
+			}
+			if(lessonToRemove != null) {
+				//remove the timeslot containing the lesson from every day in the schedual
+				Space s = lessonToRemove.getSpace();
+				s.removeLessonFromSpace(lessonToRemove);
+				//remove the lesson from the instructor's collection of lessons it teaches
+				Instructor i = lessonToRemove.getTeacher();
+			if(i != null) {	i.removeLesson(lessonToRemove);}
+				
+				//remove the lesson from the Offers
+				removeLessonFromOffers(lessonToRemove);
+				
+				//remove any booking's associate with that lesson
+				BookingCatalog bc = BookingCatalog.getBookingCatalog();
+				bc.removeBooking(lessonToRemove);
+				
+				
+				System.out.println("The lesson was removed from entire system");
+			}
+			else System.out.println("This lesson cannot be removed because the lesson ID is not found");
+			
+		}
+
+
+		private void removeLessonFromOffers(Lesson lessonToRemove) {
+			lessons.removeIf(l -> l == lessonToRemove);
+			//for(Lesson l : lessons) {
+				//if(l == lessonToRemove) {
+					//lessons.remove(lessons.indexOf(lessonToRemove));
+				//	System.out.println("lesson removed form OFfering's lessons");
+				//}
+			//}
+			
 		}
 		
 }
