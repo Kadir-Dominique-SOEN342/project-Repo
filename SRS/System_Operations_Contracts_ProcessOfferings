@@ -4,29 +4,47 @@ uploadOffering
 
 Operation: uploadOffering()
 Cross Reference: Use Case: Process Offerings
-Preconditions:
 
+Preconditions:
 - The administrator is logged in to the system
 - Organiation instance exist
 - Offerings instance exist
-  Postconditions:
+
+Postconditions:
 - A Lesson instance lesson is created (instance creation)
 - lesson is associated with Offerings (association formation)
 - lesson.hasInstructor was set to false (attribute modification)
 - lesson.isAvailable was set to true (attribute modification)
 
 ---
+deleteOffering
+
+Operation: deleteOffering()
+Cross Reference: Use Case: Process Offerings
+
+Preconditions: 
+  - Lesson  l instance exist 
+  - Lesson l is associated with Offerings
+  - Administrator is logged in
+
+Postconditions: 
+  - Timeslot t is removed from Days where Day.Date is between l.startDate and l.endDate(attribute modification)
+  - Lesson l is removed from Offering's lessons (attribute modification)
+  - Lesson l is removed from Instructor's teaches (attribute modification)
+  - Booking b containing l removed from Booking Catalog's booking
+---
 
 viewOffering
 
 Operation: viewOffering()
 Cross References: Use Case: Process Offering
+
 Preconditions:
 – User instance exist
 – Organization instance exists
 – Organization offerings collection has been created
-Postconditions:
 
+Postconditions:
 - The operation is a read only operation.The State of the system is not changed.
 
 ---
@@ -35,6 +53,7 @@ signupToLesson
 
 Operation: signupToLesson()
 Cross References: Use Case: Process Offering
+
 Preconditions:
 – The instructor is registered
 – The instructor is logged in
@@ -45,8 +64,8 @@ Preconditions:
 – Lessons instance exist
 – lesson.hasInstructor is false
 – instructor has visibility to offerings and lessons
-Postconditions:
 
+Postconditions:
 - an instance of lessonPairing lp was created(instance creation)
 - lp is associated with Lesson (association created)
 - lp is associated with instructor(association created)
