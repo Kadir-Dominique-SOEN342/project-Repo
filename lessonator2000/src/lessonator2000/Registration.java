@@ -2,6 +2,13 @@ package lessonator2000;
 import java.time.LocalDate;
 import java.util.*;
 
+/**
+ * 
+ * Class Registration.
+ *
+ * <p>This class holds all the registries for Client and instructors and takes care of the login, logout , register functionalities</p>
+
+ */
 public class Registration {
 
 	//Registrator holds the registries for the organisation
@@ -10,7 +17,11 @@ public class Registration {
 	private lessonator2000.Administrator myAdmin = lessonator2000.Administrator.getAdministrator();
 	private static Registration registry = null;
 
-	//constructor - implemented as a singleton
+
+	/**
+	 * Registration is implemented as a singleton
+	 * private constructor
+	 */
 	private  Registration() {
 		// Remove this after persistance is achieved through the database is completed. These are hardcoded clients/ instructors
 		lessonator2000.Client e = new lessonator2000.Client("Bernard", "Summer",LocalDate.of(1956, 01, 4), "bsum" , "neworder");
@@ -49,7 +60,12 @@ public class Registration {
 		return registry;
 	}
 
-	public static lessonator2000.User login() {
+	/**
+	 * captures user input on the type of user they want to login as and their credentials
+	 * returns a client , instructor or administrator if it is found in the registry
+	 * @return
+	 */
+	public lessonator2000.User login() {
 
 		Scanner keyboard = new Scanner(System.in);
 
@@ -211,7 +227,11 @@ public class Registration {
 
 	}
 
-
+/**
+ * This method verifies the age of the client ,because underage clients cannot book lessons 
+ * @param birth
+ * @return
+ */
 	private static Boolean underageCheck(LocalDate birth) {
 
 		System.out.println();
@@ -249,6 +269,11 @@ public class Registration {
 		}
 		return null;
 	}
+	/**
+	 * helper method to create a new client when user registers via register()
+	 * will capture user information and then verify the client's age and add it to the Client's registry after creation
+	 * @return a client
+	 */
 	private synchronized  lessonator2000.Client createClient() {
 		Scanner keyboard = new Scanner(System.in);
 
@@ -344,6 +369,11 @@ public class Registration {
 			return null;} // Registraiton failed
 	}
 
+	/**
+	 * helper method to create an underageClient when user registers via register()
+	 * captures user input, verifies age and then creates the client and adds it to the client registry
+	 * @return
+	 */
 	private synchronized lessonator2000.UnderageClient createUnderageClient() {
 
 		Scanner keyboard = new Scanner(System.in);
@@ -450,7 +480,11 @@ public class Registration {
 			return null;} // Registraiton failed
 	}
 
-
+/**
+ * helper method for when a user wants to register as an instructor.
+ * will capture user input for the credentals and then create an instrcutor and add it to the instructor registry
+ * @return
+ */
 	private synchronized lessonator2000.Instructor createInstructor() {
 		Scanner keyboard = new Scanner(System.in);
 		System.out.println("What is your specialization:");

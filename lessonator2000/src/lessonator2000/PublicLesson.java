@@ -13,18 +13,33 @@ public class PublicLesson extends lessonator2000.Lesson {
         this.participants = 0;
     }
 
-    public void updateParticipants(){
+    /**
+     * used when a booking is made, the number of participants is increased. 
+     */
+     void updateParticipants(){
         this.participants++;
     }
 
+    /**
+     * sets the capacity
+     * @param cap
+     */
     public void setCapacity(int cap){
         this.capacity = cap;
     }
 
+    /**
+     * get the capacity 
+     * @return
+     */
     public int getCapacity(){
         return this.capacity;
     }
 
+    /**
+     * get the numbe rof participants
+     * @return
+     */
     public int getParticipants(){
         return this.participants;
     }

@@ -5,6 +5,15 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * 
+ * Class Offerings.
+ *
+ * <p>Offerings is the class that holds the collection of Lessons and that is responsable to create and modify lessons
+ * Offerings also holds the BookingCatalog that holds and handles the Bookings</p>
+ * 
+ * 
+ */
 public class Offerings{
 
 	private ArrayList<lessonator2000.Lesson> lessons;
@@ -14,7 +23,10 @@ public class Offerings{
 
 
 
-	//Constructor
+	/**
+	 * Offerings is implemented as a singleton
+	 * private constructor of Offerings
+	 */
 	private Offerings(){
 		this.lessons = new ArrayList<lessonator2000.Lesson>();
 		this.bookingCatalog = lessonator2000.BookingCatalog.getBookingCatalog();
@@ -23,9 +35,21 @@ public class Offerings{
 
 	//	public void uploadOffering(String type, String id){
 	//	this.lessons.add(new Lesson(type, id, false, true));
-	//TODO:  need to add the creation of a private or public lesson 
 	//}
-	public synchronized lessonator2000.Lesson uploadOffering(String type, String id , Boolean hasInstructor, Boolean isAvailable, Boolean isPublic, int capacity, LocalDate start, LocalDate end, String weekDay) {
+	/**
+	 * uploadOffering creates the lessons and adds them to lessons collection
+	 * @param type
+	 * @param id
+	 * @param hasInstructor
+	 * @param isAvailable
+	 * @param isPublic
+	 * @param capacity
+	 * @param start
+	 * @param end
+	 * @param weekDay
+	 * @return
+	 */
+	 synchronized lessonator2000.Lesson uploadOffering(String type, String id , Boolean hasInstructor, Boolean isAvailable, Boolean isPublic, int capacity, LocalDate start, LocalDate end, String weekDay) {
 		//System.out.println("Offerings: uploadOffering");
 		//First create the elsson
 		lessonator2000.Lesson myLesson = null;
@@ -47,27 +71,43 @@ public class Offerings{
 
 
 		//Offerings is implemented as a singleton 
-		public static Offerings getOfferings() {
+	/**
+	 * returns the single instance of Offering	
+	 * @return
+	 */
+	 public static Offerings getOfferings() {
 			if(offers == null) {
 				offers = new Offerings();
 			}
 			return offers;	
 		}
 		
+	 /**
+	  * returns the bookingCatalog attribute of Offerings
+	  * @return
+	  */
 		public BookingCatalog getBookingCatalog() {
 			return this.bookingCatalog;
 		}
 
 
 
-
-		public void addSpaceTimeToLesson(lessonator2000.Space mySpace, lessonator2000.Timeslot myTimeSlot, lessonator2000.Lesson myLesson) {
+/**
+ * This method sets the timeSlot and the space attribute of the Lesson. This was done so the lesson has visibility on those objects.
+ * @param mySpace
+ * @param myTimeSlot
+ * @param myLesson
+ */
+		 void addSpaceTimeToLesson(lessonator2000.Space mySpace, lessonator2000.Timeslot myTimeSlot, lessonator2000.Lesson myLesson) {
 			//System.out.println("Offerings: addSpaceTimeToLEsson");
 			myLesson.setSpace(mySpace);
 			myLesson.setTime(myTimeSlot);
 			
 		}
 		
+		 /**
+		  * This is the method that viewOffering() will use to discriminate between lessons that have an instructor assigned to it or not when showing the lesson to clients.
+		  */
 		private void listAvailableOffering() {
 			for(lessonator2000.Lesson l : lessons) {
 				if(l.getHasInstructor()) {
@@ -77,12 +117,18 @@ public class Offerings{
 			}
 
 		}
+		/**
+		  * This is  method that viewOffering() will use to show lessons without discrimination to instructors
+		 */
 		private void listAllOffering() {
 			for(lessonator2000.Lesson l : lessons) {
 				System.out.println(l.toString());
 			}
-
 		}
+		/**
+		 * this method will show details of lessons that have instructors to clients or all the lessons to instructors
+		 * @param u
+		 */
 		public void viewOffering(lessonator2000.User u) {
 			System.out.println("---------------------------------------------------");
 			System.out.println("-----------------viewOffering-----------------");
@@ -97,6 +143,12 @@ public class Offerings{
 			
 			}
 		}
+		/**
+		 * This is the method that will let an instructor signup to a lesson
+		 * the method takes an instructor and a lessonId , it will add the instructor to the lesson and add the lesson to the instructor teaches collection
+		 * @param ins
+		 * @param lessonId
+		 */
 		public synchronized void signupToLesson(lessonator2000.Instructor ins, String lessonId) {
 			lessonator2000.Lesson myLesson= null;
 			for(lessonator2000.Lesson les: lessons) {
@@ -117,8 +169,13 @@ public class Offerings{
 						
 		
 		}
-
-		public lessonator2000.Lesson findLesson(String lessonId) {
+		/**
+		 * This method is used by makeBooking to find the lesson to create the Booking  association instance with(lesson and Client)
+		 * returns a lesson if found
+		 * @param lessonId
+		 * @return
+		 */
+		private lessonator2000.Lesson findLesson(String lessonId) {
 			lessonator2000.Lesson myLesson = null;
 			for (lessonator2000.Lesson les : lessons) {
 
@@ -129,14 +186,20 @@ public class Offerings{
 			}
 			return myLesson;
 		}
-
+		
+		/**
+		 * This method lets the user specify if the booking is for an adult or a dependant Client . verifies the age of the client.
+		 * Then the user can specify the lesson and the method calls createBooking() to instanciate the new booking
+		 * @param cl
+		 */
 		public synchronized void makeBooking(lessonator2000.Client cl){
+			//TODO : do not asusme perfetc user
 			Scanner sc = new Scanner(System.in);
 			System.out.println("Are you booking for:");
 			System.out.println("1. Yourself\n2. Dependant");
 			int choice = sc.nextInt();
 			System.out.println("Please enter the lesson you want to book: ");
-			String lesson = sc.next();
+			String lesson = sc.nextLine();
 
 			if(choice == 2){
 				lessonator2000.UnderageClient uc = bookingCatalog.underageBooking(cl);
@@ -150,10 +213,17 @@ public class Offerings{
 			bookingCatalog.viewBooking(cl);
 
 		}
-		public synchronized void createBooking(String lessonId, lessonator2000.Client cl){
+		/**
+		 * this method is used by makeBooking() to send a message(to delegate) to bookingCatalog in order to create the booking
+		 * The method verifies if the lesson is available(aka there is space) and if it has an instructor
+		 * the method then wll make a private lesson unavailable or increase the participant of a public lesson
+		 * @param lessonId
+		 * @param cl
+		 */
+		private synchronized void createBooking(String lessonId, lessonator2000.Client cl){
 			// Find lesson with lesson id
 			lessonator2000.Lesson les = findLesson(lessonId);
-			if(les.getisAvailable()){
+			if(les.getisAvailable() && les.getHasInstructor()){   // Dom 08-11-2024  I added a check to make sure the lesson has an instructor assigned to it. If not they might not see it in view offering but they could still create a booking for it if they had the id
 				if(les instanceof lessonator2000.PrivateLesson){
 					bookingCatalog.addBooking(les, cl);
 					les.setisAvailable(false);
@@ -172,7 +242,13 @@ public class Offerings{
 
 		}
 
-
+		/**
+		 * this method will delete a lesson that has the argument's lessonId
+		 * the lesson will be removed from every day in the schedual of the space it was uploaded to
+		 * then , if it had an instructor it will be removed from the instructor's collection
+		 * then if it had any booking associated, the booking will be removed 
+		 * @param lessonId
+		 */
 		public void deleteOffering(String lessonId) {
 			Lesson lessonToRemove= null;
 			for( Lesson l : lessons) {
@@ -200,7 +276,10 @@ public class Offerings{
 			
 		}
 
-
+		/**
+		 * Used by deleteOffering to remove the lesson from the offers collection
+		 * @param lessonToRemove
+		 */
 		private void removeLessonFromOffers(Lesson lessonToRemove) {
 			lessons.removeIf(l -> l == lessonToRemove);
 			//for(Lesson l : lessons) {

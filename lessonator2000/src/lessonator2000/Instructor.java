@@ -2,6 +2,14 @@ package lessonator2000;
 
 import java.util.ArrayList;
 
+/**
+ * 
+ * Class Instructor.
+ *
+ * <p>This is the class of </p>
+ * User that can signupToLesson(making the lesson viewable to the Clients)
+
+ */
 public class Instructor extends lessonator2000.User {
 
 	
@@ -10,7 +18,7 @@ public class Instructor extends lessonator2000.User {
 	private String lastname;
 	private long phoneNumber;
 	private ArrayList<lessonator2000.Lesson> teaches;
-	ArrayList<String> availability = new ArrayList<String>(); //TODO: check if we actually make city into a class
+	private ArrayList<String> availability = new ArrayList<String>(); //TODO: check if we actually make city into a class
 	
 	public Instructor(String specialization, String firstname,String lastname,long phonenb) {
 		this.specialization = specialization;
@@ -64,13 +72,20 @@ public class Instructor extends lessonator2000.User {
 		
 	}
 	
+	/**
+	 * when a instructor signups to a lesson, the lesson is also added to it's teaches collection. 
+	 * @param l
+	 */
 	public void addToCollection(lessonator2000.Lesson l) {
 		teaches.add(l);
 		
 	}
 
-
-	public void removeLesson(Lesson lessonToRemove) {
+/**
+ * used when a lesson(offer) is delete, it needs to be removed from the instructor teaches collection
+ * @param lessonToRemove
+ */
+	 void removeLesson(Lesson lessonToRemove) {
 		teaches.removeIf(l -> l == lessonToRemove);
 		for(Lesson l : teaches) {
 		//	if(l == lessonToRemove) {
@@ -83,4 +98,5 @@ public class Instructor extends lessonator2000.User {
 	}
 
 }
+	 //TODO: add functionality so that the instructor can see all it's lessons  (print my schedual or something..)
 	}
