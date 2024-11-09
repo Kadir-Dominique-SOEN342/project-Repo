@@ -193,6 +193,8 @@ public class Offerings{
 		 * @param cl
 		 */
 		public synchronized void makeBooking(lessonator2000.Client cl){
+			
+			
 			//TODO : do not asusme perfetc user
 			Scanner sc = new Scanner(System.in);
 			System.out.println("Are you booking for:");
@@ -220,7 +222,7 @@ public class Offerings{
 		 * @param lessonId
 		 * @param cl
 		 */
-		private synchronized void createBooking(String lessonId, lessonator2000.Client cl){
+		public synchronized void createBooking(String lessonId, lessonator2000.Client cl){
 			// Find lesson with lesson id
 			lessonator2000.Lesson les = findLesson(lessonId);
 			if(les.getisAvailable() && les.getHasInstructor()){   // Dom 08-11-2024  I added a check to make sure the lesson has an instructor assigned to it. If not they might not see it in view offering but they could still create a booking for it if they had the id
