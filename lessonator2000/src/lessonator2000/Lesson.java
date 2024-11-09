@@ -2,7 +2,15 @@ package lessonator2000;
 
 import java.time.LocalDate;
 
+/**
+ * 
+ * Class Lesson.
+ *
+ * <p>Lesson is the class that contains all the offering information , the instructors , the space it's offered in , the timeSlot it takes and all the accompanying methods.</p>
+ * 
+ */
 public class Lesson {
+
 
     private String type;
     private String lessonId;
@@ -11,12 +19,20 @@ public class Lesson {
     private lessonator2000.Instructor teacher;
     private lessonator2000.Space space;
     private lessonator2000.Timeslot time;
-
    private LocalDate startDate;
     private LocalDate endDate;
   private String dayOfTheWeek;
 
-
+/**
+ * Constructor for the lesson , there are no defualt constructors because to exist, these LEssons need all these attributes explicitely given
+ * @param type
+ * @param id
+ * @param hasInstructor
+ * @param isAvailable
+ * @param startDate
+ * @param endDate
+ * @param weekDay
+ */
     public Lesson(String type, String id, boolean hasInstructor, boolean isAvailable, LocalDate startDate, LocalDate endDate , String weekDay){
         this.type = type;
         this.lessonId = id;
@@ -28,10 +44,17 @@ public class Lesson {
 
     }
 
-    public void addInstructorToLesson(lessonator2000.Instructor ins){
+    /**
+     * This is the method used by signupToLesson() to add the instructor to the Lesson
+     * @param ins
+     */
+     void addInstructorToLesson(lessonator2000.Instructor ins){
         this.teacher = ins;
     }
 
+     /**
+      * shows all the lesso information and annotaiton is it's not available.
+      */
     public String toString(){
 
         return "the lesson ID : " + lessonId + "\n " +  (!isAvailable ? "UNAVAILABLE " : "")+ "The"  +  space.getTypeOfSpace() + " " + space.getroomNumber() + " , in " + space.getCity() + " , is available for " + type + " on "+ dayOfTheWeek + " From " + time.getStartTime() + " to " + time.getEndTime() + ", from" + startDate.getMonthValue() + " " + startDate.getDayOfYear() + "to " + endDate.getMonthValue() + " " + endDate.getDayOfYear()+ ",  " + endDate.getYear();

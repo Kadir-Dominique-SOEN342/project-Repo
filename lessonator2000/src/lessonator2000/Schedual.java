@@ -5,8 +5,16 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
+/**
+ * 
+ * Class Schedual.
+ *
+ * <p>This class holds the calendar for a space. Each schedual has a calendar of 5 years , each has a day that can hold timeslots each with a lesson attribute</p>
+
+ */
 public class Schedual {
-	lessonator2000.Day[][] mySchedual;
+	private lessonator2000.Day[][] mySchedual;
+	
 	
 	public Schedual() {
 		
@@ -27,7 +35,9 @@ public class Schedual {
 		 
 
 	        // Initialize Day objects for each day in the schedule
+		 //for each year
 	        for (int year = 0; year < mySchedual.length; year++) {
+	        	// for each day of the year
 	            int daysInYear = mySchedual[year].length; 
 	            for (int day = 0; day < daysInYear; day++) {
 	                // Create a LocalDate for the corresponding day
@@ -37,7 +47,19 @@ public class Schedual {
 	            }
 		 
 	        }
-	public lessonator2000.Timeslot addLesson(lessonator2000.Lesson myLesson, LocalDate startdate, LocalDate enddate, String datOfTheWeek , LocalTime startTime, LocalTime endTime) {
+	/**
+	 * used from uploadOffering()
+	 * creates a timeslot that has a lesson attribute
+	 * adds the timeslot to every Day that falls on a dayOfTheWeekn between startDate and endate
+	 * @param myLesson
+	 * @param startdate
+	 * @param enddate
+	 * @param datOfTheWeek
+	 * @param startTime
+	 * @param endTime
+	 * @return
+	 */
+	 lessonator2000.Timeslot addLesson(lessonator2000.Lesson myLesson, LocalDate startdate, LocalDate enddate, String datOfTheWeek , LocalTime startTime, LocalTime endTime) {
 		//	System.out.println("Schedual : addLesson");
 		//create new timeslot
 		lessonator2000.Timeslot myTimeSlot =  new lessonator2000.Timeslot(startTime, endTime, myLesson);
@@ -124,7 +146,7 @@ public class Schedual {
 	}
 	
 	//removeLesson removes each timeslot that has the lessonToRemove as attribute from every day between the lesosn startDate and endDate that fall's on dayOfTheWeek
-	public void removeLesson(Lesson lessonToRemove) {
+	 void removeLesson(Lesson lessonToRemove) {
 		// TODO Auto-generated method stub
 		ArrayList<LocalDate> localDateArray = findAllDateBetween(lessonToRemove.getStartDatE(), lessonToRemove.getEndDate(), lessonToRemove.getDayOfTheWeek());
 	
