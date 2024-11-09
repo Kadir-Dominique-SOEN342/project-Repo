@@ -48,7 +48,7 @@ public class BookingCatalog {
  * @param cl the adult client who's dependant catalog will be searched 
  * @return
  */
-	 lessonator2000.UnderageClient underageBooking(lessonator2000.Client cl) {
+	public lessonator2000.UnderageClient underageBooking(lessonator2000.Client cl) {
 		Scanner sc = new Scanner(System.in);
 		cl.viewDependants();
 		System.out.println("Please enter the username of the dependant you want to book: ");
