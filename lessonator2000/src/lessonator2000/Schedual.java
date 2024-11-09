@@ -35,7 +35,9 @@ public class Schedual {
 		 
 
 	        // Initialize Day objects for each day in the schedule
+		 //for each year
 	        for (int year = 0; year < mySchedual.length; year++) {
+	        	// for each day of the year
 	            int daysInYear = mySchedual[year].length; 
 	            for (int day = 0; day < daysInYear; day++) {
 	                // Create a LocalDate for the corresponding day
@@ -144,7 +146,7 @@ public class Schedual {
 	}
 	
 	//removeLesson removes each timeslot that has the lessonToRemove as attribute from every day between the lesosn startDate and endDate that fall's on dayOfTheWeek
-	public void removeLesson(Lesson lessonToRemove) {
+	 void removeLesson(Lesson lessonToRemove) {
 		// TODO Auto-generated method stub
 		ArrayList<LocalDate> localDateArray = findAllDateBetween(lessonToRemove.getStartDatE(), lessonToRemove.getEndDate(), lessonToRemove.getDayOfTheWeek());
 	

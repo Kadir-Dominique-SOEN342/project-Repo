@@ -5,6 +5,13 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * 
+ * Class Client.
+ *
+ * <p>Clients have dependant catalog that holds underage client for whom they will be able to book a lesson.</p>
+
+ */
 public class Client extends lessonator2000.User{
 	
 	private String firstName; 
@@ -15,11 +22,16 @@ public class Client extends lessonator2000.User{
 	ArrayList<lessonator2000.UnderageClient> dependantsCatalog = new ArrayList<lessonator2000.UnderageClient>();
 	
 
-	//Constructors
-	public Client() {
 
-	}
-
+/**
+ * 
+ * Constructor for the class Client. initiated without dependants.
+ * @param firstn
+ * @param lastn
+ * @param birth
+ * @param username
+ * @param password
+ */
 	public Client(String firstn,String lastn, LocalDate birth, String username, String password) {
 		
 				
@@ -66,7 +78,7 @@ public class Client extends lessonator2000.User{
 		this.password = pwrd;
 	}
 	
-	public void addToDependantsCatalog(lessonator2000.UnderageClient uc) {
+	 void addToDependantsCatalog(lessonator2000.UnderageClient uc) {
 		this.dependantsCatalog.add(uc);
 	}
 
@@ -74,13 +86,21 @@ public class Client extends lessonator2000.User{
 		return dependantsCatalog;
 	}
 
-	public void viewDependants(){
+	/**
+	 * Prints information about each dependants in the catalog. used when a client wants to book for one of their underage dependants
+	 */
+	 void viewDependants(){
 		for(lessonator2000.UnderageClient uc : dependantsCatalog){
 			System.out.println(uc.toString());
 		}
 	}
 
-	public lessonator2000.UnderageClient findDependant(String username) {
+	 /**
+	  * iterates through the client's catalog to find a dependant, returns the dependant
+	  * @param username
+	  * @return
+	  */
+	 lessonator2000.UnderageClient findDependant(String username) {
 		lessonator2000.UnderageClient uc = null;
 		for(lessonator2000.UnderageClient underage : dependantsCatalog){
 			if(underage.getUsername().equals(username))
@@ -88,7 +108,9 @@ public class Client extends lessonator2000.User{
 		}
 		return uc;
 	}
-
+/**
+ * Prints out the client's information
+ */
 	public String toString(){
 		return (this.getfirstName() + " " + this.getlastName() + " username:" + this.getUsername());
 	}
