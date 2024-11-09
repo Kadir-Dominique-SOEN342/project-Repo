@@ -42,6 +42,7 @@ public class BookingCatalog {
 	 synchronized void addBooking(lessonator2000.Lesson l, lessonator2000.Client cl) {
 		lessonator2000.Booking b = new lessonator2000.Booking(l, cl); 
 		bookings.add(b);
+		System.out.println("booking created between " + cl.toString() + "and " + l.toString()  );
 	}
 /**
  * This method captures User input to specify which dependant of it's dependants it wants to create a booking for. If found , the underageClient object is returned.
