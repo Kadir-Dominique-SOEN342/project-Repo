@@ -35,11 +35,9 @@ SOEN 342 - SECTION H
   - [Signup to lesson Success](SRS/SystemSequenceDiagram_SignupToLesson.jpg)
   - [Signup to lesson failures](SRS/SystemSequenceDiagram_SignupToLesson_Failures.jpg)
 - For critical use case create Booking:
-  - [create booking success] ()
-  - [create booking failure] () 
-others 
--
-- 
+  - [create booking success] (SRS/SystemSequenceDiagram_makeBooking.jpg)
+  - [create booking failure] (SRS/SystemSequenceDiagram_makeBooking_Failures.jpg) 
+
 
 
 ### System operations
@@ -51,19 +49,19 @@ others
 
 - Critical use case create Booking :
 
-    viewOffering()
     makeBooking()
     underageBooking()
     createBooking()
+    viewBooking()
 
 
 ### System operation contracts 
-- For critical use case [Signup to lesson] (SRS\System_Operations_Contracts_signupToLesson)
-- For critical use case [create Booking]
+- For critical use case [Signup to lesson] (SRS/System_Operations_Contracts_signupToLesson)
+- For critical use case [create Booking](SRS/System_Operations_Contracts_makeBooking)
 
 others 
-- [System operations contracts for non critical use case of Process Offering](SRS\SystemOperation_Contracts_ProcessOfferings_NonCritical)
-- [System operations contracts for non critical use case of Process Booking]
+- [System operations contracts for non critical use case of Process Offering](SRS/SystemOperation_Contracts_ProcessOfferings_NonCritical)
+- [System operations contracts for non critical use case of Process Booking](SRS/SystemOperation_Contracts_processBooking_NonCritital)
 ---
 ##SAD 
 ### UML Class diagram and attached OCL
@@ -74,12 +72,16 @@ others
 For critical use case Signup to lesson : 
 - [Interaction Diagram for viewOffering()](SAD/InteractionDiagram_viewOffering_v5.jpg)
 - [Interaction Diagram for signupToLesson()](SAD/InteractionDiagram_signupToLesson_v4.jpg)
-For critical use case create Booking: 
-
+For critical use case create Booking:
+- [interaction Diagram for makeBooking()](SAD/InteractionDiagram_makeBooking_v5.jpg)
+-  [interaction Diagram for underageBooking()](SAD/InteractionDiagram_underageBooking_v1.jpg)
+-  [interaction Diagram for createBooking()](SAD/InteractionDiagram_createBooking.jpg)
+- [interaction Diagram for viewBooking()](SAD/InteractionDiagram_ViewBooking_v2.jpg)
 other s 
--
+- [interaction Diagram for uploadOffering()](SAD/InteractionDiagram_UploadOffering_v4.jpg)
 - 
-
+- [interaction Diagram for deleteOffering()](SAD/InteractionDiagram_deleteOffering_v2.jpg)
+- [interaction Diagram for cancelBooking()](SAD/InteractionDiagram_CancelBooking_v2.jpg)
 
 --- 
 PERSISTANCE
