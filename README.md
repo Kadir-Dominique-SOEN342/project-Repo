@@ -29,8 +29,8 @@ SOEN 342 - SECTION H
 
 ## System Sequence Diagrams 
 - For critical use case Signup to lesson
-  - [Signup to lesson Success] (SRS\SystemSequenceDiagram_SignupToLesson.jpg)
-  - [Signup to lesson failures] (SRS\SystemSequenceDiagram_SignupToLesson_Failures.jpg)
+  - [Signup to lesson Success](SRS\SystemSequenceDiagram_SignupToLesson.jpg)
+  - [Signup to lesson failures](SRS\SystemSequenceDiagram_SignupToLesson_Failures.jpg)
 - For critical use case create Booking:
   - [create booking success] ()
   - [create booking failure] () 
