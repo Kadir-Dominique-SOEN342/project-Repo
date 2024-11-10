@@ -1,0 +1,40 @@
+## System Operations Contracts for critical Use case signupToLesson System Operations
+
+## viewOffering
+
+Operation: viewOffering(User )
+Cross References: Use Case: viewOffering
+
+Preconditions:
+– A session thread is running
+– browsingUser is istantiated to any substype of User
+– Offering singleton is instantiated
+
+- Offering Lesson collection is initiated
+
+Postconditions:
+
+- The operation is a read only operation.The State of the system is not changed.
+
+## signupToLesson
+
+Operation: signupToLesson()
+Cross References: Use Case: Process Offering
+
+Preconditions:
+– Sesison thread is running
+– The instructor is registered
+– User is logged in as instructor ins
+– offers is instantiated
+
+- Offering lessons collection is initialized
+  – a Lesson l instance exist with the lessoniD
+  – l.hasInstructor is false
+
+Postconditions:
+
+- l is added to instructor's teaches Lesson collection (attribute modification)
+- Lesson l attirbute teacher is set to ins (attribute modification)
+- l hasInstructor is set to true(attribute modification)
+
+---
