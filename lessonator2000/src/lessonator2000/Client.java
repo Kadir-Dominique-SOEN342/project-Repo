@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
+import java.time.Period;
 
 /**
  * 
@@ -17,6 +18,7 @@ public class Client extends lessonator2000.User{
 	private String firstName; 
 	private String lastName;
 	private LocalDate dateOfBirth;
+	private int age;
 	private String userName;
 	private String password; 
 	ArrayList<lessonator2000.UnderageClient> dependantsCatalog = new ArrayList<lessonator2000.UnderageClient>();
@@ -40,6 +42,7 @@ public class Client extends lessonator2000.User{
 		this.dateOfBirth = birth;
 		this.userName = username;
 		this.password = password;
+		age = Period.between(dateOfBirth,LocalDate.now()).getYears();
 		
 	}
 	

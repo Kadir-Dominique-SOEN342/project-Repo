@@ -1,0 +1,47 @@
+# OCL for UML Class Diagram
+
+## Attributes
+
+--each Instrucotrs must have a unique phoneNumber
+Context Registration
+inv : self.registerIns -> forAll (i2,i2 : Instructor| i1 <> i2 implies i1.phoneNumber <> i2.phoneNumber )
+
+--each Client must have a unique username
+Context Registration
+inv : self.registerClient -> forAll (c2,c2 : Client| e1 <> e2 implies i1.userName <> i2.userName )
+
+--each underageClient needs to have a less than 18 years old
+Context UnderageCleint
+inv : self.age < 18
+
+-- underageClient legal guardians need to be adults
+Context UnderageCleint
+inv : self.legalGuardian.age >= 18
+
+---two timeslots in a day cannot have an endtime before a startTime
+context Days
+inv : self.timetabled ->
+
+## Operations
+
+#### viewOffering
+
+-- viewOffering : browsingUser cannot be null.
+-- if browsingUser is Client or Public : viewOffering can only show lessons where
+?? not sure.. //TODO
+
+#### signupoToLesson
+
+--there is a lesson that includes a lesson with this lessonID the lesson with the lessonID has no instructor
+context Offering::signupToLesson(ins : Instructor , id : String)
+pre: self.offers-lesson-> exist(l : Lesson | l.lessonID = id and not l.hasInstrutor)
+post : ins.teaches -> includes(l : Lesson | l.lessonID = id && l.hasInstructor)
+
+#### makeBooking
+
+#### underageBooking
+
+#### viewBooking
+
+** Make sure to enter all the preconditoons for the operation contracts
+** make sure to enter all post conditions for operation contracts
