@@ -12,6 +12,81 @@ SOEN 342 - SECTION H
   - dominique.proulx@mail.concordia.ca
 
 ### Project Discussion : https://github.com/Kadir-Dominique-SOEN342/project-Repo/discussions/1
+---
+## SRS : 
+
+### Use case diagrams 
+[high level of abstraction](SRS\UseCase_v4.jpg)
+- [signUp/Signin](SRS\UseCase_Diagram_SignUpSignIn_v1.jpg)
+- [process Offerring](SRS\UseCase_Diagram_ProcessOfferings_v1.jpg)
+- [Process Booking](SRS\UseCase_Diagram_ProcessBookings_v1.jpg)
+
+
+
+### UML domain model and package diagram
+-  [UML Domain model](SRS/UmlDomainModel_v11.jpg)
+-   Uml package Diagram : It was decided to keep everything in the same package.
+
+## System Sequence Diagrams 
+- For critical use case Signup to lesson
+  - [Signup to lesson Success] (SRS\SystemSequenceDiagram_SignupToLesson.jpg)
+  - [Signup to lesson failures] (SRS\SystemSequenceDiagram_SignupToLesson_Failures.jpg)
+- For critical use case create Booking:
+  - [create booking success] ()
+  - [create booking failure] () 
+others 
+-
+- 
+
+
+## System operations
+
+- Critical use case signup To lesson :
+
+    viewOffering()
+    signupToLesson()
+
+- Critical use case create Booking :
+
+    viewOffering()
+    makeBooking()
+    underageBooking()
+    createBooking()
+
+
+## System operation contracts 
+- For critical use case [Signup to lesson] (SRS\System_Operations_Contracts_signupToLesson)
+- For critical use case [create Booking]
+
+others 
+-
+- 
+
+
+---
+SAD 
+UML Class Diagram
+OCL
+
+## Interaction diagrams
+ For critical use case Signup to lesson : 
+For critical use case create Booking: 
+
+other s 
+-
+- 
+
+
+--- 
+PERSISTANCE
+ ## relational models
+ -
+----
+
+
+
+---
+
 
 ## Interation 1
 
