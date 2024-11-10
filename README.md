@@ -77,7 +77,8 @@ For critical use case create Booking:
 -  [interaction Diagram for underageBooking()](SAD/InteractionDiagram_underageBooking_v1.jpg)
 -  [interaction Diagram for createBooking()](SAD/InteractionDiagram_createBooking.jpg)
 - [interaction Diagram for viewBooking()](SAD/InteractionDiagram_ViewBooking_v2.jpg)
-other s 
+
+Interaction diagram for non critical use cases: 
 - [interaction Diagram for uploadOffering()](SAD/InteractionDiagram_UploadOffering_v4.jpg)
 - 
 - [interaction Diagram for deleteOffering()](SAD/InteractionDiagram_deleteOffering_v2.jpg)
