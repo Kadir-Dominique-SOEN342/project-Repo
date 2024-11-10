@@ -22,14 +22,13 @@ Operation: signupToLesson()
 Cross References: Use Case: Process Offering
 
 Preconditions:
-– Sesison thread is running
+– Session thread is running
 – The instructor is registered
 – User is logged in as instructor ins
 – offers is instantiated
-
 - Offering lessons collection is initialized
-  – a Lesson l instance exist with the lessoniD
-  – l.hasInstructor is false
+– a Lesson l instance exist with the lessoniD
+– l.hasInstructor is false
 
 Postconditions:
 
