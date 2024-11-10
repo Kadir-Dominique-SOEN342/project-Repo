@@ -31,10 +31,10 @@ SOEN 342 - SECTION H
 -   Uml package Diagram : It was decided to keep everything in the same package.
 
 ### System Sequence Diagrams 
-- For critical use case Signup to lesson
+For critical use case Signup to lesson
   - [Signup to lesson Success](SRS/SystemSequenceDiagram_SignupToLesson.jpg)
   - [Signup to lesson failures](SRS/SystemSequenceDiagram_SignupToLesson_Failures.jpg)
-- For critical use case create Booking:
+ For critical use case create Booking:
   - [create booking success] (SRS/SystemSequenceDiagram_makeBooking.jpg)
   - [create booking failure] (SRS/SystemSequenceDiagram_makeBooking_Failures.jpg) 
 
@@ -63,7 +63,7 @@ others
 - [System operations contracts for non critical use case of Process Offering](SRS/SystemOperation_Contracts_ProcessOfferings_NonCritical)
 - [System operations contracts for non critical use case of Process Booking](SRS/SystemOperation_Contracts_processBooking_NonCritital)
 ---
-##SAD 
+## SAD 
 ### UML Class diagram and attached OCL
 - [UML Class Diagram](SAD/UmlClassDiagram_v12.jpg)
 - [OCL]()
@@ -72,6 +72,7 @@ others
 For critical use case Signup to lesson : 
 - [Interaction Diagram for viewOffering()](SAD/InteractionDiagram_viewOffering_v5.jpg)
 - [Interaction Diagram for signupToLesson()](SAD/InteractionDiagram_signupToLesson_v4.jpg)
+
 For critical use case create Booking:
 - [interaction Diagram for makeBooking()](SAD/InteractionDiagram_makeBooking_v5.jpg)
 -  [interaction Diagram for underageBooking()](SAD/InteractionDiagram_underageBooking_v1.jpg)
