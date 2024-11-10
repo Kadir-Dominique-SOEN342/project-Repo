@@ -195,26 +195,20 @@ public class Offerings{
 		public synchronized void makeBooking(lessonator2000.Client cl){
 			
 			
-			//TODO : do not asusme perfetc user
-			Scanner sc = new Scanner(System.in);
-			System.out.println("Are you booking for:");
-			System.out.println("1. Yourself\n2. Dependant");
-			int choice = sc.nextInt();
-			System.out.println("Please enter the lesson you want to book: ");
-			String lesson = sc.nextLine();
-
-			if(choice == 2){
-				lessonator2000.UnderageClient uc = bookingCatalog.underageBooking(cl);
-				createBooking(lesson, uc);
-			}
-			else{
-				createBooking(lesson, cl);
-			}
-			// This is just to test if Bookings are in the Booking catalog
-			System.out.println("Here is your new booking: ");
-			bookingCatalog.viewBooking(cl);
-
-		}
+			           //TODO : do not asusme perfetc user
+					   Scanner sc = new Scanner(System.in);
+					   System.out.println("Are you booking for:");
+					   System.out.println("1. Yourself\n2. Dependant");
+					   int choice = sc.nextInt();
+					   System.out.println("Please enter the lesson you want to book: ");
+					   String lesson =null;
+					   boolean valid = false;
+					   while (!valid) {
+						   try { lesson = sc.next();
+						   valid = true;}
+						   catch (java.util.InputMismatchException e) {
+							   System.out.println("Please enter a valid lesosn id");
+						   }}
 		/**
 		 * this method is used by makeBooking() to send a message(to delegate) to bookingCatalog in order to create the booking
 		 * The method verifies if the lesson is available(aka there is space) and if it has an instructor
