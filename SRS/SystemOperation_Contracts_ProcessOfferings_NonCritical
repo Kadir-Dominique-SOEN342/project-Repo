@@ -1,0 +1,46 @@
+#Operation Contracts for non critical system operations of Process offering use case
+
+##uploadOffering
+
+Operation: uploadOffering()
+Cross Reference: Use Case: Process Offerings
+
+Preconditions:
+
+-Session thread is running
+
+- User is logged in as Administrator
+- Offerings instance exist
+- lessons Lesson collection is initiated.
+
+Postconditions:
+
+- A Lesson instance lesson is created (instance creation)
+- lesson is associated with Offerings (association formation)
+- lesson.hasInstructor was set to false (attribute modification)
+- lesson.isAvailable was set to true (attribute modification)
+
+---
+
+##deleteOffering
+
+Operation: deleteOffering()
+Cross Reference: Use Case: Process Offerings
+
+Preconditions:
+
+- -Session thread is running
+- User is logged in as Administrator
+- Offerings instance exist
+- lessons Lesson collection is initiated.
+- Lesson l instance exist
+- Lesson l is associated with Offerings
+
+Postconditions:
+
+- Timeslot t is removed from Days where Day.Date is between l.startDate and l.endDate(attribute modification)
+- Lesson l is removed from Offering's lessons (attribute modification)
+- Lesson l is removed from Instructor's teaches (attribute modification)
+- Booking b containing l removed from Booking Catalog's booking (attribute modification)
+
+---

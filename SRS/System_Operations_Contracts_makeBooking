@@ -1,0 +1,93 @@
+## System Operations Contracts for critical Use case make Booking System Operations
+
+## viewOffering
+
+has been declared as a system operation for use case signupTolesson
+
+## makeBooking
+
+Operation: makeBooking()
+Cross Reference: Use case: make Booking
+Preconditions:
+
+- Session thread is running
+- Client cl exist
+- User is registered as Client
+- User is logged in as Client cl
+- Lesson l exists in Offering lessons Catalog
+- if adult Client is booking for underageClient, underageclient uc is part of Client's dependant collection
+- if Client is booking for himself, he is an adult client.
+- l.isAvailable is true
+
+Postconditions:
+
+- l.participants is incremented by 1 (attribute modification)
+- if lesson is public and l.capacity is equal to l.participant , isAvailable is set to false (attribute modification)
+- bookingCatalog.sequenceID is increased (attribute modification)
+- if l is a privateLesson l.isAvaiable set to false(attribute modification)
+- Booking b instance is created (instance creation)
+- Booking b is added to bookings of BookingCatalog(attribute modification)
+- association between client and booking is created(association formed)
+- association between lesson and booking is created(association formed)
+- Booking is associated with bookingCatalog(association formed)
+
+---
+
+## underageBooking
+
+Operation: underageBooking(cl: Client)
+Cross Reference: Use case: makeBooking
+Preconditions:
+
+- Session thread is running
+- Client cl exist
+- underageClient uc exist
+- User is registered as Client
+- User is logged in as Client cl
+- underageclient uc is part of Client's cl dependant collection
+
+Postconditions:
+
+The state of the system is not changed.(uc is only returned)
+
+## createBooking
+
+Operation: underageBooking(cl: Client)
+Cross Reference: Use case: makeBooking
+Preconditions:
+
+- Session thread is running
+- Client cl exist
+- underageClient uc exist
+- User is registered as Client
+- User is logged in as Client cl
+- if booking for dependant, underageClient uc has been returned by underageBooking
+- lesson l exist
+- lesson l isAvailable is true
+  -lesson l hasInstructor is true
+
+Postconditions:
+
+- instance of Booking b is created(instance creation)
+- b is added to BookingCatalog's bookings collection (attribute modification)
+- association between Booking and BookingCatalog has been formed(association formed)
+- association bettwen Client cl(or underageClient uc if booking for an underageClient) and Booking b is formed(association formed)
+- association between Lesson l and Booking b is formed(association formed)
+- Booking sequenceId attribute is incremented (attribute modification)
+- l.isAvailable set to false is l is of type PrivateLesson(attribute modification)
+- l.participants is increased if l is a PublicLesson (attribute modification)
+- l.isAvailable is set to false if 1 is of type publicLesson and the capactiy has been reached(attribute modification)
+
+## viewBooking
+
+Operation: viewBooking()
+Cross References: Use Case: Process Booking
+Preconditions:
+– The User is registered as Administrator or Client
+– The User is logged in as Administrator or Client
+
+Postconditions:
+
+This is a read only operation, no instance are created, no attributes changed or association formed. The state of the system does not change after this operation.
+
+---

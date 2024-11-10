@@ -1,0 +1,18 @@
+#Operation Contracts for non critical system operations of Process offering use case
+
+## cancelBooking
+
+Operation: cancelBooking()
+Cross References: Use Case: Process Booking
+Preconditions:
+
+– User is logged in as administrator
+
+- Booking b exist
+- Booking b is part of the BookingCatalog's collection bookings
+
+Postconditions:
+
+- b is removed from bookings Booking collection in BookingCatalog(attribute modification)
+- association between b and lesson is broken(association broken)
+- association between b and client is broken(association broken)

@@ -34,7 +34,9 @@ Preconditions:
 Postconditions:
 
 - l is added to instructor's teaches Lesson collection (attribute modification)
-- Lesson l attirbute teacher is set to ins (attribute modification)
+- association between instructor and lesson is created(association formed)
+- Lesson l attribute teacher is set to ins (attribute modification)
+- association between lesson and instructor is created(assocation formed)
 - l hasInstructor is set to true(attribute modification)
 
 ---
