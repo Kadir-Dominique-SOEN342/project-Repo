@@ -36,6 +36,7 @@ public class UnderageClient extends lessonator2000.Client {
 	public UnderageClient(String firstn, String lastn, LocalDate birth, String username, String password, lessonator2000.Client parent) {
 		super(firstn, lastn, birth, username, password);
 		this.legalguardian = parent;
+		this.dependantsCatalog = null;
 		
 	}
 	
