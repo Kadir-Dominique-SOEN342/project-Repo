@@ -21,7 +21,7 @@ public class Client extends lessonator2000.User{
 	private int age;
 	private String userName;
 	private String password; 
-	ArrayList<lessonator2000.UnderageClient> dependantsCatalog = new ArrayList<lessonator2000.UnderageClient>();
+	ArrayList<lessonator2000.UnderageClient> dependantsCatalog ;
 	
 
 
@@ -43,7 +43,7 @@ public class Client extends lessonator2000.User{
 		this.userName = username;
 		this.password = password;
 		age = Period.between(dateOfBirth,LocalDate.now()).getYears();
-		
+		dependantsCatalog =  new ArrayList<lessonator2000.UnderageClient>();
 	}
 	
 
