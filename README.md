@@ -39,19 +39,20 @@ SOEN 342 - SECTION H
 For critical use case Signup to lesson
 <<<<<<< HEAD
 =======
-  - [Signup to lesson Success](SRS/SystemSequenceDiagram_SignupToLesson.jpg)
-  - [Signup to lesson failures](SRS/SystemSequenceDiagram_SignupToLesson_Failures.jpg)
- For critical use case create Booking:
-  - [create booking success](SRS/SystemSequenceDiagram_makeBooking.jpg)
-  - [create booking failure](SRS/SystemSequenceDiagram_makeBooking_Failures.jpg) 
-
->>>>>>> 607a9be0363cd9f6b6ec9d1b8a11f42e402830ed
 
 - [Signup to lesson Success](SRS/SystemSequenceDiagram_SignupToLesson.jpg)
 - [Signup to lesson failures](SRS/SystemSequenceDiagram_SignupToLesson_Failures.jpg)
   For critical use case create Booking:
-- [create booking success] (SRS/SystemSequenceDiagram_makeBooking.jpg)
-- [create booking failure] (SRS/SystemSequenceDiagram_makeBooking_Failures.jpg)
+- [create booking success](SRS/SystemSequenceDiagram_makeBooking.jpg)
+- [create booking failure](SRS/SystemSequenceDiagram_makeBooking_Failures.jpg)
+
+> > > > > > > 607a9be0363cd9f6b6ec9d1b8a11f42e402830ed
+
+- [Signup to lesson Success](SRS/SystemSequenceDiagram_SignupToLesson.jpg)
+- [Signup to lesson failures](SRS/SystemSequenceDiagram_SignupToLesson_Failures_v2.jpg)
+  For critical use case create Booking:
+- [create booking success](SRS/SystemSequenceDiagram_makeBooking.jpg)
+- [create booking failure](SRS/SystemSequenceDiagram_makeBooking_Failures.jpg)
 
 ### System operations
 
@@ -91,7 +92,7 @@ others
 For critical use case Signup to lesson :
 
 - [Interaction Diagram for viewOffering()](SAD/InteractionDiagram_viewOffering_v5.jpg)
-- [Interaction Diagram for signupToLesson()](SAD/InteractionDiagram_signupToLesson_v4.jpg)
+- [Interaction Diagram for signupToLesson()](SAD/InteractionDiagram_signupToLesson_v5.jpg)
 
 For critical use case create Booking:
 
@@ -113,8 +114,6 @@ PERSISTANCE
 
 ## relational models
 
--
+- ***
 
----
-
----
+  ***
