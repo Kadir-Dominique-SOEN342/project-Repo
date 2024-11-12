@@ -2,7 +2,7 @@
 
 ## viewOffering
 
-Operation: viewOffering(User )
+Operation: viewOffering(User u)
 Cross References: Use Case: viewOffering
 
 Preconditions:
@@ -18,7 +18,7 @@ Postconditions:
 
 ## signupToLesson
 
-Operation: signupToLesson()
+Operation: signupToLesson(ins : Instructor, lessoniD : String)
 Cross References: Use Case: Process Offering
 
 Preconditions:

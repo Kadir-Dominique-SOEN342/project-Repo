@@ -24,22 +24,33 @@ inv : self.timetabled ->
 
 ## Operations
 
-#### viewOffering
+#### signupToLesson
 
--- viewOffering : browsingUser cannot be null.
--- if browsingUser is Client or Public : viewOffering can only show lessons where
-?? not sure.. //TODO
+--Offering Lesson Collection includess a lesson l with l.lessonID
+--the lesson with the lessonID has no instructor and the city of the space of the lesson is contained in the instructor availabitly collection.
 
-#### signupoToLesson
-
---there is a lesson that includes a lesson with this lessonID the lesson with the lessonID has no instructor
 context Offering::signupToLesson(ins : Instructor , id : String)
-pre: self.offers-lesson-> exist(l : Lesson | l.lessonID = id and not l.hasInstrutor)
-post : ins.teaches -> includes(l : Lesson | l.lessonID = id && l.hasInstructor)
+pre: self.offers-lesson-> exist(l : Lesson |
+l.lessonID = id and
+not l.hasInstrutor and
+ins.availability -> include(l.space.city))
+post : ins.teaches -> includes(l : Lesson | l.lessonID = id and
+l.hasInstructor and
+l.teacher = ins)
 
 #### makeBooking
 
+--Lesson information is captured in makeBooking, so it's not part of the precondition. This postcondition is broader than the postcondition in createBooking where we specify the lesson the booking must be associated with.
+context::makeBooking(cl:Client)
+pre:
+post: self.bookingCatalog.Booking ->include(b:Booking | b.Client = cl)
+
 #### underageBooking
+
+context::underageBooking(cl:Client)
+--the Client is an adult client
+pre: cl.age >=18
+--
 
 #### viewBooking
 
