@@ -85,7 +85,6 @@ public class BookingCatalog {
 	 *Prints all the bookings information
 	 */
 	private void adminViewVooking() {
-		
 			for (lessonator2000.Bookings b : bookings) {
 				System.out.println(b.toString());
 			}
@@ -96,7 +95,6 @@ public class BookingCatalog {
 	 * @param client
 	 */
 	private void clientViewVooking(lessonator2000.Client client) {
-		
 			for (lessonator2000.Bookings b : bookings) {
 				lessonator2000.Client c  = b.getBookingclient();
 				if(c == client) {
