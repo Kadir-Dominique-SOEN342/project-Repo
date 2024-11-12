@@ -36,6 +36,10 @@ inv : self.oclIsOfType(PublicLEsson) and self.capacity = self.participants impli
 context Booking
 inv : self.bookingLesson.teacher <> null;
 
+-- no two days in the schedual can have the same LocalDate
+context schedual
+inv : mySchedual.Day -> forAll(d1,d2 : Day | d1<>d2 implies d1.today <> d2.today)
+
 
 ## Operations
 
