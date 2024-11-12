@@ -41,7 +41,7 @@ For critical use case Signup to lesson
 =======
 
 - [Signup to lesson Success](SRS/SystemSequenceDiagram_SignupToLesson.jpg)
-- [Signup to lesson failures](SRS/SystemSequenceDiagram_SignupToLesson_Failures.jpg)
+- [Signup to lesson failures](SRS/SystemSequenceDiagram_SignupToLesson_Failures_v2.jpg)
   For critical use case create Booking:
 - [create booking success](SRS/SystemSequenceDiagram_makeBooking.jpg)
 - [create booking failure](SRS/SystemSequenceDiagram_makeBooking_Failures.jpg)
