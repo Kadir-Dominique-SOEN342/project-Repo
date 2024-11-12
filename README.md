@@ -84,7 +84,7 @@ others
 
 ### UML Class diagram and attached OCL
 
-- [UML Class Diagram](SAD/UmlClassDiagram_v12.jpg)
+- [UML Class Diagram](SAD/UmlClassDiagram_v14.jpg)
 - [OCL]()
 
 ### Interaction diagrams
@@ -96,15 +96,14 @@ For critical use case Signup to lesson :
 
 For critical use case create Booking:
 
-- [interaction Diagram for makeBooking()](SAD/InteractionDiagram_makeBooking_v5.jpg)
-- [interaction Diagram for underageBooking()](SAD/InteractionDiagram_underageBooking_v1.jpg)
+- [interaction Diagram for makeBooking()](SAD/InteractionDiagram_makeBooking_v6.jpg)
+- [interaction Diagram for underageBooking()](SAD/InteractionDiagram_underageBooking_v2.jpg)
 - [interaction Diagram for createBooking()](SAD/InteractionDiagram_createBooking.jpg)
 - [interaction Diagram for viewBooking()](SAD/InteractionDiagram_ViewBooking_v2.jpg)
 
 Interaction diagram for non critical use cases:
 
 - [interaction Diagram for uploadOffering()](SAD/InteractionDiagram_UploadOffering_v7.jpg)
--
 - [interaction Diagram for deleteOffering()](SAD/InteractionDiagram_deleteOffering_v2.jpg)
 - [interaction Diagram for cancelBooking()](SAD/InteractionDiagram_CancelBooking_v2.jpg)
 

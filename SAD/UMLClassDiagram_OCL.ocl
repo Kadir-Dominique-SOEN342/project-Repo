@@ -1,0 +1,130 @@
+# OCL for UML Class Diagram
+
+## Attributes
+
+--each Instrucotrs must have a unique phoneNumber
+Context Registration
+inv : self.registerIns -> forAll (i2,i2 : Instructor| i1 <> i2 implies i1.phoneNumber <> i2.phoneNumber )
+
+--each Client must have a unique username
+Context Registration
+inv : self.registerClient -> forAll (c2,c2 : Client| e1 <> e2 implies i1.userName <> i2.userName )
+
+--each underageClient needs to have a less than 18 years old
+Context UnderageCleint
+inv : self.age < 18
+
+-- underageClient legal guardians need to be adults
+Context UnderageCleint
+inv : self.legalGuardian.age >= 18
+
+--A given location can only accommodate one lesson at any given time slot on a given day.
+---two timeslots in a day cannot overlap, they need to happen one after the other.
+context Days
+inv : self.timetabled ->forAll(ts1,ts2 : Timeslot | ts1 <>ts2 implies ts2.startTime >= ts1.endTime or
+      
+                                                                        ts2.endTime <= ts1.starTime)
+-- a private lesson is unavaible if it has been booked
+Context Booking
+inv : self.bookingLesson.oclIsOfType(PrivateLesson) implies self.bookingLesson.isAvailable = false;
+
+-- a public lesson is unavaible if it's participants is the same as it's capacity
+Context Lesson
+inv : self.oclIsOfType(PublicLEsson) and self.capacity = self.participants implies self.isAvailable = false
+
+-- a lesson that is part of a booking Must have a teacher
+context Booking
+inv : self.bookingLesson.teacher <> null;
+
+
+## Operations
+
+#### signupToLesson
+
+--Offering Lesson Collection has a lesson l with l.lessonID
+--the lesson with the lessonID has no instructor and the city of the space of the lesson is contained in the instructor availabitly collection.
+
+context Offering::signupToLesson(ins : Instructor , id : String)
+pre: 
+        self.offers-lesson-> exist(l : Lesson |
+                l.lessonID = id and
+                not l.hasInstrutor and
+                ins.availability -> include(l.space.city) and
+                ins.specialization = l.type)
+post : 
+        ins.teaches -> exist(l : Lesson | l.lessonID = id and
+                l.hasInstructor and
+                l.teacher = ins)
+
+
+
+#### makeBooking
+
+--Lesson information is captured in makeBooking, so it's not part of the precondition. This postcondition is broader than the postcondition in createBooking where we specify the lesson the booking must be associated with.
+context Offering::makeBooking(cl:Client)
+pre:    -- the age a a client must be at least 18 to make a booking
+        cl.age >=18
+post: 
+        self.bookingCatalog.Booking ->include(b:Booking | b.bookingClient = cl)
+
+#### underageBooking
+
+context BookingCatalog::underageBooking(username :String , cl:Client)
+pre:  
+        --the Client is an adult client
+        cl.age >=18
+        -- underageClient uc exist with username in cl dependant catalog
+        cl.dependantsCatalog ->exist( uc : UnderageClient | uc.username = username )
+        -- the underage booking is returned
+post:  
+        result = cl.dependantCatalog->one(us : UnderageClient | uc.username = username)
+--
+
+#### createBooking
+context Offering::createBooking(lessonID : String, cl:Client)
+pre : 
+        -- cl is either a Client or an UnderageClient
+        user.oclIsKindOf(c : Client)
+        -- a lesson l exist with lessonID in OFferings Lesosn collection. this lesson also has --attribute isAvaialble set to true and the lesosn has an instructor(is an available offering)
+        self.offers-lesson->exist(l:Lesson | l.lessonId = lessonID and 
+                                l.isAvailable and
+                                l.hasInstructor )
+post: 
+        -- there is a booking that was created with  the client and the lesson
+        self.BookingCatalog.Booking -> exist(b:Booking | b.bookingCLient = cl and
+                                        b.bookingLesson.lessonId = lessonID)
+      
+        -- the lesson's isAvailable attribute set to false if it's a private lesson , or participants --are increased if it's a public lesson and isAvailable is set to false if this increase --leads particiopants to be equal to the capacity
+        
+        let lesson : Lesson =  self.BookingCatalog.Booking -> one(l : Lesson | l.lessinId = lessonID) in
+        if lesson.oclTypeOf(PrivateLesson) then lesson.isAvailable = false
+        if lesson.oclTypeOF(PublicLEsson) then lesson.participant = lesson.participant@pre +1
+                                                        and if lesson.participant = lesson.capacity then lesson.isAvailable = false;
+### viewBooking
+context BookingCatalog::viewBooking(user : User)
+pre:
+        - cl is either a Client or an UnderageClient or an Administrator
+        user.oclIsKindOf(Client) or user.oclIsOfType(Adminitrator)
+
+
+
+### cancelBooking
+context BookingCatalog::cancelBooking(id : Int)
+pre: 
+        -- a booking with the bookingId id must exist in the booking catalog
+        self.bookingCatalog ->exist(b: Booking | b.bookingId = id)
+post    -- the booking is removed
+        self.bookingCatalog -> select(b: Booking | b.bookingId = id)
+                            -> isEmpty()
+
+### uploadOffering  
+context Offering::uploadOffering(type : String , id : String , hasInstructor : Boolean ,  isAvailable: Boolean, isPublic : Boolean ,capacity: int , start : LocalDate , end: LocalDate , weekDay : String )
+
+pre :
+        --the stirng id is not taken by another lesson
+        self.offers-lesson->select(l : Lesson | l.lessonId = id)
+                          -> size() = 0
+post:   -- lesoon is created and added to the offers collection with their available and       hasinstructor set to false
+        self.offers-lesson-> exist(l :Lesson | l.lessonId = id and
+                                l.isAvailable = false and
+                                l.hasInstructor = false)
