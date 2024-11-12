@@ -26,9 +26,12 @@ Preconditions:
 – The instructor is registered
 – User is logged in as instructor ins
 – offers is instantiated
+
 - Offering lessons collection is initialized
-– a Lesson l instance exist with the lessoniD
-– l.hasInstructor is false
+  – a Lesson l instance exist with the lessoniD
+  – l.hasInstructor is false
+  - l has a space atrribute s
+  - s.city is contained in the avalability collection of the instructor.
 
 Postconditions:
 
