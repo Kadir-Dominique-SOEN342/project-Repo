@@ -69,12 +69,12 @@ Preconditions:
 Postconditions:
 
 - instance of Booking b is created(instance creation)
-- b is added to BookingCatalog's bookings collection (attribute modification)
-- association between Booking and BookingCatalog has been formed(association formed)
 - association bettwen Client cl(or underageClient uc if booking for an underageClient) and Booking b is formed(association formed)
 - association between Lesson l and Booking b is formed(association formed)
-- Booking sequenceId attribute is incremented (attribute modification)
-- l.isAvailable set to false is l is of type PrivateLesson(attribute modification)
+- b is added to BookingCatalog's bookings collection (attribute modification)
+- association between Booking and BookingCatalog has been formed(association formed)
+- Booking sequenceId class attribute is incremented (attribute modification)
+- l.isAvailable set to false if l is of type PrivateLesson(attribute modification)
 - l.participants is increased if l is a PublicLesson (attribute modification)
 - l.isAvailable is set to false if 1 is of type publicLesson and the capactiy has been reached(attribute modification)
 
