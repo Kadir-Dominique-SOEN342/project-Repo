@@ -85,9 +85,9 @@ public class Instructor extends lessonator2000.User {
  * used when a lesson(offer) is delete, it needs to be removed from the instructor teaches collection
  * @param lessonToRemove
  */
-	 void removeLesson(Lesson lessonToRemove) {
+	 void removeLesson(lessonator2000.Lesson lessonToRemove) {
 		teaches.removeIf(l -> l == lessonToRemove);
-		for(Lesson l : teaches) {
+		for(lessonator2000.Lesson l : teaches) {
 		//	if(l == lessonToRemove) {
 		//		//remove the lesson 
 		//		teaches.remove(teaches.indexOf(l));

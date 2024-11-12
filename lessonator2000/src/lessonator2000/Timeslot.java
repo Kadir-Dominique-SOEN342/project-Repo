@@ -35,7 +35,7 @@ public class Timeslot {
 		return this.startTime;
 	}
 	
-	public Lesson getLesson() {
+	public lessonator2000.Lesson getLesson() {
 		return this.timedLesson;
 	}
 }

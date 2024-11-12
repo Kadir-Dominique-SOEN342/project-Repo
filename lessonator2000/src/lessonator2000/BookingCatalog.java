@@ -11,7 +11,7 @@ import java.util.Scanner;
  */
 public class BookingCatalog {
 	private static BookingCatalog bookingCatalog = null;
-	private ArrayList<lessonator2000.Booking> bookings;
+	private ArrayList<lessonator2000.Bookings> bookings;
 
 	//implemented as singleton
 	/**
@@ -19,7 +19,7 @@ public class BookingCatalog {
 	 */
 	private BookingCatalog() {
 		
-		bookings = new ArrayList<lessonator2000.Booking>();
+		bookings = new ArrayList<lessonator2000.Bookings>();
 	}
 	
 	//returns the single instance of BookingCatalog if its not null, if it is , it creates it and then returns it
@@ -40,7 +40,7 @@ public class BookingCatalog {
 	 * @param cl
 	 */
 	 synchronized void addBooking(lessonator2000.Lesson l, lessonator2000.Client cl) {
-		lessonator2000.Booking b = new lessonator2000.Booking(l, cl); 
+		lessonator2000.Bookings b = new lessonator2000.Bookings(l, cl);
 		bookings.add(b);
 		System.out.println("booking created between " + cl.toString() + "and " + l.toString()  );
 	}
@@ -62,7 +62,7 @@ public class BookingCatalog {
  * setter for bookingCatalog
  * @param bookingCatalog
  */
-	public void setBookingCatalog(ArrayList<lessonator2000.Booking> bookingCatalog) {
+	public void setBookingCatalog(ArrayList<lessonator2000.Bookings> bookingCatalog) {
 		this.bookings = bookingCatalog;
 	}
 
@@ -70,7 +70,7 @@ public class BookingCatalog {
 	 * This method allows Clients to view their own bookings or Administrator to view all the bookings
 	 * @param user
 	 */
-	 void viewBooking(User user) {
+	 void viewBooking(lessonator2000.User user) {
 		if(user instanceof lessonator2000.Administrator) {			
 			adminViewVooking();
 			}
@@ -86,7 +86,7 @@ public class BookingCatalog {
 	 */
 	private void adminViewVooking() {
 		
-			for (lessonator2000.Booking b : bookings) {
+			for (lessonator2000.Bookings b : bookings) {
 				System.out.println(b.toString());
 			}
 	}
@@ -95,10 +95,10 @@ public class BookingCatalog {
 	 * prints all the bookings the passed Client as attribute.
 	 * @param client
 	 */
-	private void clientViewVooking(Client client) {
+	private void clientViewVooking(lessonator2000.Client client) {
 		
-			for (lessonator2000.Booking b : bookings) {
-				Client c  = b.getBookingclient();
+			for (lessonator2000.Bookings b : bookings) {
+				lessonator2000.Client c  = b.getBookingclient();
 				if(c == client) {
 					System.out.println(b.toString());
 					
@@ -112,8 +112,8 @@ public class BookingCatalog {
 	 */
 	 synchronized void cancelBooking(int id) {
 
-		lessonator2000.Booking bookingToRemove = null; 
-		for( lessonator2000.Booking b : bookings) {
+		lessonator2000.Bookings bookingToRemove = null;
+		for( lessonator2000.Bookings b : bookings) {
 			if (b.getBookingId() == id) {
 				bookingToRemove = b;	    				
 			}}
@@ -131,7 +131,7 @@ public class BookingCatalog {
 	  * removebooking() is used when a lesosn is removed as part of delteOffering(), if a booking is assocated to the lesosn, it needs to be removed
 	  * @param lessonToRemove
 	  */
-	 void removeBooking(Lesson lessonToRemove) {
+	 void removeBooking(lessonator2000.Lesson lessonToRemove) {
 		bookings.removeIf(b -> b.getBookinglesson() == lessonToRemove);
 		System.out.println("every booking containg the lesson was removed");
 		//for(Booking b : bookings) {
