@@ -49,12 +49,9 @@ public class BookingCatalog {
  * @param cl the adult client who's dependant catalog will be searched 
  * @return
  */
-	public lessonator2000.UnderageClient underageBooking(lessonator2000.Client cl) {
-		Scanner sc = new Scanner(System.in);
-		cl.viewDependants();
-		System.out.println("Please enter the username of the dependant you want to book: ");
-		String choice = sc.next();
-		lessonator2000.UnderageClient uc = cl.findDependant(choice);
+	public lessonator2000.UnderageClient underageBooking(String username, lessonator2000.Client cl) {
+
+		lessonator2000.UnderageClient uc = cl.findDependant(username);
 		return uc;
 
 	}
@@ -71,11 +68,14 @@ public class BookingCatalog {
 	 * @param user
 	 */
 	 void viewBooking(lessonator2000.User user) {
-		if(user instanceof lessonator2000.Administrator) {			
+		if(user instanceof lessonator2000.Administrator) {	
+			System.out.println("Here are all the bookings: ");
 			adminViewVooking();
 			}
 		else if (user instanceof lessonator2000.Client) {
+			System.out.println("Here are all your bookings:");
 			clientViewVooking((lessonator2000.Client)user);
+			System.out.println("To view the bookings for your dependants, you need to log in with thier username. This feature is coming soon.");
 		}
 		}
 	
@@ -104,6 +104,7 @@ public class BookingCatalog {
 					
 				}
 			}
+			
 	}
 	
 	/**

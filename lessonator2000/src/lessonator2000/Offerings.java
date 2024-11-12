@@ -160,16 +160,30 @@ public class Offerings {
 	 */
 	public synchronized void signupToLesson(lessonator2000.Instructor ins, String lessonId) {
 		lessonator2000.Lesson myLesson = null;
+		// find the lesson
 		for (lessonator2000.Lesson les : lessons) {
 
 			if (les.getID().equals(lessonId)) {
 				myLesson = les;
 			}
 		}
-
-		if (myLesson != null) {
+		if(myLesson == null) {System.out.println("There is no lesson with this Id. try again"); return;}
+		
+		//Checking if the lesson is offered in a city that figures in the instructor availabilities
+		Space lessonSpace = myLesson.getSpace();
+		String city = lessonSpace.getCity();
+		Boolean isInAvailability = false;
+		for(String s: ins.getAvailability()){
+			if(s.equals(city)){
+				isInAvailability = true;
+			}
+		}
+		
+		// if the lesson is in the instructor availability , process to signup to the lesson
+		if (isInAvailability) {
 			ins.addToCollection(myLesson);
 			myLesson.addInstructorToLesson(ins);
+			//make the offering avaialble
 			myLesson.sethasInstructor(true);
 			System.out.println("Offerings: signupToLesson() " + myLesson.toString());
 		} else System.out.println("There is no lesson with this Id. try again");
@@ -203,9 +217,13 @@ public class Offerings {
 	 * @param cl
 	 */
 	public synchronized void makeBooking(lessonator2000.Client cl) {
+		if(cl.getAge() < 18 ) {
+			System.out.println("You need to be an adult to book, go ask your legal Guardian to book it for you");
+			return;}
+		
+		
 
-
-		//TODO : do not asusme perfetc user
+		
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Are you booking for:");
 		System.out.println("1. Yourself\n2. Dependant");
@@ -218,9 +236,44 @@ public class Offerings {
 				lesson = sc.next();
 				valid = true;
 			} catch (java.util.InputMismatchException e) {
-				System.out.println("Please enter a valid lesosn id");
+				System.out.println("Please enter a valid lesson id");
 			}
 		}
+		if(choice == 2){
+			
+			cl.viewDependants();
+			System.out.println("Please enter the username of the dependant you want to book for: ");
+			String dependantusername = null;
+			valid = false;
+			while(!valid) {
+				try {
+			 dependantusername = sc.next();
+			valid = true;
+				}
+			catch(java.util.InputMismatchException e) {
+				System.out.println("Please enter a valid username");
+			}
+			}
+			
+			lessonator2000.UnderageClient uc = bookingCatalog.underageBooking(dependantusername, cl);
+			if(uc != null) {createBooking(lesson, uc);
+			System.out.println("Here is your new booking: ");
+			bookingCatalog.viewBooking(uc);
+			return;}
+			else System.out.println("Sorry there were no dependant with that username, start over");
+		}
+		if(choice == 1) {
+			createBooking(lesson, cl);
+			// This is just to test if Bookings are in the Booking catalog
+			System.out.println("Here is your new booking: ");
+			bookingCatalog.viewBooking(cl);
+			return;
+		}
+		
+		else{
+			System.out.println("This was not an available choice, please start over");
+		}
+		
 	}
 		/**
 		 * this method is used by makeBooking() to send a message(to delegate) to bookingCatalog in order to create the booking

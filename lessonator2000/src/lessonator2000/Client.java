@@ -66,7 +66,12 @@ public class Client extends lessonator2000.User{
 	public String getPassword() {
 		return password;
 	}
-	
+	public int getAge() {
+		return age;
+	}
+	public ArrayList<lessonator2000.UnderageClient> getDependantsCatalog() {
+		return dependantsCatalog;
+	}
 	public void setfirstName(String firstname) {
 		this.firstName = firstName;
 	}
@@ -85,9 +90,7 @@ public class Client extends lessonator2000.User{
 		this.dependantsCatalog.add(uc);
 	}
 
-	public ArrayList<lessonator2000.UnderageClient> getDependantsCatalog() {
-		return dependantsCatalog;
-	}
+
 
 	/**
 	 * Prints information about each dependants in the catalog. used when a client wants to book for one of their underage dependants

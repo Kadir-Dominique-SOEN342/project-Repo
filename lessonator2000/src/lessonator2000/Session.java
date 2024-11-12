@@ -2,6 +2,7 @@ package lessonator2000;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Scanner;
 /**
  * 
@@ -108,6 +109,8 @@ public class Session extends Thread{
 		cli.addToDependantsCatalog(uc1);
 		cli.addToDependantsCatalog(uc2);
 
+		
+		
 //browsingUser = new lessonator2000.Client("Bobby","Baratheon",LocalDate.of(1600, 1, 13) , "bobb", "westeros");
 //browsingUser = new lessonator2000.Instructor("Sword","Ned" , "Stark", 5128963587L);
 //browsingUser = new Public();
@@ -213,11 +216,16 @@ public  void  cancelBooking() {
  * instructors dont see the bookings
  */
 public  void viewBooking() {
+	System.out.println("---------------------------------------------------");
+	System.out.println("------------------View Bookings--------------------");
+	System.out.println("---------------------------------------------------");
 
 	if(browsingUser instanceof lessonator2000.Client || browsingUser instanceof lessonator2000.Administrator ) {
 		offers.getBookingCatalog().viewBooking(browsingUser);	
+
 	}
-}
+	}
+
 
 
 
