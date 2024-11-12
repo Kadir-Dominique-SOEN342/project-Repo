@@ -83,6 +83,7 @@ public class Registration {
 			valid = true;}
 			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid int");
+				keyboard.nextLine();
 			}
 		}
 
@@ -100,14 +101,31 @@ public class Registration {
 				}
 			}
 			lessonator2000.Client myClient = registry.searchClient(username);
-
 			if(myClient == null ) {
-				System.out.println("You are not registered, you will browse as public for now until you do.");
-				return new lessonator2000.Public();
+	System.out.println("You are not registered, you will browse as public for now until you do.");
+	return new lessonator2000.Public();
+
+}
+			System.out.println("What is your password ? ");
+			String password = null;
+			valid = false;
+			while (!valid) {
+				try { password =  keyboard.next();
+				keyboard.nextLine();
+				valid = true;}
+				catch (java.util.InputMismatchException e) {
+					System.out.println("Please enter a valid String");
+				}
 			}
-			else {System.out.println("You are logged in" + username); 
-			return myClient;
+			if(password.equals(myClient.getPassword())) {
+				System.out.println("You are logged in" + username);
+				return myClient;}
+			
+			else {System.out.println("Wrong password, try again");
 			}
+			
+			
+
 
 		}
 
@@ -251,6 +269,7 @@ public class Registration {
 	 * @return the client object if found. returns null if not found.
 	 */
 	private  lessonator2000.Client searchClient(String username) {
+		System.out.println("Searching for client with username " + username);
 		for(lessonator2000.Client c : clientRegistry) {
 			String clientusername = c.getUsername();
 			//	System.out.println(clientusername);
@@ -308,6 +327,7 @@ public class Registration {
 			valid = true;}
 			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid integer");
+				keyboard.nextLine();
 			}
 		}
 		System.out.println("\n What is your month of birth");
@@ -318,6 +338,7 @@ public class Registration {
 			valid = true;}
 			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid integer");
+				keyboard.nextLine();
 			}
 		}
 
@@ -329,11 +350,18 @@ public class Registration {
 			valid = true;}
 			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid int");
+				keyboard.nextLine();
 			}
 		}
 
 
-		LocalDate birth = LocalDate.of(year, month, day);
+		LocalDate birth = null;
+		try{birth = LocalDate.of(year, month, day);}
+		catch(java.time.DateTimeException e) {
+			System.out.println("This was not a valid birthdate, please start over");
+			return null;
+			
+		}
 
 		Boolean isUnderage = underageCheck(birth);
 
@@ -388,6 +416,7 @@ public class Registration {
 				System.out.println("Please enter a valid String");
 			}
 		}
+		System.out.println("Searching for parent username " + parentUsername);
 		lessonator2000.Client parent  = getRegistry().searchClient(parentUsername);  // find the parent Client
 		if(parent == null){
 			System.out.println("Please go back and create a parent client, this username was not found"); 
@@ -422,6 +451,7 @@ public class Registration {
 			valid = true;}
 			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid integer");
+				keyboard.nextLine();
 			}
 		}
 		System.out.println("\n What is your month of birth");
@@ -432,7 +462,10 @@ public class Registration {
 			valid = true;}
 			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid integer");
+				keyboard.nextLine();
+				
 			}
+			
 		}
 		System.out.println("\n What is your day of birth");
 		int day =0 ;
@@ -442,9 +475,19 @@ public class Registration {
 			valid = true;}
 			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid integer");
+				keyboard.nextLine();
+				
 			}
 		}
-		LocalDate birth = LocalDate.of(year, month, day);
+		LocalDate birth = null;
+		try{birth = LocalDate.of(year, month, day);}
+		catch(java.time.DateTimeException e) {
+			System.out.println("This was not a valid birthdate, please start over");
+			return null;
+			
+		}
+		
+		
 		System.out.println("\n What is your username");
 		String username = null;
 		valid = false;
