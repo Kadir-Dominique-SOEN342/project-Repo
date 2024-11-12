@@ -55,7 +55,7 @@ public String getroomNumber() {
 public String getTypeOfSpace() {
 	return this.typeOfSpace;
 }
-public Schedual getSchedual() {
+public lessonator2000.Schedual getSchedual() {
 	return this.openFor;
 }
 
@@ -86,7 +86,7 @@ lessonator2000.Timeslot addLessonToSchedual(lessonator2000.Lesson myLesson, Loca
  * used by deleteOffering , sends a message to offerings to remove the lesson from each day where it was held in the shcedual of a space
  * @param lessonToRemove
  */
-public void removeLessonFromSpace(Lesson lessonToRemove) {
+public void removeLessonFromSpace(lessonator2000.Lesson lessonToRemove) {
 	openFor.removeLesson(lessonToRemove);
 		
 }

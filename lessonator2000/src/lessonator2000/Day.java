@@ -64,7 +64,7 @@ public class Day {
  * Used by scedual's removeLesson() when a lesson is deleted. 
  * @param lessonToRemove
  */
-	 void removeTimeSlot(Lesson lessonToRemove) {
+	 void removeTimeSlot(lessonator2000.Lesson lessonToRemove) {
 		daySchedual.removeIf(ts -> ts.getLesson() == lessonToRemove);
 	//	for(Timeslot ts : daySchedual) {
 		//	if (ts.getLesson() == lessonToRemove) {

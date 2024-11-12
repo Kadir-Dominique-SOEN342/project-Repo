@@ -146,7 +146,7 @@ public class Schedual {
 	}
 	
 	//removeLesson removes each timeslot that has the lessonToRemove as attribute from every day between the lesosn startDate and endDate that fall's on dayOfTheWeek
-	 void removeLesson(Lesson lessonToRemove) {
+	 void removeLesson(lessonator2000.Lesson lessonToRemove) {
 		// TODO Auto-generated method stub
 		ArrayList<LocalDate> localDateArray = findAllDateBetween(lessonToRemove.getStartDatE(), lessonToRemove.getEndDate(), lessonToRemove.getDayOfTheWeek());
 	
