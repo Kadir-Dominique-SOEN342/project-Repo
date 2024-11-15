@@ -100,16 +100,9 @@ availability3.add("Laval");
 		//Returns a client if it's found, returns a public if not
 		if(userChoice == 1) {
 			System.out.println("What is your username");
-			String username = null;
-			valid = false;
-			while (!valid) {
-				try { username =  keyboard.nextLine();
-				
-				valid = true;}
-				catch (java.util.InputMismatchException e) {
-					System.out.println("Please enter a valid String");
-				}
-			}
+			
+			String 	username =  keyboard.nextLine();
+			
 			lessonator2000.Client myClient = registry.searchClient(username);
 			if(myClient == null ) {
 	System.out.println("You are not registered, you will browse as public for now until you do.");
@@ -117,15 +110,9 @@ availability3.add("Laval");
 
 }
 			System.out.println("What is your password ? ");
-			String password = null;
-			valid = false;
-			while (!valid) {
-				try { password =  keyboard.nextLine();
-				valid = true;}
-				catch (java.util.InputMismatchException e) {
-					System.out.println("Please enter a valid String");
-				}
-			}
+			String password = password =  keyboard.nextLine();
+			
+			
 			if(password.equals(myClient.getPassword())) {
 				System.out.println("You are logged in" + username);
 				return myClient;}
@@ -310,7 +297,7 @@ availability3.add("Laval");
 		String firstn = null;
 		boolean valid = false;
 		while (!valid) {
-			try { firstn = keyboard.next();
+			try { firstn = keyboard.nextLine();
 			valid = true;}
 			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid String");
@@ -322,7 +309,7 @@ availability3.add("Laval");
 		String lastn = null;
 		valid = false;
 		while (!valid) {
-			try { lastn = keyboard.next();
+			try { lastn = keyboard.nextLine();
 			valid = true;}
 			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid String");
@@ -345,6 +332,7 @@ availability3.add("Laval");
 		valid = false;
 		while (!valid) {
 			try { month = keyboard.nextInt();
+			keyboard.nextLine();
 			valid = true;}
 			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid integer");
@@ -357,6 +345,7 @@ availability3.add("Laval");
 		valid = false;
 		while (!valid) {
 			try { day = keyboard.nextInt();
+			keyboard.nextLine();
 			valid = true;}
 			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid int");
@@ -377,20 +366,20 @@ availability3.add("Laval");
 
 		if(!isUnderage) {
 			System.out.println("\n What is your username");
-			String username = keyboard.next();
+			String username = null; 
 			valid = false;
 			while (!valid) {
-				try { username = keyboard.next();
+				try { username = keyboard.nextLine();
 				valid = true;}
 				catch (java.util.InputMismatchException e) {
 					System.out.println("Please enter a valid String");
 				}
 			}
 			System.out.println("\n What is your password");
-			String password = keyboard.next();
+			String password =null;
 			valid = false;
 			while (!valid) {
-				try { password = keyboard.next();
+				try { password = keyboard.nextLine();
 				valid = true;}
 				catch (java.util.InputMismatchException e) {
 					System.out.println("Please enter a valid String");
@@ -482,6 +471,7 @@ availability3.add("Laval");
 		valid = false;
 		while (!valid) {
 			try { day = keyboard.nextInt();
+			keyboard.nextLine();
 			valid = true;}
 			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid integer");
@@ -594,7 +584,7 @@ availability3.add("Laval");
 		while(!done) {
 			System.out.println("Add another city , enter \"done\" if you are done");
 			String city2 = keyboard.nextLine();
-			if(city2.equals("done")) {break;}
+			if(city2.equals("done")) {done=true; break;}
 			
 			else  {String city3 = city2.substring(0, 1).toUpperCase() + city2.substring(1);
 			availabilities.add(city3); } 

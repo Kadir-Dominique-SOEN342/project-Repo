@@ -53,7 +53,7 @@ public class Lesson {
     }
 
      /**
-      * shows all the lesso information and annotaiton is it's not available.
+      * shows all the lesson information and annotaiton is it's not available.
       */
     public String toString(){
 

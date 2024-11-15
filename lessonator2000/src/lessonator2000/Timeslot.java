@@ -32,7 +32,7 @@ public class Timeslot {
 	}
 	
 	public LocalTime getEndTime() {
-		return this.startTime;
+		return this.endTime;
 	}
 	
 	public lessonator2000.Lesson getLesson() {

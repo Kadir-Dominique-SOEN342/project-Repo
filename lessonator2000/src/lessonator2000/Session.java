@@ -412,7 +412,7 @@ do {
 			System.err.println("Please enter a valid date, must be of the form 2025-mm-dd" + e.getMessage());
 		}
 		if(!(startdate.getYear() == 2025)) {
-valid = false; System.out.println("You can only upload a lesosn for the year 2025, please enter a new date");}
+valid = false; System.out.println("You can only upload a lesson for the year 2025, please enter a new date");}
 	}
 
 
