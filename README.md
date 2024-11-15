@@ -37,8 +37,6 @@ SOEN 342 - SECTION H
 ### System Sequence Diagrams
 
 For critical use case Signup to lesson
-<<<<<<< HEAD
-=======
 
 - [Signup to lesson Success](SRS/SystemSequenceDiagram_SignupToLesson.jpg)
 - [Signup to lesson failures](SRS/SystemSequenceDiagram_SignupToLesson_Failures_v2.jpg)
@@ -46,13 +44,7 @@ For critical use case Signup to lesson
 - [create booking success](SRS/SystemSequenceDiagram_makeBooking.jpg)
 - [create booking failure](SRS/SystemSequenceDiagram_makeBooking_Failures.jpg)
 
-> > > > > > > 607a9be0363cd9f6b6ec9d1b8a11f42e402830ed
-
-- [Signup to lesson Success](SRS/SystemSequenceDiagram_SignupToLesson.jpg)
-- [Signup to lesson failures](SRS/SystemSequenceDiagram_SignupToLesson_Failures_v2.jpg)
-  For critical use case create Booking:
-- [create booking success](SRS/SystemSequenceDiagram_makeBooking.jpg)
-- [create booking failure](SRS/SystemSequenceDiagram_makeBooking_Failures.jpg)
+- [uploadOffering](SRS/SystemSequenceDiagram_upLoadOffering.jpg)
 
 ### System operations
 
@@ -84,7 +76,7 @@ others
 
 ### UML Class diagram and attached OCL
 
-- [UML Class Diagram](SAD/UmlClassDiagram_v14.jpg)
+- [UML Class Diagram](SAD/UmlClassDiagram_v15.jpg)
 - [OCL]()
 
 ### Interaction diagrams
@@ -103,7 +95,7 @@ For critical use case create Booking:
 
 Interaction diagram for non critical use cases:
 
-- [interaction Diagram for uploadOffering()](SAD/InteractionDiagram_UploadOffering_v7.jpg)
+- [interaction Diagram for uploadOffering()](SAD/InteractionDiagram_UploadOffering_v8.jpg)
 - [interaction Diagram for deleteOffering()](SAD/InteractionDiagram_deleteOffering_v2.jpg)
 - [interaction Diagram for cancelBooking()](SAD/InteractionDiagram_CancelBooking_v2.jpg)
 
