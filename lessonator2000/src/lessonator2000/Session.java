@@ -310,25 +310,28 @@ System.out.println("---------------------------------------------------");
 System.out.println("-----------------Signup To Lessons-----------------");
 System.out.println("---------------------------------------------------");
 Scanner keyboard = new Scanner(System.in);
+
+String lessonId =null;
 System.out.println("Please enter the LessonID");
 boolean valid = false;
 while (!valid) {
-	String lessonId = null;
 	try { lessonId = keyboard.next();
 	valid = true;}
 	catch (java.util.InputMismatchException e) {
 		System.out.println("Please enter a valid String");
 		
 	}
-	offers.signupToLesson((lessonator2000.Instructor)browsingUser, lessonId);
 
 }
+
+//signup to lesson
+offers.signupToLesson((lessonator2000.Instructor)browsingUser, lessonId);
 }
 
 
 
 /**
- * available to Admiistrators
+ * available to Administrators
  * uploadOffering() is the method the administratorwill interact with to add lessons to the Offering Collections. 
  * The lessons don't have an instructor at first, instructors will then be able to view this lesson but clients will only see them when instructors have used signupToLesson()
  */
@@ -353,13 +356,22 @@ System.out.println("What is the lesson ID");
 String lessonID = null;
 valid = false;
 while (!valid) {
-	try { lessonID = keyboard.nextLine();
-	valid = true;}
-	catch (java.util.InputMismatchException e) {
-	System.out.println("Please enter a valid String");
-	}
-}
+    try {
+        lessonID = keyboard.nextLine();
+        valid = true;
 
+        ArrayList<Lesson> allLessons = offers.getLessons();
+        for (Lesson l : allLessons) {
+            if (l.getID().equals(lessonID)) {
+                System.out.println("This lesson ID is taken, enter another ID");
+                valid = false; // Set valid to false to repeat the loop
+                break; // Exit the for loop to prompt the user for a new ID
+            }
+        }
+    } catch (java.util.InputMismatchException e) {
+        System.out.println("Please enter a valid string");
+    }
+}
 
 
 
@@ -370,7 +382,7 @@ String lessonDay = null;
 LocalTime startTime = null;
 LocalTime endTime = null;
 do {
-	System.out.println("What is the day of the week the lesson will take place on? Must be eithe r: Monday, Tuesday,Wednesday,Thursday,Friday,Saturday or Sunday");
+	System.out.println("What is the day of the week the lesson will take place on? Must be either: Monday, Tuesday,Wednesday,Thursday,Friday,Saturday or Sunday");
 
 	valid = false;
 

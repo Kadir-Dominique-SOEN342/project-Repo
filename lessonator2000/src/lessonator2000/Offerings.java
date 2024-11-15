@@ -371,4 +371,8 @@ public class Offerings {
 			return false;
 		}
 
+		
+		public ArrayList<Lesson> getLessons() {
+			return lessons;
+		}
 	}
