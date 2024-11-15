@@ -2,8 +2,10 @@ package lessonator2000;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Set;
 /**
  * 
  * Class Session.
@@ -341,7 +343,7 @@ System.out.println("What type of lesson is it?");
 String lessontype = null;
 boolean valid = false;
 while (!valid) {
-	try { lessontype = keyboard.next();
+	try { lessontype = keyboard.nextLine();
 	valid = true;}
 	catch (java.util.InputMismatchException e) {
 		System.out.println("Please enter a valid String");
@@ -351,92 +353,105 @@ System.out.println("What is the lesson ID");
 String lessonID = null;
 valid = false;
 while (!valid) {
-	try { lessonID = keyboard.next();
+	try { lessonID = keyboard.nextLine();
 	valid = true;}
 	catch (java.util.InputMismatchException e) {
-	System.out.println("Please enter a valid integer");
+	System.out.println("Please enter a valid String");
 	}
 }
 
 
 
-System.out.println("What is the room number?");
-String roomNb= null;
- valid = false;
+
+
+LocalDate startdate =  null;
+LocalDate enddate =  null;
+String lessonDay = null;
+LocalTime startTime = null;
+LocalTime endTime = null;
+do {
+	System.out.println("What is the day of the week the lesson will take place on? Must be eithe r: Monday, Tuesday,Wednesday,Thursday,Friday,Saturday or Sunday");
+
+	valid = false;
+
 	while (!valid) {
-		try { roomNb = keyboard.next();
+        lessonDay = keyboard.nextLine();
+        lessonDay = lessonDay.substring(0, 1).toUpperCase() + lessonDay.substring(1);
+
+        // Validate that the input day is one of the valid days
+        Set<String> validDays = Set.of("Monday", "Tuesday", "Wednesday", "Thursday", 
+                                        "Friday", "Saturday", "Sunday");
+
+        if (validDays.contains(lessonDay)) {
+            valid = true;  // Set to true only if lessonDay is valid
+        } else {
+            System.out.println("Please enter a valid day of the week.");
+        }
+    }
+
+
+	System.out.println("What is the start date? must be of the form 2025-mm-dd " );
+
+	valid = false;
+	while (!valid) {
+		try { startdate = LocalDate.parse(keyboard.nextLine());
 		valid = true;}
-		catch (java.util.InputMismatchException e) {
-		System.out.println("Please enter a valid integer");
+		catch (DateTimeParseException e) {
+			System.err.println("Please enter a valid date, must be of the form 2025-mm-dd" + e.getMessage());
+		}
+		if(!(startdate.getYear() == 2025)) {
+valid = false; System.out.println("You can only upload a lesosn for the year 2025, please enter a new date");}
+	}
+
+
+	System.out.println("What is the end date? must be of the form 2025-mm-dd");
+
+	valid = false;
+	while (!valid) {
+		try { enddate = LocalDate.parse(keyboard.nextLine());
+		valid = true;}
+		catch (DateTimeParseException e) {
+			System.err.println("Please enter a valid date, must be of the form 2025-mm-dd" + e.getMessage());
+		}
+		if(enddate.isBefore(startdate)) {valid=false; System.out.println("the end date must be after the startDate, enter a new endDate");}
+		if(!(enddate.getYear() == 2025)) { valid = false; System.out.println("You can only upload a lesosn for the year 2025, please enter a new date");}
+	}
+
+	//make sure the timeslot will no overlap on another one in that day
+
+	System.out.println("What is the start time? must be of the form 00:00:00 ");
+
+	valid = false;
+	while (!valid) {
+		try { startTime = LocalTime.parse(keyboard.nextLine());
+		valid = true;}
+		catch (DateTimeParseException e) {
+			System.err.println("Please enter a valid time  must be of the form 00:00:00" + e.getMessage());
 		}
 	}
 
-System.out.println("What is the day of the week the lesson will take place on?");
-String lessonDay = null;
-valid = false;
-while (!valid) {
-	try { lessonDay = keyboard.next();
-	valid = true;}
-	catch (java.util.InputMismatchException e) {
-	System.out.println("Please enter a valid integer");
+	System.out.println("What is the end time? must be of the form 00:00:00 and be after the startTime");
+
+	valid = false;
+	while (!valid) {
+		try { endTime = LocalTime.parse(keyboard.nextLine());
+		valid = true;
+		}
+		catch (DateTimeParseException e) {
+			System.err.println("Please enter a valid time  must be of the form 00:00:00" + e.getMessage());
+		}
+		if(endTime.isBefore(startTime)) {valid=false; System.out.println("the end time must be after the start time, enter a new end Time");}
+
 	}
-}
 
-
-
-System.out.println("What is the start date? must be of the form yyyy-mm-dd");
-LocalDate startdate =  LocalDate.parse("0000-00-00") ;
-valid = false;
-while (!valid) {
-	try { startdate = LocalDate.parse(keyboard.next());
-	valid = true;}
-	catch (java.util.InputMismatchException e) {
-	System.out.println("Please enter a valid date, must be of the form yyyy-mm-dd");
-	}
-}
-
-
-System.out.println("What is the end date? must be of the form yyyy-mm-dd");
-LocalDate enddate =  LocalDate.parse("0000-00-00") ;
-valid = false;
-while (!valid) {
-	try { enddate = LocalDate.parse(keyboard.next());
-	valid = true;}
-	catch (java.util.InputMismatchException e) {
-	System.out.println("Please enter a valid date, must be of the form yyyy-mm-dd");
-	}
-}
-System.out.println("What is the start time? must be of the form 00:00:00 ");
-LocalTime startTime= LocalTime.parse("00:00:00");
-valid = false;
-while (!valid) {
-	try { startTime = LocalTime.parse(keyboard.next());
-	valid = true;}
-	catch (java.util.InputMismatchException e) {
-	System.out.println("Please enter a valid time, must be of the form 00:00:00 ");
-	}
-}
-
-
-
-System.out.println("What is the end time? must be of the form 00:00:00 ");
-LocalTime endTime = LocalTime.parse("00:00:00");
-valid = false;
-while (!valid) {
-	try { endTime = LocalTime.parse(keyboard.next());
-	valid = true;}
-	catch (java.util.InputMismatchException e) {
-	System.out.println("Please enter a valid time, must be of the form 00:00:00 ");
-	}
-}
-
-
+}while(offers.isConflicting(startdate, enddate,lessonDay,startTime,endTime));
 
 System.out.println("is it a public lesson?  enter true or false");
 Boolean isPublic= false ;
 valid = false;
 while (!valid) {
 	try { isPublic = keyboard.nextBoolean();
+	keyboard.nextLine();
 	valid = true;}
 	catch (java.util.InputMismatchException e) {
 	System.out.println("Please enter a valid boolean, must be of the form true / false ");
@@ -449,6 +464,7 @@ if(isPublic) {System.out.println("What is the capacity?");
 valid = false;
 while (!valid) {
 	try { capacity = keyboard.nextInt();
+	keyboard.nextLine();
 	valid = true;}
 	catch (java.util.InputMismatchException e) {
 		System.out.println("Please enter a valid integer ");
@@ -460,11 +476,31 @@ else capacity = 1;
 //create the new lesson Offering -- uploadOffering(...)
 lessonator2000.Lesson myLesson = offers.uploadOffering(lessontype, lessonID , false, true,  isPublic,  capacity,startdate, enddate,lessonDay);
 
-//addLessonToSpace(...)
-lessonator2000.Space mySpace = locationregistry.addLessonToSpace(roomNb);
 
-//addLocationToSchedual, this will return the timeslot created for this lesson. Create the timeslot. addLessonToschedual add the timeslot to every day that falls on the dayOfTheWeek between startdate and enddate
-lessonator2000.Timeslot myTimeSlot =	mySpace.addLessonToSchedual(myLesson, startdate, enddate, lessonDay,startTime, endTime);
+boolean roomNbValid = false; 
+lessonator2000.Space mySpace = null;
+while(!roomNbValid) {
+System.out.println("What is the room number?");
+String roomNb= null;
+ valid = false;
+	while (!valid) {
+		try { roomNb = keyboard.nextLine();
+		valid = true;}
+		catch (java.util.InputMismatchException e) {
+		System.out.println("Please enter a valid integer");
+		}
+		
+		//addLessonToSpace(...)
+		 mySpace = locationregistry.addLessonToSpace(roomNb);
+		 if(mySpace != null) roomNbValid = true;
+		 if(mySpace == null) System.out.println("This room number was invalid, please enter another room number ");
+	}}
+
+
+
+//addLocationToSchedual, this will return the timeslot created for this lesson. Create the timeslot. 
+//addLessonToschedual add the timeslot to every day that falls on the dayOfTheWeek between startdate and enddate
+lessonator2000.Timeslot myTimeSlot = mySpace.addLessonToSchedual(myLesson, startdate, enddate, lessonDay,startTime, endTime);
 
 // add space and time to lesson
 

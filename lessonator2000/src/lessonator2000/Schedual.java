@@ -13,40 +13,44 @@ import java.util.ArrayList;
 
  */
 public class Schedual {
-	private lessonator2000.Day[][] mySchedual;
+	private lessonator2000.Day[] mySchedual;
 	
 	
 	public Schedual() {
 		
-		/*We are booking 5 years in advance. 
+		/*We are booking 1 year in advance. 
 		We will need a method for updating the schedual when we need more time in advance 
 		and flush the old scheduals*/
+		//TODO:  method to flush old schedual
+		//TODO:  add more years? 
 		
 		//Schedual holds an array of days called mySchedual 
 		//if the year is a leap year there are 366 days
 		//if the year is not a leap year it hold 365 days. 
 		//each day has an array of timeslots.
-		 mySchedual = new lessonator2000.Day[5][];
-		 mySchedual[0] = new lessonator2000.Day[366]; //2024 is a leap year
-		 mySchedual[1] = new lessonator2000.Day[365]; //2025 is a normal year
-		 mySchedual[2] = new lessonator2000.Day[365]; //2026 is a normal year
-		 mySchedual[3] = new lessonator2000.Day[365]; //2027 is a normal year
-		 mySchedual[4] = new lessonator2000.Day[366]; //2028 is a leap year
+		// mySchedual = new lessonator2000.Day[5][];
+		// mySchedual[0] = new lessonator2000.Day[366]; //2024 is a leap year
+		// mySchedual[1] = new lessonator2000.Day[365]; //2025 is a normal year
+		 mySchedual = new lessonator2000.Day[365]; //2025 is a normal year
+		// mySchedual[2] = new lessonator2000.Day[365]; //2026 is a normal year
+		// mySchedual[3] = new lessonator2000.Day[365]; //2027 is a normal year
+		// mySchedual[4] = new lessonator2000.Day[366]; //2028 is a leap year
 		 
 
 	        // Initialize Day objects for each day in the schedule
 		 //for each year
-	        for (int year = 0; year < mySchedual.length; year++) {
+	      //  for (int year = 0; year < mySchedual.length; year++) { //removed after refactoring to 1D array
 	        	// for each day of the year
-	            int daysInYear = mySchedual[year].length; 
+	        	int daysInYear = mySchedual.length; 
+	        	// int daysInYear = mySchedual[year].length;  //removed after refactoring to 1D array
 	            for (int day = 0; day < daysInYear; day++) {
 	                // Create a LocalDate for the corresponding day
-	                LocalDate date = LocalDate.of(2024 + year, 1, 1).plusDays(day);//Startb from the first day of the year and add a day until the end of the year
-	                mySchedual[year][day] = new lessonator2000.Day(date); // Initialize each Day , passing the date as parameter
+	                LocalDate date = LocalDate.of(2025, 1, 1).plusDays(day);//Startb from the first day of the year and add a day until the end of the year
+	                mySchedual[day] = new lessonator2000.Day(date); // Initialize each Day , passing the date as parameter
 	            }
 	            }
 		 
-	        }
+	        //
 	/**
 	 * used from uploadOffering()
 	 * creates a timeslot that has a lesson attribute
@@ -59,7 +63,8 @@ public class Schedual {
 	 * @param endTime
 	 * @return
 	 */
-	 lessonator2000.Timeslot addLesson(lessonator2000.Lesson myLesson, LocalDate startdate, LocalDate enddate, String datOfTheWeek , LocalTime startTime, LocalTime endTime) {
+	 lessonator2000.Timeslot addLesson(lessonator2000.Lesson myLesson, LocalDate startdate, 
+			 LocalDate enddate, String datOfTheWeek , LocalTime startTime, LocalTime endTime) {
 		//	System.out.println("Schedual : addLesson");
 		//create new timeslot
 		lessonator2000.Timeslot myTimeSlot =  new lessonator2000.Timeslot(startTime, endTime, myLesson);
@@ -71,14 +76,14 @@ public class Schedual {
 		for(LocalDate date : myDateArray) {
 			lessonator2000.Day myDay = null;
 			//TODO: refactor this to make it more effecient
-			for (int year = 0; year < mySchedual.length; year++) {
-				for (lessonator2000.Day d : mySchedual[year]) {
+			//for (int year = 0; year < mySchedual.length; year++) {
+				for (lessonator2000.Day d : mySchedual) {
 					if (date.isEqual(d.getDate())) {
 						myDay = d;
 						d.addToCollection(myTimeSlot); // For every day that matches, add the timeslot to the day's collection
 
 					}
-				}
+				//}
 
 			}
 
@@ -153,8 +158,8 @@ public class Schedual {
 		//for each date remvove the timeslot
 		for(LocalDate date : localDateArray) {
 			lessonator2000.Day myDay = null;
-			for (int year = 0; year < mySchedual.length; year++) {
-				for (lessonator2000.Day d : mySchedual[year]) {
+			//for (int year = 0; year < mySchedual.length; year++) {//  removed after refactoring to 1D array for persistance
+				for (lessonator2000.Day d : mySchedual) {
 					if (date.isEqual(d.getDate())) {
 						myDay = d;
 						d.removeTimeSlot(lessonToRemove); // For every day that matches, add the timeslot to the day's collection
@@ -162,13 +167,16 @@ public class Schedual {
 					}
 				}
 
-			}
+			}//
 
 
 		}
 	
 	}
-	}
+	 
+
+	 
+	//}//
 	
 	//TODO : Method to update the calendar and drop previous years 
 	

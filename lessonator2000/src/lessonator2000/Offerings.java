@@ -351,5 +351,22 @@ public class Offerings {
 			//}
 
 		}
+		boolean isConflicting(LocalDate startDate ,LocalDate endDate , String weekDay,LocalTime start,  LocalTime end ) {
+			
+			for(Lesson l : lessons) {
+				//both lessons fall on the same day of the week and the dates overlap
+				if( l.getDayOfTheWeek().equals(weekDay) && 
+				l.getStartDatE().isBefore(endDate) &&
+				l.getEndDate().isAfter(startDate) &&
+				 // Time ranges overlap
+				l.getTimeSlot().getStartTime().isBefore(end) &&
+				l.getTimeSlot().getEndTime().isAfter(start)) {
+				System.out.println("This time if conflicting with the time of another lesson on that Day");
+				return true;}
+			}
+			
+			
+			return false;
+		}
 
 	}

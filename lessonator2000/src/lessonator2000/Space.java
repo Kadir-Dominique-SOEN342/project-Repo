@@ -75,7 +75,9 @@ public String getprovince() {
  * @param endTime
  * @return
  */
-lessonator2000.Timeslot addLessonToSchedual(lessonator2000.Lesson myLesson, LocalDate startdate, LocalDate enddate, String dayOfTheWeek, LocalTime startTime, LocalTime endTime) {
+lessonator2000.Timeslot addLessonToSchedual(lessonator2000.Lesson myLesson, LocalDate startdate, LocalDate enddate,
+		String dayOfTheWeek, LocalTime startTime, LocalTime endTime) {
+	
 	//System.out.println("Space: addLessonToSchedual");
 	lessonator2000.Timeslot myTimeslot = openFor.addLesson( myLesson,  startdate,  enddate,  dayOfTheWeek ,  startTime,  endTime);
 	return myTimeslot;
