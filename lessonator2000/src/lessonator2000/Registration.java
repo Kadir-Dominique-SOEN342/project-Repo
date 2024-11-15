@@ -33,12 +33,22 @@ public class Registration {
 		lessonator2000.Client h = new lessonator2000.Client("Gillian", "Gilbert",LocalDate.of(1961, 01, 27), "ggil" , "neworder");
 		clientRegistry.add(h);
 
+ArrayList<String> availability1 = new ArrayList<String>();
+availability1.add("Laval");
+availability1.add("Sainte-Therese");
 
-		lessonator2000.Instructor a = new lessonator2000.Instructor("Aerobie", "Julie", "Samson", 5148659658L);
+ArrayList<String> availability2 = new ArrayList<String>();
+availability2.add("Montreal");
+availability2.add("Longueil");
+
+ArrayList<String> availability3 = new ArrayList<String>();
+availability3.add("Montreal");
+availability3.add("Laval");
+		lessonator2000.Instructor a = new lessonator2000.Instructor("Aerobie", "Julie", "Samson", 5148659658L, availability1 );
 		instructorRegistry.add(a);
-		lessonator2000.Instructor b = new lessonator2000.Instructor("Sumo", "Ura", "Kazuki", 5148659658L);
+		lessonator2000.Instructor b = new lessonator2000.Instructor("Sumo", "Ura", "Kazuki", 5148659658L, availability2);
 		instructorRegistry.add(b);
-		lessonator2000.Instructor c = new lessonator2000.Instructor("Judo", "Hajime", "Isogai", 5148659658L);
+		lessonator2000.Instructor c = new lessonator2000.Instructor("Judo", "Hajime", "Isogai", 5148659658L,availability3);
 		instructorRegistry.add(c);
 
 
@@ -135,6 +145,7 @@ public class Registration {
 			valid = false;
 			while (!valid) {
 				try { phoneNumber  = keyboard.nextLong();
+				keyboard.nextLine();
 				valid = true;}
 				catch (java.util.InputMismatchException e) {
 					System.out.println("Please enter a valid Long");
@@ -564,13 +575,32 @@ public class Registration {
 		valid = false;
 		while (!valid) {
 			try { phone = keyboard.nextLong();
+			keyboard.nextLine();
 			valid = true;}
 			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid long");
 			}
 		}
-
-		lessonator2000.Instructor i = new lessonator2000.Instructor(specialization, firstn, lastn, phone);
+		
+		ArrayList<String> availabilities = new ArrayList<String>();
+		System.out.println("Please enter a city you are avalable in : ");
+		String city = keyboard.nextLine();
+		
+		String city1= city.substring(0, 1).toUpperCase() + city.substring(1);
+		availabilities.add(city1);
+	
+		
+		boolean done =false;
+		while(!done) {
+			System.out.println("Add another city , enter \"done\" if you are done");
+			String city2 = keyboard.nextLine();
+			if(city2.equals("done")) {break;}
+			
+			else  {String city3 = city2.substring(0, 1).toUpperCase() + city2.substring(1);
+			availabilities.add(city3); } 
+		}
+		
+		lessonator2000.Instructor i = new lessonator2000.Instructor(specialization, firstn, lastn, phone, availabilities);
 		return i;
 
 	}
