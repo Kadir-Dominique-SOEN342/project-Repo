@@ -14,6 +14,7 @@ Preconditions:
 - Client cl exist
 - User is registered as Client
 - User is logged in as Client cl
+- Client age is bigger than 17
 
 Postconditions:
 
@@ -27,15 +28,15 @@ Postconditions:
 
 ## underageBooking
 
-Operation: underageBooking(cl: Client)
+Operation: underageBooking(Strin username , cl: Client)
 Cross Reference: Use case: makeBooking
 Preconditions:
 
 - Session thread is running
 - Client cl exist
-- underageClient uc exist
 - User is registered as Client
 - User is logged in as Client cl
+- underageClient uc exist with username
 - underageclient uc is part of Client's cl dependant collection
 
 Postconditions:
@@ -50,13 +51,10 @@ Preconditions:
 
 - Session thread is running
 - Client cl exist
-- underageClient uc exist
-- User is registered as Client
-- User is logged in as Client cl
-- if booking for dependant, underageClient uc has been returned by underageBooking
+- cl is either a Client or an UnderageClient
 - lesson l exist
 - lesson l isAvailable is true
-  -lesson l hasInstructor is true
+- lesson l hasInstructor is true
 
 Postconditions:
 

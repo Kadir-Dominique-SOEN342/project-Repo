@@ -2,16 +2,16 @@
 
 ##uploadOffering
 
-Operation: uploadOffering()
+Operation: uploadOffering(type : String , id : String , hasInstructor : Boolean , isAvailable: Boolean, isPublic : Boolean ,capacity: int , start : LocalDate , end: LocalDate , weekDay : String )
 Cross Reference: Use Case: Process Offerings
 
 Preconditions:
 
--Session thread is running
-
+- Session thread is running
 - User is logged in as Administrator
 - Offerings instance exist
 - lessons Lesson collection is initiated.
+- id is not taken by another lesson
 
 Postconditions:
 
@@ -24,7 +24,7 @@ Postconditions:
 
 ##deleteOffering
 
-Operation: deleteOffering()
+Operation: deleteOffering(String lessonId)
 Cross Reference: Use Case: Process Offerings
 
 Preconditions:
@@ -38,7 +38,7 @@ Preconditions:
 
 Postconditions:
 
-- Timeslot t is removed from Days where Day.Date is between l.startDate and l.endDate(attribute modification)
+- Timeslot t is removed from all the days Days (attribute modification)
 - Lesson l is removed from Offering's lessons (attribute modification)
 - Lesson l is removed from Instructor's teaches (attribute modification)
 - Booking b containing l removed from Booking Catalog's booking (attribute modification)
