@@ -44,8 +44,6 @@ For critical use case Signup to lesson
 - [create booking success](SRS/SystemSequenceDiagram_makeBooking.jpg)
 - [create booking failure](SRS/SystemSequenceDiagram_makeBooking_Failures.jpg)
 
-- [uploadOffering](SRS/SystemSequenceDiagram_upLoadOffering.jpg)
-
 ### System operations
 
 - Critical use case signup To lesson :
