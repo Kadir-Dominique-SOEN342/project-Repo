@@ -168,6 +168,8 @@ public class Offerings {
 			}
 		}
 		if(myLesson == null) {System.out.println("There is no lesson with this Id. try again"); return;}
+		if(!(myLesson.getype().equals(ins.getSpecialization()))) {System.out.println("Sorry You are not specialized in this type of lesson"); return;}
+		
 		
 		//Checking if the lesson is offered in a city that figures in the instructor availabilities
 		Space lessonSpace = myLesson.getSpace();
