@@ -93,8 +93,8 @@ public class Registration {
 			String username = null;
 			valid = false;
 			while (!valid) {
-				try { username =  keyboard.next();
-				keyboard.nextLine();
+				try { username =  keyboard.nextLine();
+				
 				valid = true;}
 				catch (java.util.InputMismatchException e) {
 					System.out.println("Please enter a valid String");
@@ -110,8 +110,7 @@ public class Registration {
 			String password = null;
 			valid = false;
 			while (!valid) {
-				try { password =  keyboard.next();
-				keyboard.nextLine();
+				try { password =  keyboard.nextLine();
 				valid = true;}
 				catch (java.util.InputMismatchException e) {
 					System.out.println("Please enter a valid String");
@@ -410,7 +409,7 @@ public class Registration {
 		String parentUsername = null;
 		boolean valid = false;
 		while (!valid) {
-			try { parentUsername = keyboard.next();
+			try { parentUsername = keyboard.nextLine();
 			valid = true;}
 			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid String");
@@ -424,20 +423,20 @@ public class Registration {
 
 
 		System.out.println("What is your first name:");
-		String firstn = keyboard.next();
+		String firstn = keyboard.nextLine();
 		valid = false;
 		while (!valid) {
-			try { firstn = keyboard.next();
+			try { firstn = keyboard.nextLine();
 			valid = true;}
 			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid String");
 			}
 		}
 		System.out.println("\n What is your last name:");
-		String lastn = keyboard.next();
+		String lastn = keyboard.nextLine();
 		valid = false;
 		while (!valid) {
-			try { lastn = keyboard.next();
+			try { lastn = keyboard.nextLine();
 			valid = true;}
 			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid String");
@@ -492,7 +491,7 @@ public class Registration {
 		String username = null;
 		valid = false;
 		while (!valid) {
-			try { username = keyboard.next();
+			try { username = keyboard.nextLine();
 			valid = true;}
 			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid String");
@@ -502,7 +501,7 @@ public class Registration {
 		String password = null;
 		valid = false;
 		while (!valid) {
-			try { password = keyboard.next();
+			try { password = keyboard.nextLine();
 			valid = true;}
 			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid String");
@@ -534,7 +533,7 @@ public class Registration {
 		String specialization =null;
 		boolean valid = false;
 		while (!valid) {
-			try { specialization = keyboard.next();
+			try { specialization = keyboard.nextLine();
 			valid = true;}
 			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid String");
@@ -544,7 +543,7 @@ public class Registration {
 		String firstn =null;
 		valid = false;
 		while (!valid) {
-			try { firstn = keyboard.next();
+			try { firstn = keyboard.nextLine();
 			valid = true;}
 			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid String");
@@ -554,7 +553,7 @@ public class Registration {
 		String lastn =null;
 		valid = false;
 		while (!valid) {
-			try { lastn = keyboard.next();
+			try { lastn = keyboard.nextLine();
 			valid = true;}
 			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid String");
