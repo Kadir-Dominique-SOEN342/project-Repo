@@ -39,7 +39,7 @@ SOEN 342 - SECTION H
 For critical use case Signup to lesson
 
 - [Signup to lesson Success](SRS/SystemSequenceDiagram_SignupToLesson.jpg)
-- [Signup to lesson failures](SRS/SystemSequenceDiagram_SignupToLesson_Failures_v2.jpg)
+- [Signup to lesson failures](SRS/SystemSequenceDiagram_SignupToLesson_Failures_v3.jpg)
   For critical use case create Booking:
 - [create booking success](SRS/SystemSequenceDiagram_makeBooking.jpg)
 - [create booking failure](SRS/SystemSequenceDiagram_makeBooking_Failures.jpg)
@@ -82,7 +82,7 @@ others
 For critical use case Signup to lesson :
 
 - [Interaction Diagram for viewOffering()](SAD/InteractionDiagram_viewOffering_v5.jpg)
-- [Interaction Diagram for signupToLesson()](SAD/InteractionDiagram_signupToLesson_v5.jpg)
+- [Interaction Diagram for signupToLesson()](SAD/InteractionDiagram_signupToLesson_v6.jpg)
 
 For critical use case create Booking:
 
