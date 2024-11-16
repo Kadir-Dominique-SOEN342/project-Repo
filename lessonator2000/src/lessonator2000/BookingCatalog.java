@@ -75,8 +75,17 @@ public class BookingCatalog {
 		else if (user instanceof lessonator2000.Client) {
 			System.out.println("Here are all your bookings:");
 			clientViewVooking((lessonator2000.Client)user);
-			System.out.println("To view the bookings for your dependants, you need to log in with thier username. This feature is coming soon.");
-		}
+		//	System.out.println("To view the bookings for your dependants, you need to log in with thier username. This feature is coming soon.");
+			
+			ArrayList<lessonator2000.UnderageClient> dependants = ((lessonator2000.Client) user).getDependantsCatalog();
+			
+			if(dependants!= null) {
+			if(!(dependants.isEmpty())){System.out.println("Here are the bookings of your dependants");
+			for(lessonator2000.UnderageClient uc : dependants ) {
+				viewBooking(uc);
+			}}
+		
+		}}
 		}
 	
 
@@ -95,14 +104,16 @@ public class BookingCatalog {
 	 * @param client
 	 */
 	private void clientViewVooking(lessonator2000.Client client) {
-			for (lessonator2000.Bookings b : bookings) {
+		int count = 0;
+				for (lessonator2000.Bookings b : bookings) {
 				lessonator2000.Client c  = b.getBookingclient();
 				if(c == client) {
 					System.out.println(b.toString());
+					count++;
 					
 				}
 			}
-			
+			if(count == 0 )System.out.println("You do not have any bookings.");
 	}
 	
 	/**
@@ -127,7 +138,7 @@ public class BookingCatalog {
 	}
 
 	 /**
-	  * removebooking() is used when a lesosn is removed as part of delteOffering(), if a booking is assocated to the lesosn, it needs to be removed
+	  * removebooking() is used when a lesson is removed as part of deelteOffering(), if a booking is associated to the lesson, it needs to be removed
 	  * @param lessonToRemove
 	  */
 	 void removeBooking(lessonator2000.Lesson lessonToRemove) {
@@ -138,6 +149,11 @@ public class BookingCatalog {
 		//		bookings.remove(bookings.indexOf(lessonToRemove));
 		//		
 		}
+
+	public ArrayList<Bookings> getBookings() {
+		return bookings;
+		
+	}
 			
 		
 		

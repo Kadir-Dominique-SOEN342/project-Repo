@@ -168,6 +168,8 @@ public class Offerings {
 			}
 		}
 		if(myLesson == null) {System.out.println("There is no lesson with this Id. try again"); return;}
+		if(!(myLesson.getype().equals(ins.getSpecialization()))) {System.out.println("Sorry You are not specialized in this type of lesson"); return;}
+		
 		
 		//Checking if the lesson is offered in a city that figures in the instructor availabilities
 		Space lessonSpace = myLesson.getSpace();
@@ -183,8 +185,8 @@ public class Offerings {
 		if (isInAvailability) {
 			ins.addToCollection(myLesson);
 			myLesson.addInstructorToLesson(ins);
-			//make the offering avaialble
 			myLesson.sethasInstructor(true);
+			//make the offering avaialble
 			System.out.println("Offerings: signupToLesson() " + myLesson.toString());
 		} else System.out.println("There is no lesson with this Id. try again");
 
@@ -351,5 +353,26 @@ public class Offerings {
 			//}
 
 		}
+		boolean isConflicting(LocalDate startDate ,LocalDate endDate , String weekDay,LocalTime start,  LocalTime end ) {
+			
+			for(Lesson l : lessons) {
+				//both lessons fall on the same day of the week and the dates overlap
+				if( l.getDayOfTheWeek().equals(weekDay) && 
+				l.getStartDatE().isBefore(endDate) &&
+				l.getEndDate().isAfter(startDate) &&
+				 // Time ranges overlap
+				l.getTimeSlot().getStartTime().isBefore(end) &&
+				l.getTimeSlot().getEndTime().isAfter(start)) {
+				System.out.println("This time if conflicting with the time of another lesson on that Day");
+				return true;}
+			}
+			
+			
+			return false;
+		}
 
+		
+		public ArrayList<Lesson> getLessons() {
+			return lessons;
+		}
 	}

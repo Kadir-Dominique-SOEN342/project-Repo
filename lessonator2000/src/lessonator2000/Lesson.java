@@ -53,11 +53,13 @@ public class Lesson {
     }
 
      /**
-      * shows all the lesso information and annotaiton is it's not available.
+      * shows all the lesson information and annotaiton is it's not available.
       */
     public String toString(){
 
-        return "the lesson ID : " + lessonId + "\n " +  (!isAvailable ? "UNAVAILABLE " : "")+ "The"  +  space.getTypeOfSpace() + " " + space.getroomNumber() + " , in " + space.getCity() + " , is available for " + type + " on "+ dayOfTheWeek + " From " + time.getStartTime() + " to " + time.getEndTime() + ", from" + startDate.getMonthValue() + " " + startDate.getDayOfYear() + "to " + endDate.getMonthValue() + " " + endDate.getDayOfYear()+ ",  " + endDate.getYear();
+        return "the lesson ID : " + lessonId + "\n " +  (!isAvailable ? "UNAVAILABLE " : "")+ "The"  +  space.getTypeOfSpace() + " " + space.getroomNumber() + " , in " + 
+        space.getCity() + " , is available for " + type + " on "+ dayOfTheWeek + 
+        		" From " + time.getStartTime() + " to " + time.getEndTime() + ", from " + startDate.getMonth() + " " + startDate.getDayOfMonth() + " to " + endDate.getMonth()+ " " + endDate.getDayOfMonth() +",  " + endDate.getYear();
         		//" with " + teacher.getFirstName() + " " + teacher.getLastName();       
     }
     

@@ -2,8 +2,10 @@ package lessonator2000;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Set;
 /**
  * 
  * Class Session.
@@ -79,12 +81,12 @@ public class Session extends Thread{
 		//addLessonToSpace(...)
 		lessonator2000.Space mySpace = locationregistry.addLessonToSpace("TY908");
 		//addLocationToSchedual, this will return the timeslot created for this lesson. Create the timeslot. addLessonToschedual add the timeslot to every day that falls on the dayOfTheWeek between startdate and enddate
-		lessonator2000.Timeslot myTimeSlot =	mySpace.addLessonToSchedual(myLesson, LocalDate.of(2024, 1, 13), LocalDate.of(2024, 12, 13),"Wednesday", LocalTime.of(10,00,00),  LocalTime.of(11,00,00));
+		lessonator2000.Timeslot myTimeSlot =	mySpace.addLessonToSchedual(myLesson, LocalDate.of(2025, 1, 13), LocalDate.of(2024, 12, 13),"Wednesday", LocalTime.of(10,00,00),  LocalTime.of(11,00,00));
 		// add space and time to lesson
 		offers.addSpaceTimeToLesson(mySpace, myTimeSlot, myLesson);
 
 //hardcodedlesson2
-		lessonator2000.Lesson myLesson2 = offers.uploadOffering("SumoWrestling", "sumo900", false, true,  true, 10,LocalDate.of(2025, 6, 28), LocalDate.of(2025,12,11),"Monday");
+		lessonator2000.Lesson myLesson2 = offers.uploadOffering("Sumo", "sumo900", false, true,  true, 10,LocalDate.of(2025, 6, 28), LocalDate.of(2025,12,11),"Monday");
 		//addLessonToSpace(...)
 		lessonator2000.Space mySpace2 = locationregistry.addLessonToSpace("H513");
 		//addLocationToSchedual, this will return the timeslot created for this lesson. Create the timeslot. addLessonToschedual add the timeslot to every day that falls on the dayOfTheWeek between startdate and enddate
@@ -94,7 +96,7 @@ public class Session extends Thread{
 
 
 //hardcodedlesson3
-		lessonator2000.Lesson myLesson3 = offers.uploadOffering("Aerobics", "aero111", true, true,  true, 1,LocalDate.of(2025, 6, 28), LocalDate.of(2025,10,20),"Saturday");
+		lessonator2000.Lesson myLesson3 = offers.uploadOffering("Aerobie", "aero111", true, true,  true, 1,LocalDate.of(2025, 6, 28), LocalDate.of(2025,10,20),"Saturday");
 		//addLessonToSpace(...)
 		lessonator2000.Space mySpace3 = locationregistry.addLessonToSpace("H513");
 		//addLocationToSchedual, this will return the timeslot created for this lesson. Create the timeslot. addLessonToschedual add the timeslot to every day that falls on the dayOfTheWeek between startdate and enddate
@@ -102,13 +104,55 @@ public class Session extends Thread{
 		// add space and time to lesson
 		offers.addSpaceTimeToLesson(mySpace3, myTimeSlot3, myLesson3);
 		
-//hardcoded client and two dependants
-		lessonator2000.Client cli = new lessonator2000.Client("Bob", "Baratheon", LocalDate.of(2021, 1,15),"bobby", "123");
-		lessonator2000.UnderageClient uc1 = new lessonator2000.UnderageClient("Mark", "Baratheon", LocalDate.of(2012, 2, 21), "mark12", "mark123", cli);
-		lessonator2000.UnderageClient uc2 = new lessonator2000.UnderageClient("Michael", "Baratheon", LocalDate.of(2012, 4, 13),"Mike", "mike123", cli);
+		//hardcoded client and two dependants
+		lessonator2000.Client cli2 = new lessonator2000.Client("Betty", "White", LocalDate.of(1970, 1,12),"bwhite", "123");
+		registry.getClientRegistry().add(cli2);
+		lessonator2000.Client cli = new lessonator2000.Client("Bob", "Baratheon", LocalDate.of(1990, 1,15),"bobby", "123");
+		registry.getClientRegistry().add(cli);
+		lessonator2000.UnderageClient uc1 = new lessonator2000.UnderageClient("Mark", "Baratheon", LocalDate.of(2021, 2, 21), "mark12", "mark123", cli);
+		registry.getClientRegistry().add(uc1);
+		lessonator2000.UnderageClient uc2 = new lessonator2000.UnderageClient("Michael", "Baratheon", LocalDate.of(2019, 4, 13),"Mike", "mike123", cli);
+		registry.getClientRegistry().add(uc2);
 		cli.addToDependantsCatalog(uc1);
 		cli.addToDependantsCatalog(uc2);
 
+		
+		//hardcode a fe winstructors
+		ArrayList<String> availability1 = new ArrayList<String>();
+		availability1.add("Laval");
+		availability1.add("Sainte-Therese");
+		availability1.add("Montreal");
+
+		ArrayList<String> availability2 = new ArrayList<String>();
+		availability2.add("Montreal");
+		availability2.add("Longueil");
+
+		ArrayList<String> availability3 = new ArrayList<String>();
+		availability3.add("Montreal");
+		availability3.add("Laval");
+		availability3.add("Ottawa");
+				lessonator2000.Instructor a = new lessonator2000.Instructor("Aerobie", "Julie", "Samson", 5148659658L, availability1 );
+				registry.getInstructorRegistry().add(a);
+				lessonator2000.Instructor b = new lessonator2000.Instructor("Sumo", "Ura", "Kazuki", 5148659658L, availability2);
+				registry.getInstructorRegistry().add(b);
+				lessonator2000.Instructor c = new lessonator2000.Instructor("Judo", "Hajime", "Isogai", 5148659658L,availability3);
+				registry.getInstructorRegistry().add(c);
+
+
+		
+		
+		//hardcode bookings
+		offers.signupToLesson(a, "aero111");
+		offers.signupToLesson(b, "sumo900");
+		
+		lessonator2000.Bookings book1 = new lessonator2000.Bookings(myLesson3, cli2);
+		BookingCatalog.getBookingCatalog().getBookings().add(book1);
+		lessonator2000.Bookings book2 = new lessonator2000.Bookings(myLesson3, uc1);
+		BookingCatalog.getBookingCatalog().getBookings().add(book2);
+		lessonator2000.Bookings book3 = new lessonator2000.Bookings(myLesson2, uc2);
+		BookingCatalog.getBookingCatalog().getBookings().add(book3);
+		lessonator2000.Bookings book4 = new lessonator2000.Bookings(myLesson2, cli);
+		BookingCatalog.getBookingCatalog().getBookings().add(book4);
 		
 		
 //browsingUser = new lessonator2000.Client("Bobby","Baratheon",LocalDate.of(1600, 1, 13) , "bobb", "westeros");
@@ -135,12 +179,18 @@ case 8: {if ((browsingUser instanceof lessonator2000.Administrator) || (browsing
 case 9: {if (browsingUser instanceof lessonator2000.Administrator) deleteOffering();else{System.out.println("Sorry this choice is not available to you");} break;}
 case 10: browsingUser=logOut();break;
 case 11: {System.out.println("Goodbye!"); exitSession();break;} //remove session
+case 12: {if (browsingUser instanceof lessonator2000.Administrator) deleteaccount();else{System.out.println("Sorry this choice is not available to you");} break;}
 default: System.out.println("This was not a valid choice");break;
 }
 
 
 }
 }
+	private void deleteaccount() {
+		registry.deleteAccount();
+		
+	}
+
 	/**
 	 * removes the sesison from the catalog and sets activeSesison to false, which will stop the thread running
 	 */
@@ -272,6 +322,7 @@ else if(u instanceof lessonator2000.Administrator) {
 	System.out.println("8- View Bookings");
 	System.out.println("9- delete Offering");
 	System.out.println("10- Logout");
+	System.out.println("12- Delete Client or Instructor account");
 	System.out.println("11- Exit");
 	}
 else {
@@ -308,25 +359,28 @@ System.out.println("---------------------------------------------------");
 System.out.println("-----------------Signup To Lessons-----------------");
 System.out.println("---------------------------------------------------");
 Scanner keyboard = new Scanner(System.in);
+
+String lessonId =null;
 System.out.println("Please enter the LessonID");
 boolean valid = false;
 while (!valid) {
-	String lessonId = null;
 	try { lessonId = keyboard.next();
 	valid = true;}
 	catch (java.util.InputMismatchException e) {
 		System.out.println("Please enter a valid String");
 		
 	}
-	offers.signupToLesson((lessonator2000.Instructor)browsingUser, lessonId);
 
 }
+
+//signup to lesson
+offers.signupToLesson((lessonator2000.Instructor)browsingUser, lessonId);
 }
 
 
 
 /**
- * available to Admiistrators
+ * available to Administrators
  * uploadOffering() is the method the administratorwill interact with to add lessons to the Offering Collections. 
  * The lessons don't have an instructor at first, instructors will then be able to view this lesson but clients will only see them when instructors have used signupToLesson()
  */
@@ -341,7 +395,7 @@ System.out.println("What type of lesson is it?");
 String lessontype = null;
 boolean valid = false;
 while (!valid) {
-	try { lessontype = keyboard.next();
+	try { lessontype = keyboard.nextLine();
 	valid = true;}
 	catch (java.util.InputMismatchException e) {
 		System.out.println("Please enter a valid String");
@@ -351,92 +405,114 @@ System.out.println("What is the lesson ID");
 String lessonID = null;
 valid = false;
 while (!valid) {
-	try { lessonID = keyboard.next();
-	valid = true;}
-	catch (java.util.InputMismatchException e) {
-	System.out.println("Please enter a valid integer");
-	}
+    try {
+        lessonID = keyboard.nextLine();
+        valid = true;
+
+        ArrayList<Lesson> allLessons = offers.getLessons();
+        for (Lesson l : allLessons) {
+            if (l.getID().equals(lessonID)) {
+                System.out.println("This lesson ID is taken, enter another ID");
+                valid = false; // Set valid to false to repeat the loop
+                break; // Exit the for loop to prompt the user for a new ID
+            }
+        }
+    } catch (java.util.InputMismatchException e) {
+        System.out.println("Please enter a valid string");
+    }
 }
 
 
 
-System.out.println("What is the room number?");
-String roomNb= null;
- valid = false;
+
+LocalDate startdate =  null;
+LocalDate enddate =  null;
+String lessonDay = null;
+LocalTime startTime = null;
+LocalTime endTime = null;
+do {
+	System.out.println("What is the day of the week the lesson will take place on? Must be either: Monday, Tuesday,Wednesday,Thursday,Friday,Saturday or Sunday");
+
+	valid = false;
+
 	while (!valid) {
-		try { roomNb = keyboard.next();
+        lessonDay = keyboard.nextLine();
+        lessonDay = lessonDay.substring(0, 1).toUpperCase() + lessonDay.substring(1);
+
+        // Validate that the input day is one of the valid days
+        Set<String> validDays = Set.of("Monday", "Tuesday", "Wednesday", "Thursday", 
+                                        "Friday", "Saturday", "Sunday");
+
+        if (validDays.contains(lessonDay)) {
+            valid = true;  // Set to true only if lessonDay is valid
+        } else {
+            System.out.println("Please enter a valid day of the week.");
+        }
+    }
+
+
+	System.out.println("What is the start date? must be of the form 2025-mm-dd " );
+
+	valid = false;
+	while (!valid) {
+		try { startdate = LocalDate.parse(keyboard.nextLine());
 		valid = true;}
-		catch (java.util.InputMismatchException e) {
-		System.out.println("Please enter a valid integer");
+		catch (DateTimeParseException e) {
+			System.err.println("Please enter a valid date, must be of the form 2025-mm-dd" + e.getMessage());
+		}
+		if(!(startdate.getYear() == 2025)) {
+valid = false; System.out.println("You can only upload a lesson for the year 2025, please enter a new date");}
+	}
+
+
+	System.out.println("What is the end date? must be of the form 2025-mm-dd");
+
+	valid = false;
+	while (!valid) {
+		try { enddate = LocalDate.parse(keyboard.nextLine());
+		valid = true;}
+		catch (DateTimeParseException e) {
+			System.err.println("Please enter a valid date, must be of the form 2025-mm-dd" + e.getMessage());
+		}
+		if(enddate.isBefore(startdate)) {valid=false; System.out.println("the end date must be after the startDate, enter a new endDate");}
+		if(!(enddate.getYear() == 2025)) { valid = false; System.out.println("You can only upload a lesosn for the year 2025, please enter a new date");}
+	}
+
+	//make sure the timeslot will no overlap on another one in that day
+
+	System.out.println("What is the start time? must be of the form 00:00:00 ");
+
+	valid = false;
+	while (!valid) {
+		try { startTime = LocalTime.parse(keyboard.nextLine());
+		valid = true;}
+		catch (DateTimeParseException e) {
+			System.err.println("Please enter a valid time  must be of the form 00:00:00" + e.getMessage());
 		}
 	}
 
-System.out.println("What is the day of the week the lesson will take place on?");
-String lessonDay = null;
-valid = false;
-while (!valid) {
-	try { lessonDay = keyboard.next();
-	valid = true;}
-	catch (java.util.InputMismatchException e) {
-	System.out.println("Please enter a valid integer");
+	System.out.println("What is the end time? must be of the form 00:00:00 and be after the startTime");
+
+	valid = false;
+	while (!valid) {
+		try { endTime = LocalTime.parse(keyboard.nextLine());
+		valid = true;
+		}
+		catch (DateTimeParseException e) {
+			System.err.println("Please enter a valid time  must be of the form 00:00:00" + e.getMessage());
+		}
+		if(endTime.isBefore(startTime)) {valid=false; System.out.println("the end time must be after the start time, enter a new end Time");}
+
 	}
-}
 
-
-
-System.out.println("What is the start date? must be of the form yyyy-mm-dd");
-LocalDate startdate =  LocalDate.parse("0000-00-00") ;
-valid = false;
-while (!valid) {
-	try { startdate = LocalDate.parse(keyboard.next());
-	valid = true;}
-	catch (java.util.InputMismatchException e) {
-	System.out.println("Please enter a valid date, must be of the form yyyy-mm-dd");
-	}
-}
-
-
-System.out.println("What is the end date? must be of the form yyyy-mm-dd");
-LocalDate enddate =  LocalDate.parse("0000-00-00") ;
-valid = false;
-while (!valid) {
-	try { enddate = LocalDate.parse(keyboard.next());
-	valid = true;}
-	catch (java.util.InputMismatchException e) {
-	System.out.println("Please enter a valid date, must be of the form yyyy-mm-dd");
-	}
-}
-System.out.println("What is the start time? must be of the form 00:00:00 ");
-LocalTime startTime= LocalTime.parse("00:00:00");
-valid = false;
-while (!valid) {
-	try { startTime = LocalTime.parse(keyboard.next());
-	valid = true;}
-	catch (java.util.InputMismatchException e) {
-	System.out.println("Please enter a valid time, must be of the form 00:00:00 ");
-	}
-}
-
-
-
-System.out.println("What is the end time? must be of the form 00:00:00 ");
-LocalTime endTime = LocalTime.parse("00:00:00");
-valid = false;
-while (!valid) {
-	try { endTime = LocalTime.parse(keyboard.next());
-	valid = true;}
-	catch (java.util.InputMismatchException e) {
-	System.out.println("Please enter a valid time, must be of the form 00:00:00 ");
-	}
-}
-
-
+}while(offers.isConflicting(startdate, enddate,lessonDay,startTime,endTime));
 
 System.out.println("is it a public lesson?  enter true or false");
 Boolean isPublic= false ;
 valid = false;
 while (!valid) {
 	try { isPublic = keyboard.nextBoolean();
+	keyboard.nextLine();
 	valid = true;}
 	catch (java.util.InputMismatchException e) {
 	System.out.println("Please enter a valid boolean, must be of the form true / false ");
@@ -449,6 +525,7 @@ if(isPublic) {System.out.println("What is the capacity?");
 valid = false;
 while (!valid) {
 	try { capacity = keyboard.nextInt();
+	keyboard.nextLine();
 	valid = true;}
 	catch (java.util.InputMismatchException e) {
 		System.out.println("Please enter a valid integer ");
@@ -460,11 +537,31 @@ else capacity = 1;
 //create the new lesson Offering -- uploadOffering(...)
 lessonator2000.Lesson myLesson = offers.uploadOffering(lessontype, lessonID , false, true,  isPublic,  capacity,startdate, enddate,lessonDay);
 
-//addLessonToSpace(...)
-lessonator2000.Space mySpace = locationregistry.addLessonToSpace(roomNb);
 
-//addLocationToSchedual, this will return the timeslot created for this lesson. Create the timeslot. addLessonToschedual add the timeslot to every day that falls on the dayOfTheWeek between startdate and enddate
-lessonator2000.Timeslot myTimeSlot =	mySpace.addLessonToSchedual(myLesson, startdate, enddate, lessonDay,startTime, endTime);
+boolean roomNbValid = false; 
+lessonator2000.Space mySpace = null;
+while(!roomNbValid) {
+System.out.println("What is the room number?");
+String roomNb= null;
+ valid = false;
+	while (!valid) {
+		try { roomNb = keyboard.nextLine();
+		valid = true;}
+		catch (java.util.InputMismatchException e) {
+		System.out.println("Please enter a valid integer");
+		}
+		
+		//addLessonToSpace(...)
+		 mySpace = locationregistry.addLessonToSpace(roomNb);
+		 if(mySpace != null) roomNbValid = true;
+		 if(mySpace == null) System.out.println("This room number was invalid, please enter another room number ");
+	}}
+
+
+
+//addLocationToSchedual, this will return the timeslot created for this lesson. Create the timeslot. 
+//addLessonToschedual add the timeslot to every day that falls on the dayOfTheWeek between startdate and enddate
+lessonator2000.Timeslot myTimeSlot = mySpace.addLessonToSchedual(myLesson, startdate, enddate, lessonDay,startTime, endTime);
 
 // add space and time to lesson
 

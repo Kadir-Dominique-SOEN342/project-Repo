@@ -33,14 +33,10 @@ public class Registration {
 		lessonator2000.Client h = new lessonator2000.Client("Gillian", "Gilbert",LocalDate.of(1961, 01, 27), "ggil" , "neworder");
 		clientRegistry.add(h);
 
-
-		lessonator2000.Instructor a = new lessonator2000.Instructor("Aerobie", "Julie", "Samson", 5148659658L);
-		instructorRegistry.add(a);
-		lessonator2000.Instructor b = new lessonator2000.Instructor("Sumo", "Ura", "Kazuki", 5148659658L);
-		instructorRegistry.add(b);
-		lessonator2000.Instructor c = new lessonator2000.Instructor("Judo", "Hajime", "Isogai", 5148659658L);
-		instructorRegistry.add(c);
-
+		
+		
+		
+		
 
 
 		//
@@ -89,17 +85,11 @@ public class Registration {
 
 		//Returns a client if it's found, returns a public if not
 		if(userChoice == 1) {
+			keyboard.nextLine();
 			System.out.println("What is your username");
-			String username = null;
-			valid = false;
-			while (!valid) {
-				try { username =  keyboard.next();
-				keyboard.nextLine();
-				valid = true;}
-				catch (java.util.InputMismatchException e) {
-					System.out.println("Please enter a valid String");
-				}
-			}
+			
+			String 	username =  keyboard.nextLine();
+			
 			lessonator2000.Client myClient = registry.searchClient(username);
 			if(myClient == null ) {
 	System.out.println("You are not registered, you will browse as public for now until you do.");
@@ -107,18 +97,11 @@ public class Registration {
 
 }
 			System.out.println("What is your password ? ");
-			String password = null;
-			valid = false;
-			while (!valid) {
-				try { password =  keyboard.next();
-				keyboard.nextLine();
-				valid = true;}
-				catch (java.util.InputMismatchException e) {
-					System.out.println("Please enter a valid String");
-				}
-			}
+			String password = password =  keyboard.nextLine();
+			
+			
 			if(password.equals(myClient.getPassword())) {
-				System.out.println("You are logged in" + username);
+				System.out.println("You are logged in " + username);
 				return myClient;}
 			
 			else {System.out.println("Wrong password, try again");
@@ -136,6 +119,7 @@ public class Registration {
 			valid = false;
 			while (!valid) {
 				try { phoneNumber  = keyboard.nextLong();
+				keyboard.nextLine();
 				valid = true;}
 				catch (java.util.InputMismatchException e) {
 					System.out.println("Please enter a valid Long");
@@ -300,7 +284,7 @@ public class Registration {
 		String firstn = null;
 		boolean valid = false;
 		while (!valid) {
-			try { firstn = keyboard.next();
+			try { firstn = keyboard.nextLine();
 			valid = true;}
 			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid String");
@@ -312,7 +296,7 @@ public class Registration {
 		String lastn = null;
 		valid = false;
 		while (!valid) {
-			try { lastn = keyboard.next();
+			try { lastn = keyboard.nextLine();
 			valid = true;}
 			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid String");
@@ -335,6 +319,7 @@ public class Registration {
 		valid = false;
 		while (!valid) {
 			try { month = keyboard.nextInt();
+			keyboard.nextLine();
 			valid = true;}
 			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid integer");
@@ -347,6 +332,7 @@ public class Registration {
 		valid = false;
 		while (!valid) {
 			try { day = keyboard.nextInt();
+			keyboard.nextLine();
 			valid = true;}
 			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid int");
@@ -367,20 +353,27 @@ public class Registration {
 
 		if(!isUnderage) {
 			System.out.println("\n What is your username");
-			String username = keyboard.next();
+			String username = null; 
 			valid = false;
 			while (!valid) {
-				try { username = keyboard.next();
+				try { username = keyboard.nextLine();
 				valid = true;}
 				catch (java.util.InputMismatchException e) {
 					System.out.println("Please enter a valid String");
 				}
+				
+				for(Client c : clientRegistry) {
+					if(c.getUsername().equals(username)) {
+						valid=false;
+						System.out.println("This username is taken , chose another one");
+					}
+				}
 			}
 			System.out.println("\n What is your password");
-			String password = keyboard.next();
+			String password =null;
 			valid = false;
 			while (!valid) {
-				try { password = keyboard.next();
+				try { password = keyboard.nextLine();
 				valid = true;}
 				catch (java.util.InputMismatchException e) {
 					System.out.println("Please enter a valid String");
@@ -410,7 +403,7 @@ public class Registration {
 		String parentUsername = null;
 		boolean valid = false;
 		while (!valid) {
-			try { parentUsername = keyboard.next();
+			try { parentUsername = keyboard.nextLine();
 			valid = true;}
 			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid String");
@@ -424,20 +417,20 @@ public class Registration {
 
 
 		System.out.println("What is your first name:");
-		String firstn = keyboard.next();
+		String firstn = keyboard.nextLine();
 		valid = false;
 		while (!valid) {
-			try { firstn = keyboard.next();
+			try { firstn = keyboard.nextLine();
 			valid = true;}
 			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid String");
 			}
 		}
 		System.out.println("\n What is your last name:");
-		String lastn = keyboard.next();
+		String lastn = keyboard.nextLine();
 		valid = false;
 		while (!valid) {
-			try { lastn = keyboard.next();
+			try { lastn = keyboard.nextLine();
 			valid = true;}
 			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid String");
@@ -472,6 +465,7 @@ public class Registration {
 		valid = false;
 		while (!valid) {
 			try { day = keyboard.nextInt();
+			keyboard.nextLine();
 			valid = true;}
 			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid integer");
@@ -492,17 +486,24 @@ public class Registration {
 		String username = null;
 		valid = false;
 		while (!valid) {
-			try { username = keyboard.next();
+			try { username = keyboard.nextLine();
 			valid = true;}
 			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid String");
 			}
+			for(Client c : clientRegistry) {
+				if(c.getUsername().equals(username)) {
+					valid=false;
+					System.out.println("This username is taken , chose another one");
+				}
+			}
+			
 		}
 		System.out.println("\n What is your password");
 		String password = null;
 		valid = false;
 		while (!valid) {
-			try { password = keyboard.next();
+			try { password = keyboard.nextLine();
 			valid = true;}
 			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid String");
@@ -533,48 +534,149 @@ public class Registration {
 		System.out.println("What is your specialization:");
 		String specialization =null;
 		boolean valid = false;
-		while (!valid) {
-			try { specialization = keyboard.next();
-			valid = true;}
-			catch (java.util.InputMismatchException e) {
-				System.out.println("Please enter a valid String");
-			}
-		}
+	
+			specialization = keyboard.nextLine();
+			
+			
+		
 		System.out.println("What is your first name:");
 		String firstn =null;
 		valid = false;
 		while (!valid) {
-			try { firstn = keyboard.next();
+			try { firstn = keyboard.nextLine();
 			valid = true;}
 			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid String");
 			}
 		}
 		System.out.println("\n What is your last name:");
-		String lastn =null;
-		valid = false;
-		while (!valid) {
-			try { lastn = keyboard.next();
-			valid = true;}
-			catch (java.util.InputMismatchException e) {
-				System.out.println("Please enter a valid String");
-			}
-		}
+		String lastn = keyboard.nextLine();
+	
+		
 		System.out.println("What is your phoneNumber");
 		long phone = 0 ;
 		valid = false;
 		while (!valid) {
 			try { phone = keyboard.nextLong();
+			keyboard.nextLine();
 			valid = true;}
 			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid long");
 			}
+			for(Instructor i : instructorRegistry) {
+				if(i.getPhone() == phone ) {
+					valid=false;
+					System.out.println("This phone number is taken , chose another one");
+				}
+			}
+			
 		}
-
-		lessonator2000.Instructor i = new lessonator2000.Instructor(specialization, firstn, lastn, phone);
+		
+		ArrayList<String> availabilities = new ArrayList<String>();
+		System.out.println("Please enter a city you are avalable in : ");
+		String city = keyboard.nextLine();
+		
+		String city1= city.substring(0, 1).toUpperCase() + city.substring(1);
+		availabilities.add(city1);
+	
+		
+		boolean done =false;
+		while(!done) {
+			System.out.println("Add another city , enter \"done\" if you are done");
+			String city2 = keyboard.nextLine();
+			if(city2.equals("done")) {done=true; break;}
+			
+			else  {String city3 = city2.substring(0, 1).toUpperCase() + city2.substring(1);
+			availabilities.add(city3); } 
+		}
+		
+		lessonator2000.Instructor i = new lessonator2000.Instructor(specialization, firstn, lastn, phone, availabilities);
 		return i;
 
 	}
 
+
+public void deleteAccount() {
+	Scanner keyboard =  new Scanner(System.in);
+	boolean choiceok =false;
+	Client clientToremove= null;
+	int adminchoice = 0;
+while(!choiceok) {
+System.out.println("Would you like to delete a Client or Instructor account?");
+System.out.println("1- Client");
+System.out.println("2- Instructor");
+
+boolean valid = false;
+while (!valid) {
+	try { adminchoice = keyboard.nextInt();
+	keyboard.nextLine();
+	valid = true;} 
+	catch (java.util.InputMismatchException e) {
+		System.out.println("Please enter a valid Integer");
+	}
+	
+	if(adminchoice == 1 || adminchoice ==2) { choiceok =true;
+	}
+}}
+
+if(adminchoice == 1) {
+	System.out.println("Here are the client sof the registry you can remove: ");
+	
+	for(Client c : clientRegistry) {
+	
+		System.out.println(	c.toString());
+		
+	}
+	System.out.println("\nPease enter the username of the client you want to remove");
+	System.out.println("Careful! Removing an adult client will delete all of it's dependant also");
+	String clientusername = keyboard.nextLine();
+	// find the client
+	
+	for(Client c : clientRegistry) {
+		if(c.getUsername().equals(clientusername)) {
+			clientToremove = c;
+		}
+	}
+	if(clientToremove == null) {System.out.println("The client does not exist, try again"); return;}
+	
+	//remove any booking the underage Client and the client had
+		BookingCatalog mybc = lessonator2000.BookingCatalog.getBookingCatalog();
+		mybc.getBookings().removeIf( b -> b.getBookingclient().getUsername().equals(clientusername));
+		mybc.getBookings().removeIf(b -> 
+	    b.getBookingclient() instanceof UnderageClient &&
+	    ((UnderageClient) b.getBookingclient()).getLegalGuardian().getUsername().equals(clientusername)
+	);
+		System.out.println("All the bookings for the client or their dependant were removed.");
+		
+	
+	//remove any underage client that has the client as a legal guardian
+	clientRegistry.removeIf(c ->   c instanceof UnderageClient && ((UnderageClient) c).getLegalGuardian().getUsername().equals(clientusername));
+	System.out.println("If the client had any dependant, they have been removed.");
+	//remove the client
+	clientRegistry.removeIf(c -> c.getUsername().equals(clientusername));
+	System.out.println("The client was removed");
+
+	
+
+}
+
+if(adminchoice == 2 ) {
+	for(Instructor i : instructorRegistry) {
+		i.toString();
+	}
+	
+	System.out.println("This functionality will be coming soon ! ");
+	//System.out.println("please enter the phone number of the instructor that you want to remove");
+	// find lesson instructor teaches, remove teacher
+	//remove all bookings with this lesson
+}
+
+}
+public ArrayList<Client> getClientRegistry(){
+	return clientRegistry;
+}
+public ArrayList<Instructor> getInstructorRegistry(){
+	return instructorRegistry;
+}
 
 }

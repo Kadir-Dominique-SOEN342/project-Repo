@@ -18,14 +18,15 @@ public class Instructor extends lessonator2000.User {
 	private String lastname;
 	private long phoneNumber;
 	private ArrayList<lessonator2000.Lesson> teaches;
-	private ArrayList<String> availability = new ArrayList<String>(); //TODO: check if we actually make city into a class
+	private ArrayList<String> availability ;
 	
-	public Instructor(String specialization, String firstname,String lastname,long phonenb) {
+	public Instructor(String specialization, String firstname,String lastname,long phonenb, ArrayList<String> availabilities) {
 		this.specialization = specialization;
 		this.firstname = firstname;
 		this.lastname= lastname;
 		this.phoneNumber= phonenb;
 		this.teaches = new ArrayList<lessonator2000.Lesson>();
+		this.availability = availabilities;
 	}
 	
 	
