@@ -103,6 +103,4 @@ PERSISTANCE
 
 ## relational models
 
-- ***
-
-  ***
+- [Relational Model](SAD/RelationalModel.png)
