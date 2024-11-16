@@ -11,6 +11,8 @@ SOEN 342 - SECTION H
   - 40177566
   - dominique.proulx@mail.concordia.ca
 
+## Presentation video [video](https://1drv.ms/v/s!ApEs5uhugF8kkLZQ9jppOeIYz_mnAw?e=2fAQSC)
+
 ## Implementation
 
 
