@@ -322,7 +322,7 @@ else if(u instanceof lessonator2000.Administrator) {
 	System.out.println("8- View Bookings");
 	System.out.println("9- delete Offering");
 	System.out.println("10- Logout");
-	System.out.println("12 delete Client or instructor account");
+	System.out.println("12- Delete Client or Instructor account");
 	System.out.println("11- Exit");
 	}
 else {

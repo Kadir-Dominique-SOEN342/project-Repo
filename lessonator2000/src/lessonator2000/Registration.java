@@ -664,7 +664,9 @@ if(adminchoice == 2 ) {
 	for(Instructor i : instructorRegistry) {
 		i.toString();
 	}
-	System.out.println("please enter the phone number of the instructor that you want to remove");
+	
+	System.out.println("This functionality will be coming soon ! ");
+	//System.out.println("please enter the phone number of the instructor that you want to remove");
 	// find lesson instructor teaches, remove teacher
 	//remove all bookings with this lesson
 }
