@@ -12,7 +12,8 @@ import java.util.ArrayList;
  */
 public class Instructor extends lessonator2000.User {
 
-	
+	//for persistance  
+	int id;
 	private String specialization;
 	private String firstname;
 	private String lastname;

@@ -9,7 +9,8 @@ import java.time.LocalDate;
  * bookings made for underage CLients need to be made by an adult client</p>
  */
 public class UnderageClient extends lessonator2000.Client {
-	
+	//for persistance  
+	int id;
 	private lessonator2000.Client legalguardian;
 
 	

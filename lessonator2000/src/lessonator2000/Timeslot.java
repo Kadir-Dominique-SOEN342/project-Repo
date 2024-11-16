@@ -13,6 +13,8 @@ import java.time.Duration;
  * The Timeslots class encapsulates properties that define the temporal aspects of a lesson</p>
  */
 public class Timeslot {
+	//for persistance  
+	int id;
 	
 	private LocalTime startTime;
 	private LocalTime endTime;

@@ -1,6 +1,8 @@
 package lessonator2000;
 
 public class Bookings {
+	//for persistance  
+	int persostanceid;
 
     private int bookingId;
     private static int id = 1;

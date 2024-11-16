@@ -11,7 +11,8 @@ import java.time.LocalDate;
  */
 public class Lesson {
 
-
+	//for persistance  
+	int id;
     private String type;
     private String lessonId;
     private boolean hasInstructor;

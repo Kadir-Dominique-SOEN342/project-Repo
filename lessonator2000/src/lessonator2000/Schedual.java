@@ -14,6 +14,8 @@ import java.util.ArrayList;
  */
 public class Schedual {
 	private lessonator2000.Day[] mySchedual;
+	//for persistance  
+	int id;
 	
 	
 	public Schedual() {

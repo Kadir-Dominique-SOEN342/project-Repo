@@ -14,7 +14,8 @@ import java.time.Period;
 
  */
 public class Client extends lessonator2000.User{
-	
+	//for persistance  
+	int id;
 	private String firstName; 
 	private String lastName;
 	private LocalDate dateOfBirth;

@@ -13,6 +13,8 @@ import java.time.LocalTime;
  * each days has a collection of timeslot that contain a lesson</p>
  */
 public class Space {
+	//for persistance  
+	int id;
 	
 private String rentedOrOwned; //TODO change this to an enum?
 private String roomNumber;

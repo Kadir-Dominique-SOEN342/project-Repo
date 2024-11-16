@@ -15,6 +15,8 @@ import java.util.ArrayList;
  * @version Nov 9, 2024
  */
 public class Day {
+	//for persistance  
+	int id;
 	
 	//private Timeslot[] daySchedual;
 	private ArrayList<lessonator2000.Timeslot> daySchedual;
