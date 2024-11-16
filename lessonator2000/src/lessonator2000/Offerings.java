@@ -185,8 +185,8 @@ public class Offerings {
 		if (isInAvailability) {
 			ins.addToCollection(myLesson);
 			myLesson.addInstructorToLesson(ins);
-			//make the offering avaialble
 			myLesson.sethasInstructor(true);
+			//make the offering avaialble
 			System.out.println("Offerings: signupToLesson() " + myLesson.toString());
 		} else System.out.println("There is no lesson with this Id. try again");
 

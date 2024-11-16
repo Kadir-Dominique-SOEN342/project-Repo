@@ -81,12 +81,12 @@ public class Session extends Thread{
 		//addLessonToSpace(...)
 		lessonator2000.Space mySpace = locationregistry.addLessonToSpace("TY908");
 		//addLocationToSchedual, this will return the timeslot created for this lesson. Create the timeslot. addLessonToschedual add the timeslot to every day that falls on the dayOfTheWeek between startdate and enddate
-		lessonator2000.Timeslot myTimeSlot =	mySpace.addLessonToSchedual(myLesson, LocalDate.of(2024, 1, 13), LocalDate.of(2024, 12, 13),"Wednesday", LocalTime.of(10,00,00),  LocalTime.of(11,00,00));
+		lessonator2000.Timeslot myTimeSlot =	mySpace.addLessonToSchedual(myLesson, LocalDate.of(2025, 1, 13), LocalDate.of(2024, 12, 13),"Wednesday", LocalTime.of(10,00,00),  LocalTime.of(11,00,00));
 		// add space and time to lesson
 		offers.addSpaceTimeToLesson(mySpace, myTimeSlot, myLesson);
 
 //hardcodedlesson2
-		lessonator2000.Lesson myLesson2 = offers.uploadOffering("SumoWrestling", "sumo900", false, true,  true, 10,LocalDate.of(2025, 6, 28), LocalDate.of(2025,12,11),"Monday");
+		lessonator2000.Lesson myLesson2 = offers.uploadOffering("Sumo", "sumo900", false, true,  true, 10,LocalDate.of(2025, 6, 28), LocalDate.of(2025,12,11),"Monday");
 		//addLessonToSpace(...)
 		lessonator2000.Space mySpace2 = locationregistry.addLessonToSpace("H513");
 		//addLocationToSchedual, this will return the timeslot created for this lesson. Create the timeslot. addLessonToschedual add the timeslot to every day that falls on the dayOfTheWeek between startdate and enddate
@@ -96,7 +96,7 @@ public class Session extends Thread{
 
 
 //hardcodedlesson3
-		lessonator2000.Lesson myLesson3 = offers.uploadOffering("Aerobics", "aero111", true, true,  true, 1,LocalDate.of(2025, 6, 28), LocalDate.of(2025,10,20),"Saturday");
+		lessonator2000.Lesson myLesson3 = offers.uploadOffering("Aerobie", "aero111", true, true,  true, 1,LocalDate.of(2025, 6, 28), LocalDate.of(2025,10,20),"Saturday");
 		//addLessonToSpace(...)
 		lessonator2000.Space mySpace3 = locationregistry.addLessonToSpace("H513");
 		//addLocationToSchedual, this will return the timeslot created for this lesson. Create the timeslot. addLessonToschedual add the timeslot to every day that falls on the dayOfTheWeek between startdate and enddate
@@ -104,13 +104,55 @@ public class Session extends Thread{
 		// add space and time to lesson
 		offers.addSpaceTimeToLesson(mySpace3, myTimeSlot3, myLesson3);
 		
-//hardcoded client and two dependants
-		lessonator2000.Client cli = new lessonator2000.Client("Bob", "Baratheon", LocalDate.of(2021, 1,15),"bobby", "123");
-		lessonator2000.UnderageClient uc1 = new lessonator2000.UnderageClient("Mark", "Baratheon", LocalDate.of(2012, 2, 21), "mark12", "mark123", cli);
-		lessonator2000.UnderageClient uc2 = new lessonator2000.UnderageClient("Michael", "Baratheon", LocalDate.of(2012, 4, 13),"Mike", "mike123", cli);
+		//hardcoded client and two dependants
+		lessonator2000.Client cli2 = new lessonator2000.Client("Betty", "White", LocalDate.of(1970, 1,12),"bwhite", "123");
+		registry.getClientRegistry().add(cli2);
+		lessonator2000.Client cli = new lessonator2000.Client("Bob", "Baratheon", LocalDate.of(1990, 1,15),"bobby", "123");
+		registry.getClientRegistry().add(cli);
+		lessonator2000.UnderageClient uc1 = new lessonator2000.UnderageClient("Mark", "Baratheon", LocalDate.of(2021, 2, 21), "mark12", "mark123", cli);
+		registry.getClientRegistry().add(uc1);
+		lessonator2000.UnderageClient uc2 = new lessonator2000.UnderageClient("Michael", "Baratheon", LocalDate.of(2019, 4, 13),"Mike", "mike123", cli);
+		registry.getClientRegistry().add(uc2);
 		cli.addToDependantsCatalog(uc1);
 		cli.addToDependantsCatalog(uc2);
 
+		
+		//hardcode a fe winstructors
+		ArrayList<String> availability1 = new ArrayList<String>();
+		availability1.add("Laval");
+		availability1.add("Sainte-Therese");
+		availability1.add("Montreal");
+
+		ArrayList<String> availability2 = new ArrayList<String>();
+		availability2.add("Montreal");
+		availability2.add("Longueil");
+
+		ArrayList<String> availability3 = new ArrayList<String>();
+		availability3.add("Montreal");
+		availability3.add("Laval");
+		availability3.add("Ottawa");
+				lessonator2000.Instructor a = new lessonator2000.Instructor("Aerobie", "Julie", "Samson", 5148659658L, availability1 );
+				registry.getInstructorRegistry().add(a);
+				lessonator2000.Instructor b = new lessonator2000.Instructor("Sumo", "Ura", "Kazuki", 5148659658L, availability2);
+				registry.getInstructorRegistry().add(b);
+				lessonator2000.Instructor c = new lessonator2000.Instructor("Judo", "Hajime", "Isogai", 5148659658L,availability3);
+				registry.getInstructorRegistry().add(c);
+
+
+		
+		
+		//hardcode bookings
+		offers.signupToLesson(a, "aero111");
+		offers.signupToLesson(b, "sumo900");
+		
+		lessonator2000.Bookings book1 = new lessonator2000.Bookings(myLesson3, cli2);
+		BookingCatalog.getBookingCatalog().getBookings().add(book1);
+		lessonator2000.Bookings book2 = new lessonator2000.Bookings(myLesson3, uc1);
+		BookingCatalog.getBookingCatalog().getBookings().add(book2);
+		lessonator2000.Bookings book3 = new lessonator2000.Bookings(myLesson2, uc2);
+		BookingCatalog.getBookingCatalog().getBookings().add(book3);
+		lessonator2000.Bookings book4 = new lessonator2000.Bookings(myLesson2, cli);
+		BookingCatalog.getBookingCatalog().getBookings().add(book4);
 		
 		
 //browsingUser = new lessonator2000.Client("Bobby","Baratheon",LocalDate.of(1600, 1, 13) , "bobb", "westeros");
@@ -137,12 +179,18 @@ case 8: {if ((browsingUser instanceof lessonator2000.Administrator) || (browsing
 case 9: {if (browsingUser instanceof lessonator2000.Administrator) deleteOffering();else{System.out.println("Sorry this choice is not available to you");} break;}
 case 10: browsingUser=logOut();break;
 case 11: {System.out.println("Goodbye!"); exitSession();break;} //remove session
+case 12: {if (browsingUser instanceof lessonator2000.Administrator) deleteaccount();else{System.out.println("Sorry this choice is not available to you");} break;}
 default: System.out.println("This was not a valid choice");break;
 }
 
 
 }
 }
+	private void deleteaccount() {
+		registry.deleteAccount();
+		
+	}
+
 	/**
 	 * removes the sesison from the catalog and sets activeSesison to false, which will stop the thread running
 	 */
@@ -274,6 +322,7 @@ else if(u instanceof lessonator2000.Administrator) {
 	System.out.println("8- View Bookings");
 	System.out.println("9- delete Offering");
 	System.out.println("10- Logout");
+	System.out.println("12 delete Client or instructor account");
 	System.out.println("11- Exit");
 	}
 else {

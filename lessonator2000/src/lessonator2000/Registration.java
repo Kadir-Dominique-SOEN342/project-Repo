@@ -33,24 +33,10 @@ public class Registration {
 		lessonator2000.Client h = new lessonator2000.Client("Gillian", "Gilbert",LocalDate.of(1961, 01, 27), "ggil" , "neworder");
 		clientRegistry.add(h);
 
-ArrayList<String> availability1 = new ArrayList<String>();
-availability1.add("Laval");
-availability1.add("Sainte-Therese");
-
-ArrayList<String> availability2 = new ArrayList<String>();
-availability2.add("Montreal");
-availability2.add("Longueil");
-
-ArrayList<String> availability3 = new ArrayList<String>();
-availability3.add("Montreal");
-availability3.add("Laval");
-		lessonator2000.Instructor a = new lessonator2000.Instructor("Aerobie", "Julie", "Samson", 5148659658L, availability1 );
-		instructorRegistry.add(a);
-		lessonator2000.Instructor b = new lessonator2000.Instructor("Sumo", "Ura", "Kazuki", 5148659658L, availability2);
-		instructorRegistry.add(b);
-		lessonator2000.Instructor c = new lessonator2000.Instructor("Judo", "Hajime", "Isogai", 5148659658L,availability3);
-		instructorRegistry.add(c);
-
+		
+		
+		
+		
 
 
 		//
@@ -99,6 +85,7 @@ availability3.add("Laval");
 
 		//Returns a client if it's found, returns a public if not
 		if(userChoice == 1) {
+			keyboard.nextLine();
 			System.out.println("What is your username");
 			
 			String 	username =  keyboard.nextLine();
@@ -114,7 +101,7 @@ availability3.add("Laval");
 			
 			
 			if(password.equals(myClient.getPassword())) {
-				System.out.println("You are logged in" + username);
+				System.out.println("You are logged in " + username);
 				return myClient;}
 			
 			else {System.out.println("Wrong password, try again");
@@ -374,6 +361,13 @@ availability3.add("Laval");
 				catch (java.util.InputMismatchException e) {
 					System.out.println("Please enter a valid String");
 				}
+				
+				for(Client c : clientRegistry) {
+					if(c.getUsername().equals(username)) {
+						valid=false;
+						System.out.println("This username is taken , chose another one");
+					}
+				}
 			}
 			System.out.println("\n What is your password");
 			String password =null;
@@ -497,6 +491,13 @@ availability3.add("Laval");
 			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid String");
 			}
+			for(Client c : clientRegistry) {
+				if(c.getUsername().equals(username)) {
+					valid=false;
+					System.out.println("This username is taken , chose another one");
+				}
+			}
+			
 		}
 		System.out.println("\n What is your password");
 		String password = null;
@@ -533,13 +534,11 @@ availability3.add("Laval");
 		System.out.println("What is your specialization:");
 		String specialization =null;
 		boolean valid = false;
-		while (!valid) {
-			try { specialization = keyboard.nextLine();
-			valid = true;}
-			catch (java.util.InputMismatchException e) {
-				System.out.println("Please enter a valid String");
-			}
-		}
+	
+			specialization = keyboard.nextLine();
+			
+			
+		
 		System.out.println("What is your first name:");
 		String firstn =null;
 		valid = false;
@@ -551,15 +550,9 @@ availability3.add("Laval");
 			}
 		}
 		System.out.println("\n What is your last name:");
-		String lastn =null;
-		valid = false;
-		while (!valid) {
-			try { lastn = keyboard.nextLine();
-			valid = true;}
-			catch (java.util.InputMismatchException e) {
-				System.out.println("Please enter a valid String");
-			}
-		}
+		String lastn = keyboard.nextLine();
+	
+		
 		System.out.println("What is your phoneNumber");
 		long phone = 0 ;
 		valid = false;
@@ -570,6 +563,13 @@ availability3.add("Laval");
 			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid long");
 			}
+			for(Instructor i : instructorRegistry) {
+				if(i.getPhone() == phone ) {
+					valid=false;
+					System.out.println("This phone number is taken , chose another one");
+				}
+			}
+			
 		}
 		
 		ArrayList<String> availabilities = new ArrayList<String>();
@@ -595,5 +595,86 @@ availability3.add("Laval");
 
 	}
 
+
+public void deleteAccount() {
+	Scanner keyboard =  new Scanner(System.in);
+	boolean choiceok =false;
+	Client clientToremove= null;
+	int adminchoice = 0;
+while(!choiceok) {
+System.out.println("Would you like to delete a Client or Instructor account?");
+System.out.println("1- Client");
+System.out.println("2- Instructor");
+
+boolean valid = false;
+while (!valid) {
+	try { adminchoice = keyboard.nextInt();
+	keyboard.nextLine();
+	valid = true;} 
+	catch (java.util.InputMismatchException e) {
+		System.out.println("Please enter a valid Integer");
+	}
+	
+	if(adminchoice == 1 || adminchoice ==2) { choiceok =true;
+	}
+}}
+
+if(adminchoice == 1) {
+	System.out.println("Here are the client sof the registry you can remove: ");
+	
+	for(Client c : clientRegistry) {
+	
+		System.out.println(	c.toString());
+		
+	}
+	System.out.println("\nPease enter the username of the client you want to remove");
+	System.out.println("Careful! Removing an adult client will delete all of it's dependant also");
+	String clientusername = keyboard.nextLine();
+	// find the client
+	
+	for(Client c : clientRegistry) {
+		if(c.getUsername().equals(clientusername)) {
+			clientToremove = c;
+		}
+	}
+	if(clientToremove == null) {System.out.println("The client does not exist, try again"); return;}
+	
+	//remove any booking the underage Client and the client had
+		BookingCatalog mybc = lessonator2000.BookingCatalog.getBookingCatalog();
+		mybc.getBookings().removeIf( b -> b.getBookingclient().getUsername().equals(clientusername));
+		mybc.getBookings().removeIf(b -> 
+	    b.getBookingclient() instanceof UnderageClient &&
+	    ((UnderageClient) b.getBookingclient()).getLegalGuardian().getUsername().equals(clientusername)
+	);
+		System.out.println("All the bookings for the client or their dependant were removed.");
+		
+	
+	//remove any underage client that has the client as a legal guardian
+	clientRegistry.removeIf(c ->   c instanceof UnderageClient && ((UnderageClient) c).getLegalGuardian().getUsername().equals(clientusername));
+	System.out.println("If the client had any dependant, they have been removed.");
+	//remove the client
+	clientRegistry.removeIf(c -> c.getUsername().equals(clientusername));
+	System.out.println("The client was removed");
+
+	
+
+}
+
+if(adminchoice == 2 ) {
+	for(Instructor i : instructorRegistry) {
+		i.toString();
+	}
+	System.out.println("please enter the phone number of the instructor that you want to remove");
+	// find lesson instructor teaches, remove teacher
+	//remove all bookings with this lesson
+}
+
+}
+public ArrayList<Client> getClientRegistry(){
+	return clientRegistry;
+}
+public ArrayList<Instructor> getInstructorRegistry(){
+	return instructorRegistry;
+}
 
 }
