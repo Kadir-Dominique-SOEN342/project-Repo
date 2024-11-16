@@ -45,7 +45,7 @@ public class Schedual {
 	        	// int daysInYear = mySchedual[year].length;  //removed after refactoring to 1D array
 	            for (int day = 0; day < daysInYear; day++) {
 	                // Create a LocalDate for the corresponding day
-	                LocalDate date = LocalDate.of(2025, 1, 1).plusDays(day);//Startb from the first day of the year and add a day until the end of the year
+	                LocalDate date = LocalDate.of(2024, 1, 1).plusDays(day);//Startb from the first day of the year and add a day until the end of the year
 	                mySchedual[day] = new lessonator2000.Day(date); // Initialize each Day , passing the date as parameter
 	            }
 	            }
