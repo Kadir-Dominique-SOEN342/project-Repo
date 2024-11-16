@@ -36,11 +36,11 @@ SOEN 342 - SECTION H
 
 ### System Sequence Diagrams
 
-For critical use case Signup to lesson
+#### For critical use case Signup to lesson
 
 - [Signup to lesson Success](SRS/SystemSequenceDiagram_SignupToLesson.jpg)
 - [Signup to lesson failures](SRS/SystemSequenceDiagram_SignupToLesson_Failures_v3.jpg)
-  For critical use case create Booking:
+#### For critical use case create Booking:
 - [create booking success](SRS/SystemSequenceDiagram_makeBooking.jpg)
 - [create booking failure](SRS/SystemSequenceDiagram_makeBooking_Failures.jpg)
 
@@ -48,15 +48,15 @@ For critical use case Signup to lesson
 
 - Critical use case signup To lesson :
 
-  viewOffering()
-  signupToLesson()
+  - viewOffering()
+  - signupToLesson()
 
 - Critical use case create Booking :
 
-  makeBooking()
-  underageBooking()
-  createBooking()
-  viewBooking()
+  - makeBooking()
+  - underageBooking()
+  - createBooking()
+  - viewBooking()
 
 ### System operation contracts
 
@@ -75,7 +75,7 @@ others
 ### UML Class diagram and attached OCL
 
 - [UML Class Diagram](SAD/UmlClassDiagram_v15.jpg)
-- [OCL]()
+- [OCL](SAD/UMLClassDiagram_OCL.ocl)
 
 ### Interaction diagrams
 
