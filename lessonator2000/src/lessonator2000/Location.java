@@ -1,8 +1,12 @@
 package lessonator2000;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 
@@ -58,10 +62,14 @@ public class Location {
 	//TODO: rename this method
 	 lessonator2000.Space addLessonToSpace(String roomNb) {
 	//	System.out.println("Location : addLessonToSpace");
-		lessonator2000.Space lessonSpace = null; //initialize to 0
-		for(lessonator2000.Space s: spaceRegistry) {  // for each space in registry , return the space if the room number is equal
-			if(roomNb.equals(s.getRoomNumber())) {
-				lessonSpace = s;	
+		 Session session = lessonator2000.ManageSessionFactory.getSf().openSession();
+		 Transaction transaction = session.beginTransaction();
+		 List<lessonator2000.Space> s = session.createQuery("from Space", lessonator2000.Space.class).getResultList();
+		spaceRegistry = (ArrayList<lessonator2000.Space>) s;
+         lessonator2000.Space lessonSpace = null; //initialize to 0
+		for(lessonator2000.Space sp: spaceRegistry) {  // for each space in registry , return the space if the room number is equal
+			if(roomNb.equals(sp.getRoomNumber())) {
+				lessonSpace = sp;
 				//System.out.println("Location: found room Number");
 			}
 			

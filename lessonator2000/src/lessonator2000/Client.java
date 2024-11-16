@@ -1,10 +1,15 @@
 package lessonator2000;
 
+import jakarta.persistence.*;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.time.Period;
+import java.util.List;
 
 /**
  * 
@@ -13,18 +18,25 @@ import java.time.Period;
  * <p>Clients have dependant catalog that holds underage client for whom they will be able to book a lesson.</p>
 
  */
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "client_type")
 public class Client extends lessonator2000.User{
-	
-	private String firstName; 
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
+	private String firstName;
 	private String lastName;
 	private LocalDate dateOfBirth;
 	private int age;
 	private String userName;
 	private String password; 
-	ArrayList<lessonator2000.UnderageClient> dependantsCatalog ;
+	@OneToMany
+	List<lessonator2000.UnderageClient> dependantsCatalog ;
 	
 
-
+public Client(){}
 /**
  * 
  * Constructor for the class Client. initiated without dependants.
@@ -69,7 +81,7 @@ public class Client extends lessonator2000.User{
 	public int getAge() {
 		return age;
 	}
-	public ArrayList<lessonator2000.UnderageClient> getDependantsCatalog() {
+	public List<lessonator2000.UnderageClient> getDependantsCatalog() {
 		return dependantsCatalog;
 	}
 	public void setfirstName(String firstname) {
@@ -87,7 +99,9 @@ public class Client extends lessonator2000.User{
 	}
 	
 	 void addToDependantsCatalog(lessonator2000.UnderageClient uc) {
-		this.dependantsCatalog.add(uc);
+
+		 dependantsCatalog.add(uc);
+
 	}
 
 
@@ -121,4 +135,7 @@ public class Client extends lessonator2000.User{
 		return (this.getfirstName() + " " + this.getlastName() + " username:" + this.getUsername());
 	}
 
+	public void setDependants(List<lessonator2000.UnderageClient> u){this.dependantsCatalog = u;}
+
 }
+

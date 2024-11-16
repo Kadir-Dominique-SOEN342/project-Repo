@@ -1,8 +1,13 @@
 package lessonator2000;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 /**
  * 
@@ -16,7 +21,7 @@ import java.util.Scanner;
  * @author Dominique Proulx
  * @version Nov 8, 2024
  */
-public class Session extends Thread{
+public class SessionThread extends Thread{
 	//class attributes
 	
 	public  static int sessionIDCounter =1;
@@ -33,7 +38,7 @@ public class Session extends Thread{
 	/**
 	 * Sesison constructor , sets the User to public, increases the counter and creates the sessionId.
 	 */
-	public Session() {
+	public SessionThread() {
 		browsingUser = new lessonator2000.Public();
 		sessionIDCounter++;
 		sessionID = "sess" + sessionIDCounter;
@@ -67,85 +72,252 @@ public class Session extends Thread{
 	 * A menu is printed and users can log in , register, viewOfferings.. depending on the subtype of User the browsingUser is set to , different choices are offered. 
 	 */
 	public void run() {
-		System.out.println("session " + sessionID + " started, User is of type :" + browsingUser.toString());
-	
+        System.out.println("session " + sessionID + " started, User is of type :" + browsingUser.toString());
 
+        //offers.uploadOffering("Physics","phys284",true, true, true, 10, LocalDate.of(2024, 1, 13), LocalDate.of(2024, 12, 13), "Wednesday");
 
 
 //hardcode a few lessons
 //hardcodedLesson1	
 //create the new lesson Offering -- uploadOffering(...)
-		lessonator2000.Lesson myLesson = offers.uploadOffering("Judo", "jud101", false, false,  true, 10,LocalDate.of(2024, 1, 13), LocalDate.of(2024, 12, 13),"Wednesday");
-		//addLessonToSpace(...)
-		lessonator2000.Space mySpace = locationregistry.addLessonToSpace("TY908");
-		//addLocationToSchedual, this will return the timeslot created for this lesson. Create the timeslot. addLessonToschedual add the timeslot to every day that falls on the dayOfTheWeek between startdate and enddate
-		lessonator2000.Timeslot myTimeSlot =	mySpace.addLessonToSchedual(myLesson, LocalDate.of(2024, 1, 13), LocalDate.of(2024, 12, 13),"Wednesday", LocalTime.of(10,00,00),  LocalTime.of(11,00,00));
-		// add space and time to lesson
-		offers.addSpaceTimeToLesson(mySpace, myTimeSlot, myLesson);
+        //lessonator2000.Lesson myLesson = offers.uploadOffering("Judo", "jud101", false, false,  true, 10,LocalDate.of(2024, 1, 13), LocalDate.of(2024, 12, 13),"Wednesday");
+        //addLessonToSpace(...)
+        //lessonator2000.Space mySpace = locationregistry.addLessonToSpace("TY908");
+        //addLocationToSchedual, this will return the timeslot created for this lesson. Create the timeslot. addLessonToschedual add the timeslot to every day that falls on the dayOfTheWeek between startdate and enddate
+        //lessonator2000.Timeslot myTimeSlot =mySpace.addLessonToSchedual(myLesson, LocalDate.of(2024, 1, 13), LocalDate.of(2024, 12, 13),"Wednesday", LocalTime.of(10,00,00),  LocalTime.of(11,00,00));
+        // add space and time to lesson
+        //offers.addSpaceTimeToLesson(mySpace, myTimeSlot, myLesson);
 
 //hardcodedlesson2
-		lessonator2000.Lesson myLesson2 = offers.uploadOffering("SumoWrestling", "sumo900", false, true,  true, 10,LocalDate.of(2025, 6, 28), LocalDate.of(2025,12,11),"Monday");
-		//addLessonToSpace(...)
-		lessonator2000.Space mySpace2 = locationregistry.addLessonToSpace("H513");
-		//addLocationToSchedual, this will return the timeslot created for this lesson. Create the timeslot. addLessonToschedual add the timeslot to every day that falls on the dayOfTheWeek between startdate and enddate
-		lessonator2000.Timeslot myTimeSlot2 =	mySpace2.addLessonToSchedual(myLesson2, LocalDate.of(2025, 6, 28), LocalDate.of(2025,12,11),"Monday", LocalTime.of(5,00,00),  LocalTime.of(3,30,00));
-		// add space and time to lesson
-		offers.addSpaceTimeToLesson(mySpace2, myTimeSlot2, myLesson2);
+        //lessonator2000.Lesson myLesson2 = offers.uploadOffering("SumoWrestling", "sumo900", false, true,  true, 10,LocalDate.of(2025, 6, 28), LocalDate.of(2025,12,11),"Monday");
+        //addLessonToSpace(...)
+        //lessonator2000.Space mySpace2 = locationregistry.addLessonToSpace("H513");
+        //addLocationToSchedual, this will return the timeslot created for this lesson. Create the timeslot. addLessonToschedual add the timeslot to every day that falls on the dayOfTheWeek between startdate and enddate
+        //lessonator2000.Timeslot myTimeSlot2 =	mySpace2.addLessonToSchedual(myLesson2, LocalDate.of(2025, 6, 28), LocalDate.of(2025,12,11),"Monday", LocalTime.of(5,00,00),  LocalTime.of(3,30,00));
+        // add space and time to lesson
+        //offers.addSpaceTimeToLesson(mySpace2, myTimeSlot2, myLesson2);
 
 
 //hardcodedlesson3
-		lessonator2000.Lesson myLesson3 = offers.uploadOffering("Aerobics", "aero111", true, true,  true, 1,LocalDate.of(2025, 6, 28), LocalDate.of(2025,10,20),"Saturday");
-		//addLessonToSpace(...)
-		lessonator2000.Space mySpace3 = locationregistry.addLessonToSpace("H513");
-		//addLocationToSchedual, this will return the timeslot created for this lesson. Create the timeslot. addLessonToschedual add the timeslot to every day that falls on the dayOfTheWeek between startdate and enddate
-		lessonator2000.Timeslot myTimeSlot3 =	mySpace3.addLessonToSchedual(myLesson3, LocalDate.of(2025, 6, 28), LocalDate.of(2025,10,20),"Saturday", LocalTime.of(3,00,00),  LocalTime.of(5,30,00));
-		// add space and time to lesson
-		offers.addSpaceTimeToLesson(mySpace3, myTimeSlot3, myLesson3);
-		
-//hardcoded client and two dependants
-		lessonator2000.Client cli = new lessonator2000.Client("Bob", "Baratheon", LocalDate.of(2021, 1,15),"bobby", "123");
-		lessonator2000.UnderageClient uc1 = new lessonator2000.UnderageClient("Mark", "Baratheon", LocalDate.of(2012, 2, 21), "mark12", "mark123", cli);
-		lessonator2000.UnderageClient uc2 = new lessonator2000.UnderageClient("Michael", "Baratheon", LocalDate.of(2012, 4, 13),"Mike", "mike123", cli);
-		cli.addToDependantsCatalog(uc1);
-		cli.addToDependantsCatalog(uc2);
+        //lessonator2000.Lesson myLesson3 = offers.uploadOffering("Aerobics", "aero111", true, true,  true, 1,LocalDate.of(2025, 6, 28), LocalDate.of(2025,10,20),"Saturday");
+        //addLessonToSpace(...)
+        //lessonator2000.Space mySpace3 = locationregistry.addLessonToSpace("H513");
 
-		
-		
+        //addLocationToSchedual, this will return the timeslot created for this lesson. Create the timeslot. addLessonToschedual add the timeslot to every day that falls on the dayOfTheWeek between startdate and enddate
+        //lessonator2000.Timeslot myTimeSlot3 =	mySpace3.addLessonToSchedual(myLesson3, LocalDate.of(2025, 6, 28), LocalDate.of(2025,10,20),"Saturday", LocalTime.of(3,00,00),  LocalTime.of(5,30,00));
+        // add space and time to lesson
+        //offers.addSpaceTimeToLesson(mySpace3, myTimeSlot3, myLesson3);
+
+//hardcoded client and two dependants
+
+        //lessonator2000.Client cli = new lessonator2000.Client("Bob", "Baratheon", LocalDate.of(2021, 1, 15), "bobby", "123");
+		/*
+        Session session = lessonator2000.ManageSessionFactory.getSf().openSession();
+        Transaction transaction = session.beginTransaction();
+
+        lessonator2000.Schedual sc = new lessonator2000.Schedual(2024);
+        session.save(sc);
+
+
+		lessonator2000.Day  day = new lessonator2000.Day(LocalDate.of(2024, 11, 14));
+		sc.getMySchedual().add(day);
+		session.save(sc);
+		day.setSchedual(sc);
+        session.save(day);
+
+        lessonator2000.Space space = new lessonator2000.Space("Rented", "H123", "Classroom", "Montreal", "Quebec");
+        space.setSchedual(sc);
+        session.save(space);
+
+		lessonator2000.Timeslot timeslot = new lessonator2000.Timeslot(LocalTime.of(10, 0), LocalTime.of(11, 30));
+		session.save(timeslot);
+
+		lessonator2000.Timeslot timeslot2 = new lessonator2000.Timeslot(LocalTime.of(9, 0), LocalTime.of(10, 0));
+		session.save(timeslot2);
+
+		lessonator2000.Timeslot timeslot3 = new lessonator2000.Timeslot(LocalTime.of(15, 0), LocalTime.of(16, 0));
+		session.save(timeslot3);
+
+		//lessonator2000.Instructor instructor = new lessonator2000.Instructor("Physics", "Jane", "Doe", 123);
+		//session.save(instructor);
+*/
+		//offers.uploadOffering("Math", "Math101", false, true, true, 10, LocalDate.of(2023, 9, 1), LocalDate.of(2023, 12, 15), "Monday");
+		//offers.uploadOffering("Chemistry", "CHEM101", false, true, true, 15, LocalDate.of(2020, 11, 2), LocalDate.of(2020, 9, 1), "Wednesday");
+
+
+	/*
+        lessonator2000.Lesson lesson = new lessonator2000.Lesson("Math", "Math101", true, true, LocalDate.of(2023, 9, 1), LocalDate.of(2023, 12, 15), "Monday");
+        lesson.setInstructor(instructor);
+		lesson.setSpace(space);
+		lesson.setTimeslot(timeslot);
+		session.save(lesson);
+
+		lessonator2000.Lesson lesson2 = new lessonator2000.Lesson("Chemistry", "CHEM101", true, true, LocalDate.of(2020, 11, 2), LocalDate.of(2020, 9, 1), "Wednesday");
+		lesson2.setInstructor(instructor);
+		lesson2.setSpace(space);
+		lesson2.setTimeslot(timeslot2);
+		session.save(lesson2);
+
+		lessonator2000.Lesson lesson3 = new lessonator2000.Lesson("Biology", "BIO101", false, false, LocalDate.of(2022, 4, 2), LocalDate.of(2022, 4, 2), "Friday");
+		lesson3.setSpace(space);
+		lesson3.setTimeslot(timeslot3);
+		session.save(lesson3);
+
+		 */
+
+
+
+		Session session = lessonator2000.ManageSessionFactory.getSf().openSession();
+		Transaction transaction = session.beginTransaction();
+
+		lessonator2000.Schedual sc = new lessonator2000.Schedual(2024);
+		session.save(sc);
+
+		lessonator2000.Space space = new lessonator2000.Space("Rented", "TY908", "Classroom", "Ottawa", "Quebec");
+		space.setSchedual(sc);
+		session.save(space);
+
+
+		lessonator2000.Day  day = new lessonator2000.Day(LocalDate.of(2024, 11, 14));
+		sc.getMySchedual().add(day);
+		session.save(sc);
+		day.setSchedual(sc);
+		session.save(day);
+
+		lessonator2000.Day  day2 = new lessonator2000.Day(LocalDate.of(2024, 11, 15));
+		sc.getMySchedual().add(day);
+		session.save(sc);
+		day.setSchedual(sc);
+		session.save(day);
+
+		lessonator2000.Day  day3 = new lessonator2000.Day(LocalDate.of(2024, 11, 16));
+		sc.getMySchedual().add(day);
+		session.save(sc);
+		day.setSchedual(sc);
+		session.save(day);
+
+		lessonator2000.Day  day4 = new lessonator2000.Day(LocalDate.of(2024, 11, 17));
+		sc.getMySchedual().add(day);
+		session.save(sc);
+		day.setSchedual(sc);
+		session.save(day);
+
+		lessonator2000.Day  day5 = new lessonator2000.Day(LocalDate.of(2024, 11, 18));
+		sc.getMySchedual().add(day);
+		session.save(sc);
+		day.setSchedual(sc);
+		session.save(day);
+
+		lessonator2000.Day  day6 = new lessonator2000.Day(LocalDate.of(2024, 11, 18));
+		sc.getMySchedual().add(day);
+		session.save(sc);
+		day.setSchedual(sc);
+		session.save(day);
+
+
+
+
+        session.getTransaction().commit();
+        session.close();
+
+		/*
+        lessonator2000.UnderageClient uc1 = new lessonator2000.UnderageClient("Mark", "Baratheon", LocalDate.of(2012, 2, 21), "mark12", "mark123", cli);
+        lessonator2000.UnderageClient uc2 = new lessonator2000.UnderageClient("Michael", "Baratheon", LocalDate.of(2012, 4, 13), "Mike", "mike123", cli);
+        cli.addToDependantsCatalog(uc1);
+        cli.addToDependantsCatalog(uc2);
+
+		 */
+
+
 //browsingUser = new lessonator2000.Client("Bobby","Baratheon",LocalDate.of(1600, 1, 13) , "bobb", "westeros");
 //browsingUser = new lessonator2000.Instructor("Sword","Ned" , "Stark", 5128963587L);
 //browsingUser = new Public();
 //browsingUser = lessonator2000.Administrator.getAdministrator();
 
 
-
-while(activeSession) {
+        while (activeSession) {
 //print the top menu
-int userchoice;
-userchoice = printMenu(browsingUser);
-switch(userchoice) {
+            int userchoice;
+            userchoice = printMenu(browsingUser);
+            switch (userchoice) {
 
-case 1: {browsingUser = register();break;}  //register
-case 2:{browsingUser = login(); break;}     // login
-case 3: {viewOffering();break;} // viewOFferings
-case 4: {if (browsingUser instanceof lessonator2000.Administrator)uploadOffering();else{System.out.println("Sorry this choice is not available to you");}break;} //uploadOffering
-case 5: {if (browsingUser instanceof lessonator2000.Instructor)signupToLesson(); else{System.out.println("Sorry this choice is not available to you");}break;}   //signupToLesson
-case 6: {if (browsingUser instanceof lessonator2000.Client && (!(browsingUser instanceof lessonator2000.UnderageClient))){makeBooking();} else {System.out.println("Sorry this choice is not available to you");}break;}             //makeOffering
-case 7: {if (browsingUser instanceof lessonator2000.Administrator)cancelBooking();else {System.out.println("Sorry this choice is not available to you");} break;} // cancelBooking
-case 8: {if ((browsingUser instanceof lessonator2000.Administrator) || (browsingUser instanceof lessonator2000.Client))viewBooking();else{System.out.println("Sorry this choice is not available to you");} break;}
-case 9: {if (browsingUser instanceof lessonator2000.Administrator) deleteOffering();else{System.out.println("Sorry this choice is not available to you");} break;}
-case 10: browsingUser=logOut();break;
-case 11: {System.out.println("Goodbye!"); exitSession();break;} //remove session
-default: System.out.println("This was not a valid choice");break;
-}
+                case 1: {
+                    browsingUser = register();
+                    break;
+                }  //register
+                case 2: {
+                    browsingUser = login();
+                    break;
+                }     // login
+                case 3: {
+                    viewOffering();
+                    break;
+                } // viewOFferings
+                case 4: {
+                    if (browsingUser instanceof lessonator2000.Administrator) uploadOffering();
+                    else {
+                        System.out.println("Sorry this choice is not available to you");
+                    }
+                    break;
+                } //uploadOffering
+                case 5: {
+                    if (browsingUser instanceof lessonator2000.Instructor) signupToLesson();
+                    else {
+                        System.out.println("Sorry this choice is not available to you");
+                    }
+                    break;
+                }   //signupToLesson
+                case 6: {
+                    if (browsingUser instanceof lessonator2000.Client && (!(browsingUser instanceof lessonator2000.UnderageClient))) {
+                        makeBooking();
+                    } else {
+                        System.out.println("Sorry this choice is not available to you");
+                    }
+                    break;
+                }             //makeOffering
+                case 7: {
+                    if (browsingUser instanceof lessonator2000.Administrator) cancelBooking();
+                    else {
+                        System.out.println("Sorry this choice is not available to you");
+                    }
+                    break;
+                } // cancelBooking
+                case 8: {
+                    if ((browsingUser instanceof lessonator2000.Administrator) || (browsingUser instanceof lessonator2000.Client))
+                        viewBooking();
+                    else {
+                        System.out.println("Sorry this choice is not available to you");
+                    }
+                    break;
+                }
+                case 9: {
+                    if (browsingUser instanceof lessonator2000.Administrator) deleteOffering();
+                    else {
+                        System.out.println("Sorry this choice is not available to you");
+                    }
+                    break;
+                }
+                case 10:
+                    browsingUser = logOut();
+                    break;
+                case 11: {
+                    System.out.println("Goodbye!");
+                    exitSession();
+                    break;
+                } //remove session
+                default:
+                    System.out.println("This was not a valid choice");
+                    break;
+            }
 
 
-}
-}
+        }
+    }
 	/**
 	 * removes the sesison from the catalog and sets activeSesison to false, which will stop the thread running
 	 */
  private	void exitSession(){
-	 SessionCatalog sc = lessonator2000.SessionCatalog.getSessionCatalog();
+	 lessonator2000.SessionCatalog sc = lessonator2000.SessionCatalog.getSessionCatalog();
 	 sc.removeSession(sessionID);
 		activeSession = false;
 	}
@@ -385,7 +557,7 @@ while (!valid) {
 
 
 System.out.println("What is the start date? must be of the form yyyy-mm-dd");
-LocalDate startdate =  LocalDate.parse("0000-00-00") ;
+LocalDate startdate = null ;
 valid = false;
 while (!valid) {
 	try { startdate = LocalDate.parse(keyboard.next());
@@ -397,7 +569,7 @@ while (!valid) {
 
 
 System.out.println("What is the end date? must be of the form yyyy-mm-dd");
-LocalDate enddate =  LocalDate.parse("0000-00-00") ;
+LocalDate enddate =  null ;
 valid = false;
 while (!valid) {
 	try { enddate = LocalDate.parse(keyboard.next());
@@ -407,7 +579,7 @@ while (!valid) {
 	}
 }
 System.out.println("What is the start time? must be of the form 00:00:00 ");
-LocalTime startTime= LocalTime.parse("00:00:00");
+LocalTime startTime= null;
 valid = false;
 while (!valid) {
 	try { startTime = LocalTime.parse(keyboard.next());
@@ -420,7 +592,7 @@ while (!valid) {
 
 
 System.out.println("What is the end time? must be of the form 00:00:00 ");
-LocalTime endTime = LocalTime.parse("00:00:00");
+LocalTime endTime = null; //LocalTime.parse("00:00:00");
 valid = false;
 while (!valid) {
 	try { endTime = LocalTime.parse(keyboard.next());
@@ -457,21 +629,34 @@ while (!valid) {
 }}
 else capacity = 1;
 
+Session session = lessonator2000.ManageSessionFactory.getSf().openSession();;
+Transaction transaction = session.beginTransaction();
 //create the new lesson Offering -- uploadOffering(...)
 lessonator2000.Lesson myLesson = offers.uploadOffering(lessontype, lessonID , false, true,  isPublic,  capacity,startdate, enddate,lessonDay);
-
 //addLessonToSpace(...)
 lessonator2000.Space mySpace = locationregistry.addLessonToSpace(roomNb);
+//myLesson.setSpace(mySpace);
+//session.save(myLesson);
 
 //addLocationToSchedual, this will return the timeslot created for this lesson. Create the timeslot. addLessonToschedual add the timeslot to every day that falls on the dayOfTheWeek between startdate and enddate
-lessonator2000.Timeslot myTimeSlot =	mySpace.addLessonToSchedual(myLesson, startdate, enddate, lessonDay,startTime, endTime);
+lessonator2000.Timeslot myTimeSlot = mySpace.addLessonToSchedual(myLesson, startdate, enddate, lessonDay,startTime, endTime);
+/*
+myLesson.setTimeslot(myTimeSlot);
+session.save(myLesson);
+session.getTransaction().commit();
+session.close();
+
+ */
 
 // add space and time to lesson
 
 offers.addSpaceTimeToLesson(mySpace, myTimeSlot, myLesson);
 
 System.out.println("You have uploaded the lesson" +  myLesson.toString());
-
+/*
+Space and timeslots should already exists in the system
+we create a lesson and connect the space and timeslots with that lesson
+ */
 
 }
 
@@ -503,6 +688,8 @@ public void deleteOffering() {
 }
 
 }
+
+
 
 
 

@@ -1,5 +1,9 @@
 package lessonator2000;
 
+import jakarta.persistence.*;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 import java.time.LocalDate;
 
 /**
@@ -9,15 +13,25 @@ import java.time.LocalDate;
  * <p>Lesson is the class that contains all the offering information , the instructors , the space it's offered in , the timeSlot it takes and all the accompanying methods.</p>
  * 
  */
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE) // Declare the strategy here
+@DiscriminatorColumn(name = "lesson_type")
 public class Lesson {
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String type;
     private String lessonId;
     private boolean hasInstructor;
     private boolean isAvailable;
+    @ManyToOne
+    @JoinColumn(name = "instructor_id", nullable = true)
     private lessonator2000.Instructor teacher;
+    @ManyToOne
     private lessonator2000.Space space;
+
+    @OneToOne
     private lessonator2000.Timeslot time;
    private LocalDate startDate;
     private LocalDate endDate;
@@ -43,13 +57,20 @@ public class Lesson {
         this.dayOfTheWeek = weekDay;
 
     }
+    public Lesson(){}
 
     /**
      * This is the method used by signupToLesson() to add the instructor to the Lesson
      * @param ins
      */
      void addInstructorToLesson(lessonator2000.Instructor ins){
-        this.teacher = ins;
+         Session session = lessonator2000.ManageSessionFactory.getSf().openSession();
+         Transaction tr = session.beginTransaction();
+         this.teacher = ins;
+         session.update(this);
+         session.getTransaction().commit();
+         session.close();
+
     }
 
      /**
@@ -57,21 +78,23 @@ public class Lesson {
       */
     public String toString(){
 
-        return "the lesson ID : " + lessonId + "\n " +  (!isAvailable ? "UNAVAILABLE " : "")+ "The"  +  space.getTypeOfSpace() + " " + space.getroomNumber() + " , in " + space.getCity() + " , is available for " + type + " on "+ dayOfTheWeek + " From " + time.getStartTime() + " to " + time.getEndTime() + ", from" + startDate.getMonthValue() + " " + startDate.getDayOfYear() + "to " + endDate.getMonthValue() + " " + endDate.getDayOfYear()+ ",  " + endDate.getYear();
-        		//" with " + teacher.getFirstName() + " " + teacher.getLastName();       
+        return "the lesson ID : " + lessonId + "\n " +  (!isAvailable ? "UNAVAILABLE " : "")+ "The"  +  space.getTypeOfSpace() + " " + space.getroomNumber() + " , in " +
+                space.getCity() + " , is available for " + type + " on "+ dayOfTheWeek +
+                " From " + time.getStartTime() + " to " + time.getEndTime() + ", from " + startDate.getMonth() + " " + startDate.getDayOfMonth() + " to " + endDate.getMonth()+ " " + endDate.getDayOfMonth() +",  " + endDate.getYear();
+        //" with " + teacher.getFirstName() + " " + teacher.getLastName();  ;
     }
     
    //Getters
     public String getID() {
     	return this.lessonId;
     }
-    public Space getSpace() {
+    public lessonator2000.Space getSpace() {
     	return this.space;
     }
-    public Instructor getTeacher() {
+    public lessonator2000.Instructor getTeacher() {
     	return this.teacher;
     }
-    public Timeslot getTimeSlot() {
+    public lessonator2000.Timeslot getTimeSlot() {
     	return this.time;
     }
     
@@ -108,7 +131,12 @@ public class Lesson {
     }
     
     public void sethasInstructor(Boolean hasIns) {
-    	this.hasInstructor = hasIns;
+        Session session = lessonator2000.ManageSessionFactory.getSf().openSession();
+        Transaction tr = session.beginTransaction();
+        this.hasInstructor = hasIns;
+        session.update(this);
+        session.getTransaction().commit();
+        session.close();
     }
     
     public void setisAvailable(Boolean isAvail) {
@@ -128,7 +156,14 @@ public class Lesson {
 		this.time = time;
 		
 	}
-	public void setStartDate(LocalDate start) {
+    public void setInstructor(lessonator2000.Instructor ins){
+        this.teacher = ins;
+    }
+
+    public void setTimeslot(lessonator2000.Timeslot tm){
+        this.time = tm;
+    }
+    public void setStartDate(LocalDate start) {
 		this.startDate = start;
 	}
    public  void setEndDate(LocalDate end) {

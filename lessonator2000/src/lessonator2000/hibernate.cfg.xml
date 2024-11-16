@@ -1,0 +1,47 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!-- Database connection settings -->
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/theLessonator2000</property>
+<!-- jdbc:mysql://38.108.75.90:33333/theLessonator_db-->
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">Gs1905gs2002</property>
+        <!-- JDBC connection pool settings (if needed) -->
+        <property name="hibernate.c3p0.min_size">5</property>
+        <property name="hibernate.c3p0.max_size">20</property>
+        <property name="hibernate.c3p0.timeout">300</property>
+        <property name="hibernate.c3p0.max_statements">50</property>
+        <property name="hibernate.c3p0.idle_test_period">3000</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+
+        <!-- Specify dialect -->
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+
+        <!-- Enable Hibernate's automatic session context management -->
+        <property name="hibernate.current_session_context_class">thread</property>
+
+        <!-- Echo all executed SQL to stdout -->
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">true</property>
+
+        <!-- Specify context for your annotated classes (if any) -->
+        <!-- <mapping class="com.example.YourEntityClass"/> -->
+
+        <mapping class="lessonator2000.Lesson"></mapping>
+        <mapping class="lessonator2000.Space"></mapping>
+        <mapping class="lessonator2000.Timeslot"></mapping>
+        <mapping class="lessonator2000.Schedual"></mapping>
+        <mapping class="lessonator2000.Day"></mapping>
+        <mapping class="lessonator2000.Instructor"></mapping>
+        <mapping class="lessonator2000.Client"></mapping>
+        <mapping class="lessonator2000.UnderageClient"></mapping>
+        <mapping class="lessonator2000.PublicLesson"></mapping>
+        <mapping class="lessonator2000.PrivateLesson"></mapping>
+        <mapping class="lessonator2000.Bookings"></mapping>
+
+    </session-factory>
+</hibernate-configuration>

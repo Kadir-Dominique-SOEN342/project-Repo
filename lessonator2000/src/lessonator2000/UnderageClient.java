@@ -1,5 +1,9 @@
 package lessonator2000;
 
+import jakarta.persistence.*;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 import java.time.LocalDate;
 /**
  * 
@@ -8,19 +12,18 @@ import java.time.LocalDate;
  * <p>Underage Client are a subtype of Client but with restricted access to methods lie makeBooking().
  * bookings made for underage CLients need to be made by an adult client</p>
  */
+@Entity
 public class UnderageClient extends lessonator2000.Client {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
+	@ManyToOne
 	private lessonator2000.Client legalguardian;
 
 	
 	
-	//DP : I remove this as we don't want any client's or underage client created without information
-	//Constructor
-	//public UnderageClient() {
-	//	super();
-		//this.legalguardian = null;
-		
-	//}
+
 	
 	
 	/**
@@ -34,8 +37,9 @@ public class UnderageClient extends lessonator2000.Client {
 	 * @param parent
 	 */
 	public UnderageClient(String firstn, String lastn, LocalDate birth, String username, String password, lessonator2000.Client parent) {
+
 		super(firstn, lastn, birth, username, password);
-		this.legalguardian = parent;
+		this.legalguardian = parent;;
 		this.dependantsCatalog = null;
 		
 	}

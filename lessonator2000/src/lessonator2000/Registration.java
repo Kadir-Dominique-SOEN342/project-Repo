@@ -1,4 +1,9 @@
 package lessonator2000;
+import jakarta.persistence.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import java.lang.management.ManagementFactory;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -23,27 +28,6 @@ public class Registration {
 	 * private constructor
 	 */
 	private  Registration() {
-		// Remove this after persistance is achieved through the database is completed. These are hardcoded clients/ instructors
-		lessonator2000.Client e = new lessonator2000.Client("Bernard", "Summer",LocalDate.of(1956, 01, 4), "bsum" , "neworder");
-		clientRegistry.add(e);
-		lessonator2000.Client f = new lessonator2000.Client("Steven", "Morris",LocalDate.of(1957, 10, 28), "smor" , "neworder");
-		clientRegistry.add(f);
-		lessonator2000.Client g = new lessonator2000.Client("Peter", "Hook",LocalDate.of(1956, 02, 13), "phoo" , "neworder");
-		clientRegistry.add(g);
-		lessonator2000.Client h = new lessonator2000.Client("Gillian", "Gilbert",LocalDate.of(1961, 01, 27), "ggil" , "neworder");
-		clientRegistry.add(h);
-
-
-		lessonator2000.Instructor a = new lessonator2000.Instructor("Aerobie", "Julie", "Samson", 5148659658L);
-		instructorRegistry.add(a);
-		lessonator2000.Instructor b = new lessonator2000.Instructor("Sumo", "Ura", "Kazuki", 5148659658L);
-		instructorRegistry.add(b);
-		lessonator2000.Instructor c = new lessonator2000.Instructor("Judo", "Hajime", "Isogai", 5148659658L);
-		instructorRegistry.add(c);
-
-
-
-		//
 
 
 	}
@@ -270,23 +254,35 @@ public class Registration {
 	 */
 	private  lessonator2000.Client searchClient(String username) {
 		System.out.println("Searching for client with username " + username);
-		for(lessonator2000.Client c : clientRegistry) {
-			String clientusername = c.getUsername();
-			//	System.out.println(clientusername);
-			if(clientusername.equals(username))
-				return c;
-		}
+		Session session = lessonator2000.ManageSessionFactory.getSf().openSession();
+		Transaction transaction = session.beginTransaction();
+		Query q = session.createQuery("from Client where userName = :username");
+		q.setParameter("username", username);
+		lessonator2000.Client cl = (lessonator2000.Client) q.getSingleResult();
+		session.getTransaction().commit();
+		session.close();
+
+		if(cl!=null)
+			return cl;
 		return null;
+
+
+
 	}
 
 	private  lessonator2000.Instructor searchInstructor(long phone) {
-		for(lessonator2000.Instructor ins : instructorRegistry) {
-			long phoneNumber = ins.getPhone();
-			System.out.println(phoneNumber);
-			if(phoneNumber == phone)
-				return ins;
-		}
+		Session session = lessonator2000.ManageSessionFactory.getSf().openSession();
+		Transaction transaction = session.beginTransaction();
+		Query q = session.createQuery("from Instructor where phoneNumber= :phone");
+		q.setParameter("phone", phone);
+		lessonator2000.Instructor ins = (lessonator2000.Instructor) q.getSingleResult();
+		session.getTransaction().commit();
+		session.close();
+
+		if(ins!=null)
+			return ins;
 		return null;
+
 	}
 	/**
 	 * helper method to create a new client when user registers via register()
@@ -294,13 +290,14 @@ public class Registration {
 	 * @return a client
 	 */
 	private synchronized  lessonator2000.Client createClient() {
+		Session session = lessonator2000.ManageSessionFactory.getSf().openSession();
 		Scanner keyboard = new Scanner(System.in);
 
 		System.out.println("What is your first name:");
 		String firstn = null;
 		boolean valid = false;
 		while (!valid) {
-			try { firstn = keyboard.next();
+			try { firstn = keyboard.nextLine();
 			valid = true;}
 			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid String");
@@ -312,7 +309,7 @@ public class Registration {
 		String lastn = null;
 		valid = false;
 		while (!valid) {
-			try { lastn = keyboard.next();
+			try { lastn = keyboard.nextLine();
 			valid = true;}
 			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid String");
@@ -324,6 +321,7 @@ public class Registration {
 		valid = false;
 		while (!valid) {
 			try { year = keyboard.nextInt();
+				keyboard.nextLine();
 			valid = true;}
 			catch (java.util.InputMismatchException e) {
 				System.out.println("Please enter a valid integer");
@@ -367,7 +365,7 @@ public class Registration {
 
 		if(!isUnderage) {
 			System.out.println("\n What is your username");
-			String username = keyboard.next();
+			String username = null;
 			valid = false;
 			while (!valid) {
 				try { username = keyboard.next();
@@ -377,7 +375,7 @@ public class Registration {
 				}
 			}
 			System.out.println("\n What is your password");
-			String password = keyboard.next();
+			String password = null;
 			valid = false;
 			while (!valid) {
 				try { password = keyboard.next();
@@ -390,6 +388,10 @@ public class Registration {
 			lessonator2000.Client c = new lessonator2000.Client(firstn, lastn, birth, username, password);  //create new client
 			getRegistry().clientRegistry.add(c);//add client to Clientregistry
 			System.out.println("Successfull registration, you can now browser as Client");
+			Transaction transaction = session.beginTransaction();
+			session.save(c);
+			transaction.commit();
+			session.close();
 			return c;
 		}
 		else{
@@ -403,7 +405,8 @@ public class Registration {
 	 * @return
 	 */
 	private synchronized lessonator2000.UnderageClient createUnderageClient() {
-
+		Session session = lessonator2000.ManageSessionFactory.getSf().openSession();
+		Transaction tr = session.beginTransaction();
 		Scanner keyboard = new Scanner(System.in);
 
 		System.out.println("What is the username of your parent?");
@@ -424,7 +427,7 @@ public class Registration {
 
 
 		System.out.println("What is your first name:");
-		String firstn = keyboard.next();
+		String firstn = null;
 		valid = false;
 		while (!valid) {
 			try { firstn = keyboard.next();
@@ -434,7 +437,8 @@ public class Registration {
 			}
 		}
 		System.out.println("\n What is your last name:");
-		String lastn = keyboard.next();
+		String lastn = null;
+
 		valid = false;
 		while (!valid) {
 			try { lastn = keyboard.next();
@@ -514,13 +518,21 @@ public class Registration {
 
 		if(isUnderage) {
 			lessonator2000.UnderageClient uc = new lessonator2000.UnderageClient(firstn, lastn, birth, username, password,parent);  //create new underageClient
-			parent.addToDependantsCatalog(uc);    // add the underageClient to the parent's dependant catalog
-			getRegistry().clientRegistry.add(uc); //add underageclient to client's catalog 
+			parent.addToDependantsCatalog(uc);
+
+			// add the underageClient to the parent's dependant catalog
+			getRegistry().clientRegistry.add(uc); //add underageclient to client's catalog
+
+
 			System.out.println("Successfull registration, you can now browser as an underage Client. To book a lesson, ask your parent");
+
+
 			return uc;}
 		else {
 			System.out.println("Failed registration. You need to register as a Client.");
-			return null;} // Registraiton failed
+			return null;
+		} // Registraiton failed
+
 	}
 
 /**
@@ -529,52 +541,82 @@ public class Registration {
  * @return
  */
 	private synchronized lessonator2000.Instructor createInstructor() {
-		Scanner keyboard = new Scanner(System.in);
-		System.out.println("What is your specialization:");
-		String specialization =null;
-		boolean valid = false;
-		while (!valid) {
-			try { specialization = keyboard.next();
-			valid = true;}
-			catch (java.util.InputMismatchException e) {
-				System.out.println("Please enter a valid String");
-			}
-		}
-		System.out.println("What is your first name:");
-		String firstn =null;
-		valid = false;
-		while (!valid) {
-			try { firstn = keyboard.next();
-			valid = true;}
-			catch (java.util.InputMismatchException e) {
-				System.out.println("Please enter a valid String");
-			}
-		}
-		System.out.println("\n What is your last name:");
-		String lastn =null;
-		valid = false;
-		while (!valid) {
-			try { lastn = keyboard.next();
-			valid = true;}
-			catch (java.util.InputMismatchException e) {
-				System.out.println("Please enter a valid String");
-			}
-		}
-		System.out.println("What is your phoneNumber");
-		long phone = 0 ;
-		valid = false;
-		while (!valid) {
-			try { phone = keyboard.nextLong();
-			valid = true;}
-			catch (java.util.InputMismatchException e) {
-				System.out.println("Please enter a valid long");
-			}
-		}
+        Session s = lessonator2000.ManageSessionFactory.getSf().openSession();
+        Transaction transaction = s.beginTransaction();
+        Scanner keyboard = new Scanner(System.in);
+        System.out.println("What is your specialization:");
+        String specialization = null;
+        boolean valid = false;
+        while (!valid) {
+            try {
+                specialization = keyboard.next();
+                valid = true;
+            } catch (java.util.InputMismatchException e) {
+                System.out.println("Please enter a valid String");
+            }
+        }
+        System.out.println("What is your first name:");
+        String firstn = null;
+        valid = false;
+        while (!valid) {
+            try {
+                firstn = keyboard.next();
+                valid = true;
+            } catch (java.util.InputMismatchException e) {
+                System.out.println("Please enter a valid String");
+            }
+        }
+        System.out.println("\n What is your last name:");
+        String lastn = null;
+        valid = false;
+        while (!valid) {
+            try {
+                lastn = keyboard.next();
+                valid = true;
+            } catch (java.util.InputMismatchException e) {
+                System.out.println("Please enter a valid String");
+            }
+        }
+        System.out.println("What is your phoneNumber");
+        long phone = 0;
+        valid = false;
+        ArrayList<String> availabilities = null;
+        while (!valid) {
+            try {
+                phone = keyboard.nextLong();
+                valid = true;
+            } catch (java.util.InputMismatchException e) {
+                System.out.println("Please enter a valid long");
+            }
+            availabilities = new ArrayList<String>();
+            System.out.println("Please enter a city you are available in : ");
+            String city = keyboard.nextLine();
 
-		lessonator2000.Instructor i = new lessonator2000.Instructor(specialization, firstn, lastn, phone);
-		return i;
+            //String city1 = city.substring(0, 1).toUpperCase() + city.substring(1);
+            availabilities.add(city);
 
-	}
+
+            boolean done = false;
+            while (!done) {
+                System.out.println("Add another city , enter \"done\" if you are done");
+                String city2 = keyboard.nextLine();
+                if (city2.equals("done")) {
+                    break;
+                } else {
+                    //String city3 = city2.substring(0, 1).toUpperCase() + city2.substring(1);
+                    availabilities.add(city2);
+                }
+            }
+
+        }
+
+        lessonator2000.Instructor i = new lessonator2000.Instructor(specialization, firstn, lastn, phone, availabilities);
+        s.save(i);
+        transaction.commit();
+        s.close();
+        return i;
+
+    }
 
 
 }

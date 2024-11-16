@@ -20,7 +20,7 @@ public class SessionCatalog {
 	/**
 	 * Collection of Sessions
 	 */
-	private ConcurrentHashMap<String,Session> userSessions = new ConcurrentHashMap<String,Session>();
+	private ConcurrentHashMap<String, lessonator2000.SessionThread> userSessions = new ConcurrentHashMap<String, lessonator2000.SessionThread>();
 
 	/**
 	 * SessionCatalog is implemented as a singleton , the constrcutor is private
@@ -45,7 +45,7 @@ public class SessionCatalog {
 	 */
 	public void createNewSession() {
 		
-		Session s = new Session();
+		lessonator2000.SessionThread s = new lessonator2000.SessionThread();
 		numberOfSessions++;
 		userSessions.put(s.getSessionId(), s);
 		Thread sessionThread = new Thread(s);
@@ -53,7 +53,7 @@ public class SessionCatalog {
 	}
 	
 	public void removeSession(String sessionId) {
-		ConcurrentHashMap<String, Session> userSession;
+		ConcurrentHashMap<String, lessonator2000.SessionThread> userSession;
 		userSessions.remove(sessionId);
 		numberOfSessions--;
 		System.out.println("Session removed");

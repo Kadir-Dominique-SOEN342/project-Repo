@@ -1,5 +1,7 @@
 package lessonator2000;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -12,11 +14,17 @@ import java.time.LocalTime;
  * each schedual has a 5 year calendar of Days
  * each days has a collection of timeslot that contain a lesson</p>
  */
+@Entity
+@Table(name = "Space")
 public class Space {
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 private String rentedOrOwned; //TODO change this to an enum?
 private String roomNumber;
 private String typeOfSpace;
+@OneToOne
+@JoinColumn(nullable = true)
 private lessonator2000.Schedual openFor;
 private String city;
 private String province;
@@ -36,10 +44,11 @@ public Space(String rentedOrOwned, String roomNumber, String type , String city,
 	this.openFor = new lessonator2000.Schedual();
 	this.city = city;
 	this.province = province;
-		}
 
+}
+public Space(){}
 
-
+public void setSchedual(lessonator2000.Schedual sc){this.openFor = sc;}
 public String getRoomNumber() {
 	return this.roomNumber;
 }
@@ -75,11 +84,7 @@ public String getprovince() {
  * @param endTime
  * @return
  */
-lessonator2000.Timeslot addLessonToSchedual(lessonator2000.Lesson myLesson, LocalDate startdate, LocalDate enddate, String dayOfTheWeek, LocalTime startTime, LocalTime endTime) {
-	//System.out.println("Space: addLessonToSchedual");
-	lessonator2000.Timeslot myTimeslot = openFor.addLesson( myLesson,  startdate,  enddate,  dayOfTheWeek ,  startTime,  endTime);
-	return myTimeslot;
-}
+
 
 
 /**
@@ -90,4 +95,10 @@ public void removeLessonFromSpace(lessonator2000.Lesson lessonToRemove) {
 	openFor.removeLesson(lessonToRemove);
 		
 }
+
+	lessonator2000.Timeslot addLessonToSchedual(lessonator2000.Lesson myLesson, LocalDate startdate, LocalDate enddate, String dayOfTheWeek, LocalTime startTime, LocalTime endTime) {
+		//System.out.println("Space: addLessonToSchedual");
+		lessonator2000.Timeslot myTimeslot = openFor.addLesson( myLesson,  startdate,  enddate,  dayOfTheWeek ,  startTime,  endTime);
+		return myTimeslot;
+	}
 }

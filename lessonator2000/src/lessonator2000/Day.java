@@ -1,8 +1,13 @@
 package lessonator2000;
 
+import jakarta.persistence.*;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 
@@ -14,25 +19,41 @@ import java.util.ArrayList;
  * @author domin
  * @version Nov 9, 2024
  */
+
+@Entity
+@Table(name = "Day")
 public class Day {
-	
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 	//private Timeslot[] daySchedual;
-	private ArrayList<lessonator2000.Timeslot> daySchedual;
+	@OneToMany
+	private List<lessonator2000.Timeslot> daySchedual;
+
+	@ManyToOne
+	@JoinColumn(name = "schedual_id")
+	private lessonator2000.Schedual schedual;
 	private LocalDate today;
-	
+
+	public Day(){}
 /**
  * constructor for Day
  * @param today
  */
-	public Day(LocalDate today) {
-		daySchedual = new ArrayList();
+
+public Day(LocalDate today) {
 		this.today = today;
 	}
 	
 	
 	//getter
-	public ArrayList<lessonator2000.Timeslot> getDaySchedual() {
+	public List<lessonator2000.Timeslot> getDaySchedual() {
 		return this.daySchedual;
+	}
+
+	public void setSchedual(lessonator2000.Schedual schedual) {
+		this.schedual = schedual;
 	}
 
 	public LocalDate getDate() {
@@ -56,7 +77,12 @@ public class Day {
  * @param myTimeSlot
  */
 	 void addToCollection(lessonator2000.Timeslot myTimeSlot) {
-		daySchedual.add(myTimeSlot);
+		 Session session = lessonator2000.ManageSessionFactory.getSf().openSession();
+		 Transaction transaction = session.beginTransaction();
+		 daySchedual.add(myTimeSlot);
+		 session.update(this);
+		 session.getTransaction().commit();
+		 session.close();
 		
 	}
 
@@ -75,11 +101,5 @@ public class Day {
 		
 	}
 
-	//public Timeslot createTimeSlot(LocalTime startTime, LocalTime endTime, Lesson myLesson) {
-		//System.out.println("Day :  createTimeSlot");
-	//	Timeslot myTimeSlot = new Timeslot(startTime, endTime, myLesson);
-	//daySchedual.add(myTimeSlot);
-	//return myTimeSlot;
-		//TODO: make sure start time is after end time of other time slots.
-	
+
 

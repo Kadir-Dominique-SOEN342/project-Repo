@@ -1,9 +1,15 @@
 package lessonator2000;
 
+import jakarta.persistence.*;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import java.lang.management.ManagementFactory;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 
@@ -12,41 +18,41 @@ import java.util.ArrayList;
  * <p>This class holds the calendar for a space. Each schedual has a calendar of 5 years , each has a day that can hold timeslots each with a lesson attribute</p>
 
  */
+@Entity
+@Table(name = "Schedual")
 public class Schedual {
-	private lessonator2000.Day[][] mySchedual;
-	
-	
-	public Schedual() {
-		
-		/*We are booking 5 years in advance. 
-		We will need a method for updating the schedual when we need more time in advance 
-		and flush the old scheduals*/
-		
-		//Schedual holds an array of days called mySchedual 
-		//if the year is a leap year there are 366 days
-		//if the year is not a leap year it hold 365 days. 
-		//each day has an array of timeslots.
-		 mySchedual = new lessonator2000.Day[5][];
-		 mySchedual[0] = new lessonator2000.Day[366]; //2024 is a leap year
-		 mySchedual[1] = new lessonator2000.Day[365]; //2025 is a normal year
-		 mySchedual[2] = new lessonator2000.Day[365]; //2026 is a normal year
-		 mySchedual[3] = new lessonator2000.Day[365]; //2027 is a normal year
-		 mySchedual[4] = new lessonator2000.Day[366]; //2028 is a leap year
-		 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 
-	        // Initialize Day objects for each day in the schedule
-		 //for each year
-	        for (int year = 0; year < mySchedual.length; year++) {
-	        	// for each day of the year
-	            int daysInYear = mySchedual[year].length; 
-	            for (int day = 0; day < daysInYear; day++) {
-	                // Create a LocalDate for the corresponding day
-	                LocalDate date = LocalDate.of(2024 + year, 1, 1).plusDays(day);//Startb from the first day of the year and add a day until the end of the year
-	                mySchedual[year][day] = new lessonator2000.Day(date); // Initialize each Day , passing the date as parameter
-	            }
-	            }
-		 
-	        }
+	private int year;
+
+	@OneToMany(mappedBy = "schedual")
+	private List<lessonator2000.Day> mySchedual = new ArrayList<>();
+
+	
+	public Schedual(){}
+	public Schedual(int year) {
+		
+
+
+
+			this.year = year;
+
+
+
+
+
+
+
+
+
+		}
+
+
+
+
+
 	/**
 	 * used from uploadOffering()
 	 * creates a timeslot that has a lesson attribute
@@ -54,40 +60,40 @@ public class Schedual {
 	 * @param myLesson
 	 * @param startdate
 	 * @param enddate
-	 * @param datOfTheWeek
+	 * @param dayOfTheWeek
 	 * @param startTime
 	 * @param endTime
 	 * @return
 	 */
-	 lessonator2000.Timeslot addLesson(lessonator2000.Lesson myLesson, LocalDate startdate, LocalDate enddate, String datOfTheWeek , LocalTime startTime, LocalTime endTime) {
-		//	System.out.println("Schedual : addLesson");
-		//create new timeslot
-		lessonator2000.Timeslot myTimeSlot =  new lessonator2000.Timeslot(startTime, endTime, myLesson);
 
-		//find everyDateBetwee startDate and endDate where dayOfTheWeek equals the day of the week day
+	public lessonator2000.Timeslot addLesson(lessonator2000.Lesson myLesson, LocalDate startdate, LocalDate enddate, String dayOfTheWeek, LocalTime startTime, LocalTime endTime) {
+		// Create a new timeslot
+		Session session = lessonator2000.ManageSessionFactory.getSf().openSession();
+		Transaction transaction = session.beginTransaction();
+		lessonator2000.Timeslot myTimeSlot = new lessonator2000.Timeslot(startTime, endTime, myLesson);
+		List<lessonator2000.Day> d = session.createQuery("from Day ", lessonator2000.Day.class).getResultList();
+		mySchedual = d;
+		// Find every date between startDate and endDate where the day of the week matches
+		ArrayList<LocalDate> matchingDates = findAllDateBetween(startdate, enddate, dayOfTheWeek);
 
-		ArrayList<LocalDate> myDateArray = findAllDateBetween(startdate,enddate, datOfTheWeek );
-		//add the timeslot to every day in the myDateArray
-		for(LocalDate date : myDateArray) {
-			lessonator2000.Day myDay = null;
-			//TODO: refactor this to make it more effecient
-			for (int year = 0; year < mySchedual.length; year++) {
-				for (lessonator2000.Day d : mySchedual[year]) {
-					if (date.isEqual(d.getDate())) {
-						myDay = d;
-						d.addToCollection(myTimeSlot); // For every day that matches, add the timeslot to the day's collection
-
-					}
+		// Add the timeslot to each matching day in the schedule
+		for (LocalDate date : matchingDates) {
+			for (lessonator2000.Day day : mySchedual) { // Iterate over the one-dimensional array
+				if (date.isEqual(day.getDate())) {
+					day.addToCollection(myTimeSlot); // Add the timeslot to the matching day
+					break; // Break to avoid unnecessary iterations once the match is found
 				}
-
 			}
-
-
 		}
 
 		return myTimeSlot;
 	}
-	
+
+
+
+	public List<lessonator2000.Day> getMySchedual(){return this.mySchedual;}
+
+	public void setDay(List<lessonator2000.Day> d){this.mySchedual = d;}
 	
 	private ArrayList<LocalDate> findAllDateBetween(LocalDate startdate, LocalDate enddate , String dayOfTheWeek) {
 		ArrayList<LocalDate> myDateArray = new ArrayList<LocalDate>();
@@ -146,31 +152,25 @@ public class Schedual {
 	}
 	
 	//removeLesson removes each timeslot that has the lessonToRemove as attribute from every day between the lesosn startDate and endDate that fall's on dayOfTheWeek
-	 void removeLesson(lessonator2000.Lesson lessonToRemove) {
-		// TODO Auto-generated method stub
-		ArrayList<LocalDate> localDateArray = findAllDateBetween(lessonToRemove.getStartDatE(), lessonToRemove.getEndDate(), lessonToRemove.getDayOfTheWeek());
-	
-		//for each date remvove the timeslot
-		for(LocalDate date : localDateArray) {
-			lessonator2000.Day myDay = null;
-			for (int year = 0; year < mySchedual.length; year++) {
-				for (lessonator2000.Day d : mySchedual[year]) {
-					if (date.isEqual(d.getDate())) {
-						myDay = d;
-						d.removeTimeSlot(lessonToRemove); // For every day that matches, add the timeslot to the day's collection
-						
-					}
+	public void removeLesson(lessonator2000.Lesson lessonToRemove) {
+		// Find all dates between the start and end dates of the lesson that match the specified day of the week
+
+		ArrayList<LocalDate> matchingDates = findAllDateBetween(lessonToRemove.getStartDatE(), lessonToRemove.getEndDate(), lessonToRemove.getDayOfTheWeek());
+
+		// Remove the timeslot for each matching date
+		for (LocalDate date : matchingDates) {
+			for (lessonator2000.Day day : mySchedual) { // Iterate over the one-dimensional array of days
+				if (date.isEqual(day.getDate())) {
+					day.removeTimeSlot(lessonToRemove); // Remove the timeslot associated with the lesson
+					break; // Break to avoid unnecessary iterations once the match is found
 				}
-
 			}
-
-
 		}
-	
 	}
-	}
+
+}
 	
-	//TODO : Method to update the calendar and drop previous years 
+
 	
 
 

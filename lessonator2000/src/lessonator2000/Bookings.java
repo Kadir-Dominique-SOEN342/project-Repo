@@ -1,10 +1,20 @@
 package lessonator2000;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "Bookings")
 public class Bookings {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private int bookingId;
-    private static int id = 1;
+
+
+    @OneToOne
     private lessonator2000.Lesson bookinglesson;
+   @OneToOne
     private lessonator2000.Client bookingclient;
 
     public Bookings(){

@@ -1,8 +1,13 @@
 package lessonator2000;
 
+import jakarta.persistence.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -53,13 +58,22 @@ public class Offerings {
 	synchronized lessonator2000.Lesson uploadOffering(String type, String id, Boolean hasInstructor, Boolean isAvailable, Boolean isPublic, int capacity, LocalDate start, LocalDate end, String weekDay) {
 		//System.out.println("Offerings: uploadOffering");
 		//First create the elsson
+
+
+
+
 		lessonator2000.Lesson myLesson = null;
 		if (isPublic) {
 			myLesson = new lessonator2000.PublicLesson(capacity, type, id, hasInstructor, isAvailable, start, end, weekDay);
+
 		}
 		if (!isPublic) {
 			myLesson = new lessonator2000.PrivateLesson(type, id, hasInstructor, isAvailable, start, end, weekDay);
+
 		}
+
+
+
 
 		//Add the lesson to the lesson collection
 		lessons.add(myLesson);
@@ -104,8 +118,16 @@ public class Offerings {
 	 */
 	void addSpaceTimeToLesson(lessonator2000.Space mySpace, lessonator2000.Timeslot myTimeSlot, lessonator2000.Lesson myLesson) {
 		//System.out.println("Offerings: addSpaceTimeToLEsson");
+		Session session = lessonator2000.ManageSessionFactory.getSf().openSession();
+		Transaction transaction = session.beginTransaction();
+		session.saveOrUpdate(mySpace);  // Save mySpace if it is new
+		session.saveOrUpdate(myTimeSlot);
+
 		myLesson.setSpace(mySpace);
 		myLesson.setTime(myTimeSlot);
+		session.save(myLesson);
+		session.getTransaction().commit();
+		session.close();
 
 	}
 
@@ -113,12 +135,19 @@ public class Offerings {
 	 * This is the method that viewOffering() will use to discriminate between lessons that have an instructor assigned to it or not when showing the lesson to clients.
 	 */
 	private void listAvailableOffering() {
+		Session session = lessonator2000.ManageSessionFactory.getSf().openSession();
+		Transaction transaction = session.beginTransaction();
+
+		List<lessonator2000.Lesson> les = session.createQuery("from Lesson", lessonator2000.Lesson.class).getResultList();
+		lessons = (ArrayList<lessonator2000.Lesson>) les;
 		for (lessonator2000.Lesson l : lessons) {
 			if (l.getHasInstructor()) {
 				System.out.println(l.toString());
 
 			}
 		}
+		transaction.commit();
+
 
 	}
 
@@ -126,9 +155,15 @@ public class Offerings {
 	 * This is  method that viewOffering() will use to show lessons without discrimination to instructors
 	 */
 	private void listAllOffering() {
-		for (lessonator2000.Lesson l : lessons) {
+		Session session = lessonator2000.ManageSessionFactory.getSf().openSession();
+		Transaction transaction = session.beginTransaction();
+		List<lessonator2000.Lesson> les = session.createQuery("from Lesson", lessonator2000.Lesson.class).getResultList();
+		lessons = (ArrayList<lessonator2000.Lesson>) les;
+        for (lessonator2000.Lesson l : lessons) {
 			System.out.println(l.toString());
 		}
+		session.getTransaction().commit();
+
 	}
 
 	/**
@@ -159,7 +194,11 @@ public class Offerings {
 	 * @param lessonId
 	 */
 	public synchronized void signupToLesson(lessonator2000.Instructor ins, String lessonId) {
+		Session session = lessonator2000.ManageSessionFactory.getSf().openSession();
+		Transaction transaction = session.beginTransaction();
 		lessonator2000.Lesson myLesson = null;
+		List<lessonator2000.Lesson> l = session.createQuery("from Lesson", lessonator2000.Lesson.class).getResultList();
+		lessons = (ArrayList<lessonator2000.Lesson>) l;
 		// find the lesson
 		for (lessonator2000.Lesson les : lessons) {
 
@@ -168,9 +207,10 @@ public class Offerings {
 			}
 		}
 		if(myLesson == null) {System.out.println("There is no lesson with this Id. try again"); return;}
-		
+
+
 		//Checking if the lesson is offered in a city that figures in the instructor availabilities
-		Space lessonSpace = myLesson.getSpace();
+		lessonator2000.Space lessonSpace = myLesson.getSpace();
 		String city = lessonSpace.getCity();
 		Boolean isInAvailability = false;
 		for(String s: ins.getAvailability()){
@@ -189,6 +229,8 @@ public class Offerings {
 		} else System.out.println("There is no lesson with this Id. try again");
 
 
+
+
 	}
 
 	/**
@@ -199,6 +241,10 @@ public class Offerings {
 	 * @return
 	 */
 	private lessonator2000.Lesson findLesson(String lessonId) {
+		Session session = lessonator2000.ManageSessionFactory.getSf().openSession();
+		Transaction tr = session.beginTransaction();
+		List<lessonator2000.Lesson> l = session.createQuery("from Lesson", lessonator2000.Lesson.class).getResultList();
+		lessons = (ArrayList<lessonator2000.Lesson>) l;
 		lessonator2000.Lesson myLesson = null;
 		for (lessonator2000.Lesson les : lessons) {
 
@@ -284,6 +330,8 @@ public class Offerings {
 		 */
 		public synchronized void createBooking(String lessonId, lessonator2000.Client cl){
 			// Find lesson with lesson id
+			Session session = lessonator2000.ManageSessionFactory.getSf().openSession();
+			Transaction tr = session.beginTransaction();
 			lessonator2000.Lesson les = findLesson(lessonId);
 			if (les.getisAvailable() && les.getHasInstructor()) {   // Dom 08-11-2024  I added a check to make sure the lesson has an instructor assigned to it. If not they might not see it in view offering but they could still create a booking for it if they had the id
 				if (les instanceof lessonator2000.PrivateLesson) {
@@ -343,13 +391,10 @@ public class Offerings {
 		 */
 		private void removeLessonFromOffers (lessonator2000.Lesson lessonToRemove){
 			lessons.removeIf(l -> l == lessonToRemove);
-			//for(Lesson l : lessons) {
-			//if(l == lessonToRemove) {
-			//lessons.remove(lessons.indexOf(lessonToRemove));
-			//	System.out.println("lesson removed form OFfering's lessons");
-			//}
-			//}
+
 
 		}
+		public void setLessons(List<lessonator2000.Lesson> l){this.lessons = (ArrayList<lessonator2000.Lesson>) l;}
 
 	}
+

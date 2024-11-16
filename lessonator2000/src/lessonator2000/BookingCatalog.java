@@ -1,6 +1,10 @@
 package lessonator2000;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 /**
  * 
@@ -40,7 +44,12 @@ public class BookingCatalog {
 	 * @param cl
 	 */
 	 synchronized void addBooking(lessonator2000.Lesson l, lessonator2000.Client cl) {
-		lessonator2000.Bookings b = new lessonator2000.Bookings(l, cl);
+		 Session session = lessonator2000.ManageSessionFactory.getSf().openSession();
+		 Transaction tr = session.beginTransaction();
+		 lessonator2000.Bookings b = new lessonator2000.Bookings(l, cl);
+		 session.save(b);
+		 session.getTransaction().commit();
+		 session.close();
 		bookings.add(b);
 		System.out.println("booking created between " + cl.toString() + "and " + l.toString()  );
 	}
@@ -95,7 +104,11 @@ public class BookingCatalog {
 	 * @param client
 	 */
 	private void clientViewVooking(lessonator2000.Client client) {
-			for (lessonator2000.Bookings b : bookings) {
+		Session session = lessonator2000.ManageSessionFactory.getSf().openSession();
+		Transaction tr = session.beginTransaction();
+		List<lessonator2000.Bookings> book = session.createQuery("from Bookings ", lessonator2000.Bookings.class).getResultList();
+		bookings = (ArrayList<lessonator2000.Bookings>) book;
+		for (lessonator2000.Bookings b : bookings) {
 				lessonator2000.Client c  = b.getBookingclient();
 				if(c == client) {
 					System.out.println(b.toString());
