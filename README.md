@@ -21,7 +21,7 @@ We have chose hibernate as the framework to help with implementating persistance
 Unfortunately we faced challenges since the system wasn't originally designed with Hibernate in mind. Implementing persistence across the entire system turned out to be more complex than expected, as it became clear that it was more of an "all-or-nothing" situation. 
 To avoid impacting the integrity of the working system, we decided to keep the persistence implementation on a separate branch. This allows us to demonstrate how persistence was integrated for the critical use cases.***
 - [link to Java project](lessonator2000)
-- [link to the Pesistance branch](stillPersistence) 
+- [link to the Pesistance branch " stillPersistence"]([stillPersistence](https://github.com/Kadir-Dominique-SOEN342/project-Repo/tree/stillPersistence)) 
 
 ### Project presentation 
 ### Project Discussion : https://github.com/Kadir-Dominique-SOEN342/project-Repo/discussions/1
